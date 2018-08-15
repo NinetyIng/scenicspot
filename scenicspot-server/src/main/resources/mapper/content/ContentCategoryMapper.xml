@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.content.ContentCategoryMapper">
+	<sql id="condition">
+		<if test="pd.CATEGORY_ID != null">
+			and CATEGORY_ID = #{pd.CATEGORY_ID}
+		</if>
+		<if test="pd.CATEGORY_ICON != null">
+			and CATEGORY_ICON = #{pd.CATEGORY_ICON}
+		</if>
+		<if test="pd.CATEGORY_NAME != null">
+			and CATEGORY_NAME = #{pd.CATEGORY_NAME}
+		</if>
+		<if test="pd.CATEGORY_TAGS != null">
+			and CATEGORY_TAGS = #{pd.CATEGORY_TAGS}
+		</if>
+		<if test="pd.CATEGORY_CODE != null">
+			and CATEGORY_CODE = #{pd.CATEGORY_CODE}
+		</if>
+		<if test="pd.CATEGORY_TYPE != null">
+			and CATEGORY_TYPE = #{pd.CATEGORY_TYPE}
+		</if>
+		<if test="pd.CATEGORY_LINK != null">
+			and CATEGORY_LINK = #{pd.CATEGORY_LINK}
+		</if>
+		<if test="pd.ORDER_BY != null">
+			and ORDER_BY = #{pd.ORDER_BY}
+		</if>
+		<if test="pd.PARENT_ID != null">
+			and PARENT_ID = #{pd.PARENT_ID}
+		</if>
+		<if test="pd.BZ != null">
+			and BZ = #{pd.BZ}
+		</if>
+		<if test="pd.DISABLED != null">
+			and DISABLED = #{pd.DISABLED}
+		</if>
+		<if test="pd.LOGO_IMG != null">
+			and LOGO_IMG = #{pd.LOGO_IMG}
+		</if>
+	</sql>
+	<sql id="tableName">t_content_category</sql>
+	<select id="selectByPage" resultType="pd" parameterType="page">
+		select * from <include refid="tableName"></include> where 1=1
+		<include refid="condition"></include>
+	</select>
+	<select id="selectByMap" resultType="pd" parameterType="pd">
+		select * from <include refid="tableName"></include> where 1=1
+		<include refid="condition"></include>
+	</select>
+	<select id="selectById" resultType="pd" parameterType="Integer">
+		SELECT *
+		from <include refid="tableName"></include> where CATEGORY_ID = #{CATEGORY_ID}
+	</select>
+	<insert id="insert" parameterType="pd">
+		insert into <include refid="tableName"></include>
+		(CATEGORY_ICON,CATEGORY_NAME,CATEGORY_CODE,CATEGORY_TAGS,PARENT_ID,ORDER_BY,DISABLED)
+		VALUES
+		(#{CATEGORY_ICON},#{CATEGORY_NAME},#{CATEGORY_CODE},#{CATEGORY_TAGS},#{PARENT_ID},#{ORDER_BY},#{DISABLED})
+	</insert>
+	<update id="update" parameterType="pd">
+		update <include refid="tableName"></include>
+		<set>
+			<if test="CATEGORY_ID != null">
+				CATEGORY_ID = #{CATEGORY_ID},
+			</if>
+			<if test="CATEGORY_ICON != null">
+				CATEGORY_ICON = #{CATEGORY_ICON},
+			</if>
+			<if test="CATEGORY_NAME != null">
+				CATEGORY_NAME = #{CATEGORY_NAME},
+			</if>
+			<if test="CATEGORY_TAGS != null">
+				CATEGORY_TAGS = #{CATEGORY_TAGS},
+			</if>
+			<if test="CATEGORY_CODE != null">
+				CATEGORY_CODE = #{CATEGORY_CODE},
+			</if>
+			<if test="CATEGORY_TYPE != null">
+				CATEGORY_TYPE = #{CATEGORY_TYPE},
+			</if>
+			<if test="CATEGORY_LINK != null">
+				CATEGORY_LINK = #{CATEGORY_LINK},
+			</if>
+			<if test="ORDER_BY != null">
+				ORDER_BY = #{ORDER_BY},
+			</if>
+			<if test="PARENT_ID != null">
+				PARENT_ID = #{PARENT_ID},
+			</if>
+			<if test="BZ != null">
+				BZ = #{BZ},
+			</if>
+			<if test="DISABLED != null">
+				DISABLED = #{DISABLED},
+			</if>
+			<if test="LOGO_IMG != null">
+				LOGO_IMG = #{LOGO_IMG},
+			</if>
+		</set>
+		where 1=1 <if test="CATEGORY_ID != null and CATEGORY_ID != ''">and CATEGORY_ID = #{CATEGORY_ID}</if>
+		<if test="CATEGORY_CODE != null and CATEGORY_CODE != ''">and CATEGORY_CODE = #{CATEGORY_CODE}</if>
+	</update>
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include> where CATEGORY_ID = #{CATEGORY_ID}
+	</delete>
+</mapper>

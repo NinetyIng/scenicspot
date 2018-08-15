@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.content.SubjectMapper">
+
+	<sql id="tableName">t_content_subject</sql>
+
+	<select id="selectByPage" parameterType="page" resultType="pd">
+		SELECT SUBJECT_ID,NAME,CATEGORY_ID,FOR_SHORT,KEYWORD,RECOMMEND,ORDER_BY,
+		TITLE_CHART,CATEGORY_TYPE,BZ,IMAGE,CREATTIME,CREATOR,MODIFIER,GROUPS,UPDATETIME
+		FROM
+		<include refid="tableName" />
+		WHERE 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+			(
+			NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			or
+			FOR_SHORT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			or
+			KEYWORD LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			)
+		</if>
+	</select>
+
+	<select id="selectByMap" parameterType="page" resultType="pd">
+		SELECT SUBJECT_ID,NAME,CATEGORY_ID,FOR_SHORT,KEYWORD,RECOMMEND,ORDER_BY,
+		TITLE_CHART,CATEGORY_TYPE,BZ,IMAGE,CREATTIME,CREATOR,MODIFIER,GROUPS,UPDATETIME
+		FROM
+		<include refid="tableName" />
+		WHERE 1=1
+		<if test="pd.SUBJECT_ID != null and pd.SUBJECT_ID != ''">
+			and SUBJECT_ID = #{pd.SUBJECT_ID}
+		</if>
+		<if test="pd.NAME != null and pd.NAME != ''">
+			and NAME = #{NAME}
+		</if>
+		<if test="pd.CATEGORY_ID != null and pd.CATEGORY_ID != ''">
+			and CATEGORY_ID = #{pd.CATEGORY_ID}
+		</if>
+	</select>
+
+	<select id="selectById" resultType="pd" parameterType="java.lang.String">
+		SELECT SUBJECT_ID,NAME,CATEGORY_ID,FOR_SHORT,KEYWORD,RECOMMEND,ORDER_BY,
+		TITLE_CHART,CATEGORY_TYPE,BZ,IMAGE,CREATTIME,CREATOR,MODIFIER,GROUPS,UPDATETIME
+		from <include refid="tableName" /> where SUBJECT_ID = #{SUBJECT_ID}
+	</select>
+
+	<insert id="insert" parameterType="pd">
+		INSERT INTO <include refid="tableName" />
+		(SUBJECT_ID,NAME,CATEGORY_ID,FOR_SHORT,KEYWORD,RECOMMEND,ORDER_BY,
+		TITLE_CHART,CATEGORY_TYPE,BZ,IMAGE,CREATTIME,CREATOR,MODIFIER,GROUPS,UPDATETIME) VALUES
+		(#{SUBJECT_ID},#{NAME},#{CATEGORY_ID},#{FOR_SHORT},#{KEYWORD},#{RECOMMEND},#{ORDER_BY},
+		#{TITLE_CHART},#{CATEGORY_TYPE},#{BZ},#{IMAGE},#{CREATTIME},#{CREATOR},#{MODIFIER},#{GROUPS},#{UPDATETIME})
+	</insert>
+	<update id="update" parameterType="pd">
+		UPDATE <include refid="tableName" />
+		<set>
+			<if test="NAME != null and NAME != ''">
+				NAME = #{NAME},
+			</if>
+			<if test="CATEGORY_ID != null and CATEGORY_ID != ''">
+				CATEGORY_ID = #{CATEGORY_ID},
+			</if>
+			<if test="FOR_SHORT != null and FOR_SHORT != ''">
+				FOR_SHORT = #{FOR_SHORT},
+			</if>
+			<if test="KEYWORD != null and KEYWORD != ''">
+				KEYWORD = #{KEYWORD},
+			</if>
+			<if test="RECOMMEND != null and RECOMMEND != ''">
+				RECOMMEND = #{RECOMMEND},
+			</if>
+			<if test="ORDER_BY != null and ORDER_BY != ''">
+				ORDER_BY = #{ORDER_BY},
+			</if>
+			<if test="TITLE_CHART != null and TITLE_CHART != ''">
+				TITLE_CHART = #{TITLE_CHART},
+			</if>
+			<if test="CATEGORY_TYPE != null and CATEGORY_TYPE != ''">
+				CATEGORY_TYPE = #{CATEGORY_TYPE},
+			</if>
+			<if test="BZ != null and BZ != ''">
+				BZ = #{BZ},
+			</if>
+			<if test="IMAGE != null and IMAGE != ''">
+				IMAGE = #{IMAGE},
+			</if>
+			<if test="MODIFIER != null and MODIFIER != ''">
+				MODIFIER = #{MODIFIER},
+			</if>
+			<if test="UPDATETIME != null and UPDATETIME != ''">
+				UPDATETIME = #{UPDATETIME},
+			</if>
+			<if test="GROUPS != null and GROUPS != ''">
+				GROUPS = #{GROUPS},
+			</if>
+		</set>
+		where CONTENT_ID = #{CONTENT_ID}
+	</update>
+
+	<delete id="delete" parameterType="page">
+		DELETE FROM <include refid="tableName" />
+		WHERE SUBJECT_ID = #{pd.SUBJECT_ID}
+	</delete>
+</mapper>

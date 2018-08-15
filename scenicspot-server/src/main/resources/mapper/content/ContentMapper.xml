@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.content.ContentMapper">
+	<sql id="condition">
+		<if test="pd.CONTENT_ID != null and pd.CONTENT_ID != ''">
+			and CONTENT_ID = #{pd.CONTENT_ID}
+		</if>
+		<if test="pd.CATEGORY_CODE != null and pd.CATEGORY_CODE != ''">
+			and CATEGORY_CODE = #{pd.CATEGORY_CODE}
+		</if>
+		<if test="pd.SUBJECT_CODE != null and pd.SUBJECT_CODE != ''">
+			and SUBJECT_CODE = #{pd.SUBJECT_CODE}
+		</if>
+		<if test="pd.TITLE != null and pd.TITLE != ''">
+			and TITLE = #{pd.TITLE}
+		</if>
+		<if test="pd.SORT_TITLE != null and pd.SORT_TITLE != ''">
+			and SORT_TITLE = #{pd.SORT_TITLE}
+		</if>
+		<if test="pd.LINK != null and pd.LINK != ''">
+			and LINK = #{pd.LINK}
+		</if>
+		<if test="pd.ABSTRACT != null and pd.ABSTRACT != ''">
+			and ABSTRACT = #{pd.ABSTRACT}
+		</if>
+		<if test="pd.AUTHOR != null and pd.AUTHOR != ''">
+			and AUTHOR = #{pd.AUTHOR}
+		</if>
+		<if test="pd.TAGS != null and pd.TAGS != ''">
+			and TAGS = #{pd.TAGS}
+		</if>
+		<if test="pd.ORGIN != null and pd.ORGIN != '' ">
+			and ORGIN = #{pd.ORGIN}
+		</if>
+		<if test="pd.TOPLV != null and pd.TOPLV != ''">
+			and TOPLV = #{pd.TOPLV}
+		</if>
+		<if test="pd.CLICKS != null and pd.CLICKS != ''">
+			and CLICKS = #{pd.CLICKS}
+		</if>
+		<if test="pd.exclude_id != null and pd.exclude_id != ''">
+			and CONTENT_ID = #{pd.exclude_id}
+		</if>
+		<if test="pd.SUBJECT_ID != null and pd.SUBJECT_ID != ''">
+			and SUBJECT_ID = #{pd.SUBJECT_ID}
+		</if>
+		<if test="pd.CTYPE != null and pd.CTYPE != ''">
+			and CTYPE = #{pd.CTYPE}
+		</if>
+		<if test="pd.STATE != null and pd.STATE != ''">
+			and STATE = #{pd.STATE}
+		</if>
+	</sql>
+	<sql id="tableName">t_content</sql>
+	<select id="selectByPage" parameterType="page" resultType="pd">
+		select
+		tc.*,tcc.CATEGORY_NAME
+		from
+		<include refid="tableName"/> tc
+		LEFT JOIN
+		t_content_category tcc
+		ON
+		tcc.CATEGORY_CODE = tc.CATEGORY_CODE
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+			(
+			tc.TITLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			or
+			tc.TAGS
+			LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			or
+			tc.ORGIN LIKE
+			CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			or
+			tcc.CATEGORY_NAME LIKE
+			CONCAT(CONCAT('%', #{pd.keywords}),'%')
+			)
+		</if>
+		<if test="pd.CATEGORY_CODE!= null and pd.CATEGORY_CODE != ''">
+			and tc.CATEGORY_CODE = #{pd.CATEGORY_CODE}
+		</if>
+		<if test="pd.START_TIME!= null and pd.START_TIME != ''"><!-- 开始日期 -->
+			and date_format(tc.CREATETIME,'%Y-%m-%d') <![CDATA[ >= ]]>
+			#{pd.START_TIME}
+		</if>
+		<if test="pd.END_TIME!= null and pd.END_TIME != ''"><!-- 结束日期 -->
+			and date_format(tc.CREATETIME,'%Y-%m-%d')	<![CDATA[ <=]]>
+			#{pd.END_TIME}
+		</if>
+		<if test="pd.STATE!= null and pd.STATE != ''">
+			and tc.STATE=#{pd.STATE}
+		</if>
+		<if test="pd.ISHOT!= null and pd.ISHOT != ''">
+			and tc.ISHOT=#{pd.ISHOT}
+		</if>
+		<if test="pd.CTYPE!= null and pd.CTYPE != ''">
+			and tc.CTYPE=#{pd.CTYPE}
+		</if>
+		<if test="pd.CLICKS != null and pd.CLICKS != ''">
+			<if test="pd.CLICKS == 0">
+				order by CLICKS desc
+			</if>
+			<if test="pd.CLICKS == 1">
+				order by CLICKS
+			</if>
+		</if>
+		<if test="pd.CLICKS == null or pd.CLICKS == ''">
+			order by PUTTIME desc
+		</if>
+	</select>
+	<select id="selectById" resultType="pd" parameterType="java.lang.Integer">
+		SELECT *
+		FROM <include refid="tableName"/> WHERE CONTENT_ID = #{CONTENT_ID}
+	</select>
+
+	<insert id="insert" parameterType="pd">
+		INSERT INTO <include refid="tableName"/>
+		(CATEGORY_CODE,TITLE,SUBJECT_CODE,SUBJECT_ID,SORT_TITLE,LINK,ABSTRACT,AUTHOR,TAGS,ORGIN,ORGINURL,TOPLV,CLICKS,TOPLVDATE,
+		SORTTIME,PUTTIME,PIGEONHOLEDATE,CTYPE,RECOMMEND,DRAFT,T_IMG,C_IMG,S_IMG,ALBUM,CONTENT,CATEGORY_TYPE,STATE,PUBLISHER_ID,PUBLISHER,PUBLISHER_LOGO,
+		PUBLISHER_EDUCATION,CREATETIME,CREATOR,UPDATETIME,MODIFIER,ISHOT,ISFOCUS,CHECKER,CHECKTIME,SUBGROUP,AUDIT_STATUS,
+		PUBLISH_STATUS,MODEL_TYPE) VALUES
+		(#{CATEGORY_CODE},#{TITLE},#{SUBJECT_CODE},#{SUBJECT_ID},#{SORT_TITLE},#{LINK},#{ABSTRACT},#{AUTHOR},#{TAGS},#{ORGIN},#{ORGINURL},#{TOPLV},
+		#{CLICKS},#{TOPLVDATE},
+		#{SORTTIME},#{PUTTIME},#{PIGEONHOLEDATE},#{CTYPE},#{RECOMMEND},#{DRAFT},#{T_IMG},#{C_IMG},#{S_IMG},#{ALBUM},#{CONTENT},#{CATEGORY_TYPE},#{STATE},#{PUBLISHER_ID},#{PUBLISHER},
+		#{PUBLISHER_LOGO},
+		#{PUBLISHER_EDUCATION},#{CREATETIME},#{CREATOR},#{UPDATETIME},#{MODIFIER},#{ISHOT},#{ISFOCUS},#{CHECKER},#{CHECKTIME},#{SUBGROUP},#{AUDIT_STATUS},
+		#{PUBLISH_STATUS},#{MODEL_TYPE})
+	</insert>
+	<update id="update" parameterType="pd">
+		UPDATE <include refid="tableName"/>
+		<set>
+			<if test="CONTENT_ID != null">
+				CONTENT_ID = #{CONTENT_ID},
+			</if>
+			<if test="CATEGORY_CODE != null">
+				CATEGORY_CODE = #{CATEGORY_CODE},
+			</if>
+			<if test="TITLE != null">
+				TITLE = #{TITLE},
+			</if>
+			<if test="SUBJECT_CODE != null">
+				SUBJECT_CODE = #{SUBJECT_CODE},
+			</if>
+			<if test="SORT_TITLE != null">
+				SORT_TITLE = #{SORT_TITLE},
+			</if>
+			<if test="LINK != null">
+				LINK = #{LINK},
+			</if>
+			<if test="ABSTRACT != null">
+				ABSTRACT = #{ABSTRACT},
+			</if>
+			<if test="AUTHOR != null">
+				AUTHOR = #{AUTHOR},
+			</if>
+			<if test="TAGS != null">
+				TAGS = #{TAGS},
+			</if>
+			<if test="ORGIN != null">
+				ORGIN = #{ORGIN},
+			</if>
+			<if test="ORGINURL != null">
+				ORGINURL = #{ORGINURL},
+			</if>
+			<if test="TOPLV != null">
+				TOPLV = #{TOPLV},
+			</if>
+			<if test="CLICKS != null">
+				CLICKS = #{CLICKS},
+			</if>
+			<if test="TOPLVDATE != null">
+				TOPLVDATE = #{TOPLVDATE},
+			</if>
+			<if test="SORTTIME != null">
+				SORTTIME = #{SORTTIME},
+			</if>
+			<if test="PUTTIME != null">
+				PUTTIME = #{PUTTIME},
+			</if>
+			<if test="PIGEONHOLEDATE != null">
+				PIGEONHOLEDATE = #{PIGEONHOLEDATE},
+			</if>
+			<if test="CTYPE != null">
+				CTYPE = #{CTYPE},
+			</if>
+			<if test="RECOMMEND != null">
+				RECOMMEND = #{RECOMMEND},
+			</if>
+			<if test="DRAFT != null">
+				DRAFT = #{DRAFT},
+			</if>
+			<if test="T_IMG != null">
+				T_IMG = #{T_IMG},
+			</if>
+			<if test="C_IMG != null">
+				C_IMG = #{C_IMG},
+			</if>
+			<if test="S_IMG != null">
+				S_IMG = #{S_IMG},
+			</if>
+			<if test="CONTENT != null">
+				CONTENT = #{CONTENT},
+			</if>
+			<if test="CATEGORY_TYPE != null">
+				CATEGORY_TYPE = #{CATEGORY_TYPE},
+			</if>
+			<if test="STATE != null">
+				STATE = #{STATE},
+			</if>
+			<if test="PUBLISHER != null">
+				PUBLISHER = #{PUBLISHER},
+			</if>
+			<if test="PUBLISHER_LOGO != null">
+				PUBLISHER_LOGO = #{PUBLISHER_LOGO},
+			</if>
+			<if test="PUBLISHER_ID != null">
+				PUBLISHER_ID = #{PUBLISHER_ID},
+			</if>
+			<if test="PUBLISHER_EDUCATION != null">
+				PUBLISHER_EDUCATION = #{PUBLISHER_EDUCATION},
+			</if>
+			<if test="UPDATETIME != null">
+				UPDATETIME = #{UPDATETIME},
+			</if>
+			<if test="MODIFIER != null">
+				MODIFIER = #{MODIFIER},
+			</if>
+			<if test="ISHOT != null">
+				ISHOT = #{ISHOT},
+			</if>
+			<if test="ISFOCUS != null">
+				ISFOCUS = #{ISFOCUS},
+			</if>
+			<if test="CHECKER != null">
+				CHECKER = #{CHECKER},
+			</if>
+			<if test="CHECKTIME != null">
+				CHECKTIME = #{CHECKTIME},
+			</if>
+			<if test="AUDIT_STATUS != null">
+				AUDIT_STATUS = #{AUDIT_STATUS},
+			</if>
+			<if test="PUBLISH_STATUS != null">
+				PUBLISH_STATUS = #{PUBLISH_STATUS},
+			</if>
+			<if test="MODEL_TYPE != null and MODEL_TYPE !=''">
+				MODEL_TYPE = #{MODEL_TYPE},
+			</if>
+			<if test="SUBJECT_ID != null and SUBJECT_ID !=''">
+				SUBJECT_ID = #{SUBJECT_ID},
+			</if>
+		</set>
+		WHERE CONTENT_ID = #{CONTENT_ID}
+	</update>
+
+	<update id="deleteImg" parameterType="pd">
+		UPDATE <include refid="tableName"/>
+		<set>
+			<if test="T_IMG != null and T_IMG != ''">
+				T_IMG = null,
+			</if>
+			<if test="C_IMG != null and C_IMG != ''">
+				C_IMG = null,
+			</if>
+		</set>
+		WHERE CONTENT_ID =#{CONTENT_ID}
+	</update>
+
+	<delete id="delete" parameterType="page">
+		DELETE FROM <include refid="tableName"/>
+		WHERE CONTENT_ID = #{pd.CONTENT_ID}
+	</delete>
+</mapper>

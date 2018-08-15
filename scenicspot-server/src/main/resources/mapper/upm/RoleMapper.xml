@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.upm.RoleMapper">
+	
+	<resultMap type="Role" id="roleResultMap">
+		<id column="ROLE_ID" property="ROLE_ID"/>
+		<result column="ROLE_NAME" property="ROLE_NAME"/>
+		<result column="RIGHTS" property="RIGHTS"/>
+		<result column="SCHOOL_NAME" property="SCHOOL_NAME"></result>
+	</resultMap>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		ROLE_ID,
+		ROLE_NAME,
+		RIGHTS,
+		PARENT_ID,
+		ADD_QX,
+		DEL_QX,
+		EDIT_QX,
+		CHA_QX
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{ROLE_ID},
+		#{ROLE_NAME},
+		#{RIGHTS},
+		#{PARENT_ID},
+		#{ADD_QX},
+		#{DEL_QX},
+		#{EDIT_QX},
+		#{CHA_QX}
+	</sql>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		T_UPM_ROLE
+	</sql>
+	
+	<!-- 列出此组下的角色 -->
+	<select id="listAllRolesByPId" resultMap="roleResultMap" parameterType="pd">
+		select
+		ROLE_ID,
+		ROLE_NAME,
+		RIGHTS,
+		PARENT_ID,
+		ADD_QX,
+		DEL_QX,
+		EDIT_QX,
+		CHA_QX
+		from
+		<include refid="tableName"></include> r
+		where
+			PARENT_ID = #{ROLE_ID}
+			<if test="type != null and type != ''">
+			    and    ROLE_ID != 1
+			</if>  
+		ORDER BY ROLE_ID
+	</select>
+	<!-- 通过id查找 -->
+	<select id="selectById" parameterType="pd" resultType="pd">
+		select  
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where ROLE_ID = #{ROLE_ID}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="pd">
+		insert into 
+		<include refid="tableName"></include>
+		(
+		<include refid="Field"></include>
+		) values (
+		<include refid="FieldValue"></include>	
+		)
+	</insert>
+	
+	<!-- 保存修改 -->
+	<update id="update" parameterType="pd">
+		update 
+		<include refid="tableName"></include>
+		set ROLE_NAME = #{ROLE_NAME}
+		<if test="SCHOOL_ID != null and SCHOOL_ID != ''">
+		,SCHOOL_ID = #{SCHOOL_ID}
+		</if>
+		where ROLE_ID = #{ROLE_ID}
+	</update>
+	
+	<!-- 删除角色  -->
+	<delete id="deleteRoleById" parameterType="String">
+		delete from 
+		<include refid="tableName"></include>
+		where ROLE_ID=#{ROLE_ID}
+	</delete>
+	
+	<!-- 给当前角色附加菜单权限  -->
+	<update id="updateRoleRights" parameterType="Role">
+		update 
+		<include refid="tableName"></include>
+		set RIGHTS=#{RIGHTS} 
+		where ROLE_ID=#{ROLE_ID}
+	</update>
+	
+	
+	<!-- 给全部子角色加菜单权限 -->
+	<update id="setAllRights" parameterType="pd">
+		update 
+		<include refid="tableName"></include> 
+		set RIGHTS=#{rights} 
+		where PARENT_ID=#{ROLE_ID}
+	</update>
+	
+	<!-- 新增权限 -->
+	<update id="add_qx" parameterType="pd">
+		update 
+		<include refid="tableName"></include> 
+		set ADD_QX=#{value} 
+		where ROLE_ID=#{ROLE_ID}
+	</update>
+	
+	<!-- 删除权限 -->
+	<update id="del_qx" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set DEL_QX=#{value} 
+		where ROLE_ID=#{ROLE_ID}
+	</update>
+	
+	<!-- 修改权限 -->
+	<update id="edit_qx" parameterType="pd">
+		update 
+		<include refid="tableName"></include> 
+		set EDIT_QX=#{value} 
+		where ROLE_ID=#{ROLE_ID}
+	</update>
+	
+	<!-- 查看权限 -->
+	<update id="cha_qx" parameterType="pd">
+		update 
+		<include refid="tableName"></include>
+		set CHA_QX=#{value} 
+		where ROLE_ID=#{ROLE_ID}
+	</update>
+	
+	
+</mapper>

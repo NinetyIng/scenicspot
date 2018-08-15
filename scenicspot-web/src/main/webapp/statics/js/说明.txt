@@ -1,0 +1,1 @@
+js 必须采用封装的形式 尽量避免到处copy  function 

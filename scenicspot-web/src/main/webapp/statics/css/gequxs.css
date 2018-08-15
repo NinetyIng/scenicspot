@@ -1,0 +1,45 @@
+body{
+	background: #f7f7f7;
+}
+/*con*/
+.con{
+	background: #fff;
+	overflow: hidden;
+}
+.con>ul>li{
+	margin-left: 30px;
+	padding: 16px 0 16px;
+	overflow: hidden;
+	
+}
+.list-left{
+	width: 85px;
+	float: left;
+	margin-right: 30px;
+}
+.list-right{
+	border-bottom: 1px solid #e0e0e0;
+	padding-bottom: 16px;
+	padding-right: 30px;
+	margin-left: 111px;
+}
+.list-right h2{
+	font-size: 30px;
+	color: #333333;
+}
+.right-bottom{
+	margin-top: 16px;
+}
+.right-bottom img{
+	width: 25px;
+	float: left;
+	margin-right: 16px;
+	margin-top: 8px;
+}
+.right-bottom span{
+	font-size: 26px;
+    color: #999999;
+}
+.bof-img{
+	float: right;
+}

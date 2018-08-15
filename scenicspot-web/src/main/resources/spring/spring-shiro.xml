@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+        <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+			<property name="realm" ref="ShiroRealm" />
+		</bean>
+		<!-- 項目自定义的Realm -->
+	    <bean id="ShiroRealm" class="com.ythd.ower.server.upm.shiro.ShiroRealm" ></bean>
+		<!-- Shiro Filter -->
+		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+			<property name="securityManager" ref="securityManager" />
+			<property name="loginUrl" value="/main/login" />
+			<property name="successUrl" value="/main/index" />
+			<property name="filterChainDefinitions">
+					<value>
+					/statics/** 			= anon
+					/assets/**              = anon
+					/common/baidu/          = anon
+		           	/main/login	 			= anon
+		           	/main/doLogin	 		= anon
+		           	/*                      = anon
+		           	/appwx/**				= anon
+					/healthCheck            = anon
+					/**						= authc
+					</value>
+			</property>
+		</bean>
+</beans>		

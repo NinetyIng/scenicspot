@@ -1,0 +1,128 @@
+/*banner*/
+.rel{
+	position: relative;
+    height: 150px;
+}
+.rel img{
+	width: 100%;
+	height: 100%;
+}
+.abs{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.rel p{
+	color:#fff;
+	font-size: 18px;
+	width: 272px;
+    text-align: center;
+}
+.pd p{
+	color:#fff;
+}
+/*padding*/
+.pd{
+	padding: 15px;
+}
+.pb{
+	padding-bottom: 10px;
+}
+.pb1{
+	padding-bottom: 5px;
+}
+/*border*/
+.bb{
+	border-bottom: 1px solid #fff;
+}
+.bb1{
+	border-bottom: 1px solid #b4b4b4;
+}
+/*margin*/
+.ml{
+	margin-left: 10px;
+}
+.mt{
+	margin-top: 10px;
+}
+/*display*/
+.flx{
+	display: flex;
+}
+/*閸掓銆�/
+.photo img{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}/*婢舵潙鍎�/
+.txt{
+	color: #6a6a6a;
+	width: 190px;
+	font-size: 12px;	
+}
+.txtnor{
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+/*閸熷棗鎼ч崚妤勩�*/
+.ul{
+	flex-wrap: wrap;	
+}
+.ul li{
+	flex: 0 0 45%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+/*閸忚櫕鏁�/
+.care{
+	margin: 50px auto 30px;
+	text-align: center;
+}
+.care img{
+	width: 71px;
+	height: 71px;
+	border-radius: 50%;
+}
+/*閺囨潙顧嬪〒鍛礋*/
+.ul1{
+	flex-wrap: wrap;	
+}
+.ul1 li{
+	flex: 0 0 33.333%;
+	margin-top: 10px;
+}
+.img img{
+	width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 5px;
+}
+.icon img{
+	width: 14px;
+	height: 10px;
+}
+/*閸欐垹骞囬弴鏉戭檵濞撳懎宕�/
+.more{
+	width: 151px;
+	margin: 20px auto;
+	display: block;
+	text-align: center;
+	border: 1px solid #fb2020;
+	color: #fb2020;
+	padding: 5px 0;
+}
+/*濞搭喖濮╃仦锟�
+.fixed{
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	background: rgba(253,141,141,0.7);
+	position: fixed;
+	bottom: 0;
+}

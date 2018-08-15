@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.ticket.TicketMapper">
+	<!-- 文化分类 -->
+	<select id="categorySelectByMap" parameterType="pd" resultType="pd">
+		select * from t_scenic_ticket_category where 1 = 1
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		order by cate_desc desc
+	</select>
+	<update id="categoryUpdate" parameterType="pd">
+		update t_scenic_ticket_category
+		<set>
+			<if test="cate_name != null and cate_name != ''">
+				cate_name = #{cate_name},
+			</if>
+			<if test="cate_fit != null and cate_fit != ''">
+				cate_fit = #{cate_fit},
+			</if>
+			<if test="cate_clause != null and cate_clause != ''">
+				cate_clause = #{cate_clause},
+			</if>
+			<if test="cate_desc != null and cate_desc != ''">
+				cate_desc = #{cate_desc},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<insert id="categoryInsert" parameterType="pd">
+		insert into
+		t_scenic_ticket_category(cate_name,cate_fit,cate_clause,cate_desc)
+		values(#{cate_name},#{cate_fit},#{cate_clause},#{cate_desc})
+	</insert>
+
+	<delete id="categoryDel" parameterType="pd">
+		delete from t_scenic_ticket_category where id = #{id}
+	</delete>
+
+	<select id="selectByMap" resultType="pd" parameterType="page">
+		select * from t_scenic_ticket
+		where 1 = 1
+		<if test="pd.cate_id != null and pd.cate_id!= ''">
+			and cate_id = #{pd.cate_id}
+		</if>
+		<if test="pd.third_no != null and pd.third_no != ''">
+			and third_no = #{pd.third_no}
+		</if>
+		<if test="pd.scenic_id != null and pd.scenic_id != ''">
+			and scenic_id = #{pd.scenic_id}
+		</if>
+		<if test="pd.id != null and pd.id != ''">
+			and id = #{pd.id}
+		</if>
+	</select>
+	<select id="selectByPage" resultType="pd" parameterType="page">
+		select t1.*,t2.scenic_logo,t2.scenic_lat,t2.scenic_lng from t_scenic_ticket t1 left join t_scenic_content t2 on t1.scenic_id = t2.id  where 1 = 1
+		<if test="pd.cate_id != null and pd.cate_id!= ''">
+			and t1.cate_id = #{pd.cate_id}
+		</if>
+		<if test="pd.third_no != null and pd.third_no != ''">
+			and t1.third_no = #{pd.third_no}
+		</if>
+		<if test="pd.scenic_id != null and pd.scenic_id != ''">
+			and t1.scenic_id = #{pd.scenic_id}
+		</if>
+		<if test="pd.id != null and pd.id != ''">
+			and t1.id = #{pd.id}
+		</if>
+		<if test="pd.keywords != null and pd.keywords != ''">
+		    and  (
+	                t1.scenic_name LIKE CONCAT(CONCAT('%',#{pd.keywords}),'%')
+					or
+					t1.cate_name LIKE CONCAT(CONCAT('%',#{pd.keywords}),'%')
+					or
+					t1.ticket_name LIKE CONCAT(CONCAT('%',#{pd.keywords}),'%')
+	           )
+		</if>
+	</select>
+	<select id="selectById" resultType="pd" parameterType="Integer">
+		select *
+		from t_scenic_ticket where id=#{id}
+	</select>
+	<select id="selectByIdsStr" resultType="pd" parameterType="pd">
+	    select * from t_scenic_ticket where id in ${ticketIds}
+	</select>
+	
+	<insert id="insert" parameterType="pd">
+		insert into t_scenic_ticket
+		(scenic_id,cate_id,cate_name,ticket_name,third_no,ticket_price,ticket_tip,ticket_package_type,create_time,scenic_name,ticket_isrefund)
+		values(#{scenic_id},#{cate_id},#{cate_name},#{ticket_name},#{third_no},#{ticket_price},#{ticket_tip},#{ticket_package_type},#{create_time},#{scenic_name},#{ticket_isrefund})
+	</insert>
+	<update id="update" parameterType="pd">
+		update t_scenic_ticket
+		<set>
+			<if test="scenic_id != null and scenic_id != ''">
+				scenic_id = #{scenic_id},
+			</if>
+			<if test="cate_id != null and cate_id != ''">
+				cate_id = #{cate_id},
+			</if>
+			<if test="cate_name != null and cate_name != ''">
+				cate_name = #{cate_name},
+			</if>
+			<if test="ticket_name != null and ticket_name != ''">
+				ticket_name = #{ticket_name},
+			</if>
+			<if test="third_no != null and third_no != ''">
+				third_no = #{third_no},
+			</if>
+			<if test="ticket_price != null and ticket_price != ''">
+				ticket_price = #{ticket_price},
+			</if>
+			<if test="ticket_tip != null and ticket_tip != ''">
+				ticket_tip = #{ticket_tip},
+			</if>
+			<if test="ticket_package_type != null and ticket_package_type != ''">
+				ticket_package_type = #{ticket_package_type},
+			</if>
+			<if test="ticket_isrefund != null and ticket_isrefund != ''">
+				ticket_isrefund = #{ticket_isrefund},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="delete" parameterType="page">
+		delete from t_scenic_ticket
+		where 1=1
+		and id = #{pd.id}
+	</delete>
+</mapper>

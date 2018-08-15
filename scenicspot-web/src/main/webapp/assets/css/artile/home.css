@@ -1,0 +1,59 @@
+/*内容*/
+
+.wrap {
+	padding: 20px 10px;
+}
+
+.marTop {
+	margin-top: 15px;
+}
+
+
+/*图标*/
+
+.icon {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.ic1 {
+	background: url(../img/message.jpg) 0 0/100% 100%;
+}
+
+.ic2 {
+	background: url(../img/click.jpg) 0 0/100% 100%;
+}
+
+
+/*详情*/
+
+.butt {
+	padding: 0 10px;
+	border: 1px solid #323232;
+	color: #323232;
+}
+/*横条*/
+.box{
+	height: 8px;
+	background: #EEECED;
+}
+/*精华推荐*/
+.ul{
+	display: flex;
+	flex-wrap: wrap;
+}
+.ul li{
+	flex: 0 0 33.3333%;
+	padding: 10px 5px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.ul li p{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 12px;
+}

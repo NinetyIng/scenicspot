@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easaa.scenicspot.dao.ScenicMapper">
+	<!-- 文化分类 -->
+	<select id="categorySelectByMap" parameterType="pd" resultType="pd">
+		select * from t_scenic_category where 1 = 1
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="scenic_category != null and scenic_category != ''">
+			and scenic_category = #{scenic_category}
+		</if>
+		<if test="scenic_status != null and scenic_status != ''">
+			and scenic_status = #{scenic_status}
+		</if>
+		order by scenic_order_by desc
+	</select>
+	<update id="categoryUpdate" parameterType="pd">
+		update t_scenic_category
+		<set>
+			<if test="scenic_category != null and scenic_category != ''">
+				scenic_category = #{scenic_category},
+			</if>
+			<if test="scenic_logo != null and scenic_logo != ''">
+				scenic_logo = #{scenic_logo},
+			</if>
+			<if test="scenic_map_marker != null and scenic_map_marker != ''">
+			    scenic_map_marker = #{scenic_map_marker},
+			</if>
+			<if test="scenic_status != null and scenic_status != ''">
+				scenic_status = #{scenic_status},
+			</if>
+			<if test="scenic_desc != null and scenic_desc != ''">
+				scenic_desc = #{scenic_desc},
+			</if>
+			<if
+				test="culture_category_status != null and culture_category_status != ''">
+				culture_category_status = #{culture_category_status},
+			</if>
+			<if test="scenic_order_by != null and scenic_order_by != ''">
+				scenic_order_by = #{scenic_order_by},
+			</if>
+			<if test="scenic_is_voice != null and scenic_is_voice != ''">
+				scenic_is_voice = #{scenic_is_voice},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<insert id="categoryInsert" parameterType="pd">
+		insert into
+		t_scenic_category(scenic_category,scenic_logo,scenic_status,scenic_create_time,scenic_desc,scenic_order_by,scenic_is_voice,scenic_map_marker)
+		values(#{scenic_category},#{scenic_logo},#{scenic_status},#{scenic_create_time},#{scenic_desc},#{scenic_order_by},#{scenic_is_voice},#{scenic_map_marker})
+	</insert>
+	<select id="selectByMap" resultType="pd" parameterType="page">
+		select t1.*,t2.scenic_logo as marker_logo from t_scenic_content t1 left join t_scenic_category t2 on t1.category_id = t2.id  where 1 = 1 
+		<if test="pd.scenic_name != null and pd.scenic_name!= ''">
+			and scenic_name like CONCAT('%',#{pd.scenic_name},'%')
+		</if>
+		<if test="pd.scenic_is_ticket != null and pd.scenic_is_ticket != ''">
+			and scenic_is_ticket = #{pd.scenic_is_ticket}
+		</if>
+		<if test="pd.category_id != null and pd.category_id != ''">
+			and category_id = #{pd.category_id}
+		</if>
+		<if test="pd.scenic_logo != null and pd.scenic_logo != ''">
+			and scenic_logo = #{pd.scenic_logo}
+		</if>
+		<if test="pd.scenic_lat != null and pd.scenic_lat != ''">
+			and scenic_lat = #{pd.scenic_lat}
+		</if>
+		<if test="pd.scenic_lng != null and pd.scenic_lng != ''">
+			and scenic_lng = #{pd.scenic_lng}
+		</if>
+		<if test="pd.scenic_content != null and pd.scenic_content != ''">
+			and scenic_content = #{pd.scenic_content}
+		</if>
+		<if test="pd.scenic_voice_path != null and pd.scenic_voice_path != ''">
+			and scenic_voice_path = #{pd.scenic_voice_path}
+		</if>
+		<if test="pd.scenic_click != null and pd.scenic_click != ''">
+			and scenic_click = #{pd.scenic_click}
+		</if>
+		<if test="pd.scenic_address != null and pd.scenic_address != ''">
+			and scenic_address = #{pd.scenic_address}
+		</if>
+		<if test="pd.scenic_phone != null and pd.scenic_phone != ''">
+			and scenic_phone = #{pd.scenic_phone}
+		</if>
+		<if
+			test="pd.scenic_business_time != null and pd.scenic_business_time != ''">
+			and scenic_business_time = #{pd.scenic_business_time}
+		</if>
+		<if test="pd.scenic_tip != null and pd.scenic_tip != ''">
+			and scenic_tip = #{pd.scenic_tip}
+		</if>
+		<if test="pd.scenic_status != null and pd.scenic_status != ''">
+			and t1.scenic_status = #{pd.scenic_status}
+		</if>
+		<if test="pd.category_scenic_status != null and pd.category_scenic_status != ''">
+			and t2.scenic_status = #{pd.category_scenic_status}
+		</if>
+		<if test="pd.scenic_radius != null and pd.scenic_radius != ''">
+			and scenic_radius = #{pd.scenic_radius}
+		</if>
+		<if test="pd.id != null and pd.id != ''">
+			and t1.id = #{pd.id}
+		</if>
+		<if test="pd.aboutId != null and pd.aboutId != ''" >
+		    and t1.id in ${pd.aboutId}
+		</if>
+		order by scenic_order desc
+		<if test="pd.limit != null and pd.limit != ''">
+		   limit #{pd.limit}
+		</if>
+	</select>
+	<select id="selectByPage" resultType="pd" parameterType="page">
+		select * from t_scenic_content where 1 = 1 
+		<if test="pd.scenic_name != null and pd.scenic_name!= ''">
+			and scenic_name like CONCAT('%',#{pd.scenic_name},'%')
+		</if>
+		<if test="pd.scenic_is_ticket != null and pd.scenic_is_ticket!= ''">
+			and scenic_is_ticket = #{pd.scenic_is_ticket}
+		</if>
+		
+		<if test="pd.category_id != null and pd.category_id != ''">
+			and category_id = #{pd.category_id}
+		</if>
+		<if test="pd.category_id == null or pd.category_id != ''">
+			and category_id != -2 
+		</if>
+		<if test="pd.scenic_logo != null and pd.scenic_logo != ''">
+			and scenic_logo = #{pd.scenic_logo}
+		</if>
+		<if test="pd.scenic_lat != null and pd.scenic_lat != ''">
+			and scenic_lat = #{pd.scenic_lat}
+		</if>
+		<if test="pd.scenic_lng != null and pd.scenic_lng != ''">
+			and scenic_lng = #{pd.scenic_lng}
+		</if>
+		<if test="pd.scenic_content != null and pd.scenic_content != ''">
+			and scenic_content = #{pd.scenic_content}
+		</if>
+		<if test="pd.scenic_voice_path != null and pd.scenic_voice_path != ''">
+			and scenic_voice_path = #{pd.scenic_voice_path}
+		</if>
+		<if test="pd.scenic_click != null and pd.scenic_click != ''">
+			and scenic_click = #{pd.scenic_click}
+		</if>
+		<if test="pd.scenic_address != null and pd.scenic_address != ''">
+			and scenic_address = #{pd.scenic_address}
+		</if>
+		<if test="pd.scenic_phone != null and pd.scenic_phone != ''">
+			and scenic_phone = #{pd.scenic_phone}
+		</if>
+		<if
+			test="pd.scenic_business_time != null and pd.scenic_business_time != ''">
+			and scenic_business_time = #{pd.scenic_business_time}
+		</if>
+		<if test="pd.scenic_tip != null and pd.scenic_tip != ''">
+			and scenic_tip = #{pd.scenic_tip}
+		</if>
+		<if test="pd.scenic_status != null and pd.scenic_status != ''">
+			and scenic_status = #{pd.scenic_status}
+		</if>
+		<if test="pd.scenic_radius != null and pd.scenic_radius != ''">
+			and scenic_radius = #{pd.scenic_radius}
+		</if>
+		<if test="pd.id != null and pd.id != ''">
+			and id = #{pd.id}
+		</if>
+	</select>
+	<!-- 查询景点 根据类目 并且排除攻略已选择的景点 -->
+	<select id="selectExcludeLine" parameterType="pd" resultType="pd">
+	  select * from t_scenic_content where category_id = #{category_id}
+	  <if test="line_id != null and line_id != ''">
+	     and id not in (select line_scenic_id from t_scenic_line_map where line_id = #{line_id} )
+	  </if>
+	  <if test="excludeScenicIds != null and excludeScenicIds != ''">
+	      and id not in ${excludeScenicIds}
+	  </if>
+	</select>
+	
+	<select id="selectScenicByLatLng" parameterType="pd" resultType="pd">
+	    SELECT *,((round(6367000 * 2 * asin(sqrt(pow(sin(((scenic_lat * pi()) / 180 - (#{lat} * pi()) / 180) / 2), 2) + cos((#{lat} * pi()) / 180) * cos((scenic_lat * pi()) / 180) * pow(sin(((scenic_lng * pi()) / 180 - (#{lng} * pi()) / 180) / 2), 2)))))-scenic_radius) AS distance 
+		FROM t_scenic_content 
+		  where scenic_status = 1 and category_id <![CDATA[ > ]]> 0 
+		ORDER BY distance asc    
+		limit 1
+	</select>
+	<select id="selectById" resultType="pd" parameterType="Integer">
+		select *
+		from t_scenic_content where id=#{id}
+	</select>
+	<insert id="insert" parameterType="pd">
+		insert into t_scenic_content
+		(category_id,scenic_name,scenic_desc,scenic_logo,scenic_lat,scenic_lng,scenic_radius,scenic_content,scenic_voice_path,scenic_click,scenic_address,scenic_phone,scenic_business_time,scenic_tip,scenic_create_time,scenic_status,scenic_voice_hour,scenic_tip_resource,scenic_tip_source_hour,scenic_tip_order,scenic_is_ticket,scenic_lable,scenic_ticket_price,scenic_traffic,scenic_book_know)
+		values(#{category_id},#{scenic_name},#{scenic_desc},#{scenic_logo},#{scenic_lat},#{scenic_lng},#{scenic_radius},#{scenic_content},#{scenic_voice_path},#{scenic_click},#{scenic_address},#{scenic_phone},#{scenic_business_time},#{scenic_tip},#{scenic_create_time},#{scenic_status},#{scenic_voice_hour},#{scenic_tip_resource},#{scenic_tip_source_hour},#{scenic_tip_order},#{scenic_is_ticket},#{scenic_lable},#{scenic_ticket_price},#{scenic_traffic},#{scenic_book_know})
+	</insert>
+	<update id="update" parameterType="pd">
+		update t_scenic_content
+		<set>
+			<if test="category_id != null and category_id != ''">
+				category_id = #{category_id},
+			</if>
+			<if test="scenic_name != null and scenic_name != ''">
+				scenic_name = #{scenic_name},
+			</if>
+			<if test="scenic_desc != null and scenic_desc != ''">
+				scenic_desc = #{scenic_desc},
+			</if>
+			<if test="scenic_logo != null and scenic_logo != ''">
+				scenic_logo = #{scenic_logo},
+			</if>
+			<if test="scenic_lat != null and scenic_lat != ''">
+				scenic_lat = #{scenic_lat},
+			</if>
+			<if test="scenic_lng != null and scenic_lng != ''">
+				scenic_lng = #{scenic_lng},
+			</if>
+			<if test="scenic_radius != null and scenic_radius != ''">
+				scenic_radius = #{scenic_radius},
+			</if>
+			<if test="scenic_content != null and scenic_content != ''">
+				scenic_content = #{scenic_content},
+			</if>
+			<if test="scenic_voice_path != null and scenic_voice_path != ''">
+				scenic_voice_path = #{scenic_voice_path},
+			</if>
+			<if test="scenic_click != null and scenic_click != ''">
+				scenic_click = #{scenic_click},
+			</if>
+			<if test="scenic_address != null and scenic_address != ''">
+				scenic_address = #{scenic_address},
+			</if>
+			<if test="scenic_phone != null and scenic_phone != ''">
+				scenic_phone = #{scenic_phone},
+			</if>
+			<if test="scenic_business_time != null and scenic_business_time != ''">
+				scenic_business_time = #{scenic_business_time},
+			</if>
+			<if test="scenic_tip != null and scenic_tip != ''">
+				scenic_tip = #{scenic_tip},
+			</if>
+			<if test="scenic_status != null and scenic_status != ''">
+				scenic_status = #{scenic_status},
+			</if>
+			<if test="scenic_voice_hour != null and scenic_voice_hour != ''">
+				scenic_voice_hour = #{scenic_voice_hour},
+			</if>
+			<if test="scenic_tip_resource != null and scenic_tip_resource != ''">
+				scenic_tip_resource = #{scenic_tip_resource},
+			</if>
+			<if test="scenic_tip_source_hour != null and scenic_tip_source_hour != ''">
+				scenic_tip_source_hour = #{scenic_tip_source_hour},
+			</if>
+			<if test="scenic_tip_order != null and scenic_tip_order != ''">
+				scenic_tip_order = #{scenic_tip_order},
+			</if>
+			<if test="scenic_is_ticket != null and scenic_is_ticket != ''">
+				scenic_is_ticket = #{scenic_is_ticket},
+			</if>
+			<if test="scenic_lable != null and scenic_lable != ''">
+				scenic_lable = #{scenic_lable},
+			</if>
+			<if test="scenic_ticket_price != null and scenic_ticket_price != ''">
+				scenic_ticket_price = #{scenic_ticket_price},
+			</if>
+			<if test="scenic_traffic != null and scenic_traffic != ''">
+				scenic_traffic = #{scenic_traffic},
+			</if>
+			<if test="scenic_book_know != null and scenic_book_know != ''">
+				scenic_book_know = #{scenic_book_know},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deletecategory" parameterType="page">
+		delete from
+		t_scenic_category where 1=1
+		and id = #{pd.id}
+	</delete>
+    <!-- 微信端讲解列表 -->
+     <select id="explainList" parameterType="pd" resultType="pd">
+        select id,scenic_name,scenic_desc,scenic_logo,scenic_voice_path,scenic_voice_hour,category_id,scenic_lat,scenic_lng 
+        from t_scenic_content
+        where  scenic_status = 1 
+             and scenic_voice_path is not null 
+             and scenic_voice_hour is not null
+     </select>
+	<delete id="delete" parameterType="page">
+		delete from t_scenic_content
+		where 1=1
+		and id = #{pd.id}
+	</delete>
+
+	<insert id="insertImg" parameterType="pd">
+		insert into t_scenic_imgs
+		(img_path,scenic_id,status)
+		values(#{img_path},#{scenic_id},#{status})
+	</insert>
+	
+	<delete id="deleteImgsById" parameterType="pd">
+	    delete from t_scenic_imgs where id = #{id}
+	</delete>
+	<select id="selectImgByMap" parameterType="pd" resultType="pd">
+	   select * from t_scenic_imgs where 1= 1
+	   <if test="scenic_id != null and scenic_id !=''">
+	      and scenic_id = #{scenic_id}
+	   </if>
+	   <if test="status != null and status !=''">
+	      and status = #{status}
+	   </if>
+	   <if test="id != null and id !=''">
+	      and id = #{id}
+	   </if>
+	</select>
+	
+	<!-- 点赞 评论 -->
+	<!-- 查询某一个景点点赞数量 -->
+	<select id="selectCountPraise" parameterType="pd" resultType="Integer">
+	   select count(*) praiseCount from t_scenic_praise where scenic_id = #{scenic_id}
+	</select>
+	<!-- 查询某个人是否在某个景点点过赞 -->
+	<select id="selectPraiseByMap" parameterType="pd" resultType="pd">
+	   select * from  t_scenic_praise where 1=1
+	   <if test="scenic_id != null and scenic_id != ''">
+	      and scenic_id = #{scenic_id}
+	   </if>
+	   <if test="user_id != null and user_id != ''">
+	      and user_id = #{user_id}
+	   </if>
+	</select>
+	<!-- 查询评论列表 -->
+	<select id="selectCommentByMap" parameterType="pd" resultType="pd">
+	   select t1.scenic_comment_content,t1.scenic_comment_time ,t2.* from t_scenic_comment t1 
+	   left join t_user t2 on t1.user_id = t2.user_id 
+	   where 1= 1
+	   <if test="scenic_show_status != null and scenic_show_status != ''">
+	      and scenic_show_status = #{scenic_show_status} 
+	   </if>
+	   <if test="user_id != null and user_id != ''">
+	       and user_id = #{user_id} 
+	   </if>
+	   <if test="scenic_id != null and scenic_id != ''">
+	       and scenic_id = #{scenic_id}
+	   </if>
+	   order by scenic_comment_time desc
+	   <if test="limit != null and limit != ''">
+	      limit #{limit}
+	   </if>
+	</select>
+	
+		<!-- 查询评论列表 -->
+	<select id="selectCountComment" parameterType="pd" resultType="Integer">
+	   select count(*) commentCount from t_scenic_comment where 1= 1
+	   <if test="scenic_show_status != null and scenic_show_status != ''">
+	      and scenic_show_status = #{scenic_show_status} 
+	   </if>
+	   <if test="user_id != null and user_id != ''">
+	       and user_id = #{user_id} 
+	   </if>
+	   <if test="scenic_id != null and scenic_id != ''">
+	       and scenic_id = #{scenic_id}
+	   </if>
+	</select>
+	<insert id="insertComment" parameterType="pd">
+	   insert into t_scenic_comment (scenic_id,user_id,scenic_comment_content,scenic_comment_time,scenic_show_status)
+	   values(#{scenic_id},#{user_id},#{scenic_comment_content},#{scenic_comment_time},1)
+	</insert>
+	<!-- 插入点赞 -->
+	<insert id="insertPraise" parameterType="pd">
+	    insert into t_scenic_praise(user_id,scenic_id)
+	    values(#{user_id},#{scenic_id})
+	</insert>
+	<!-- 插入收藏 -->
+	<insert id="insertCollect" parameterType="pd">
+	   insert into t_scenic_follow (user_id,scenic_id,create_time)
+	   values(#{user_id},#{scenic_id},#{create_time})
+	</insert>
+	<!-- 统计收藏 -->
+	<select id="countCollect" parameterType="pd" resultType="Integer">
+	    select count(*) from t_scenic_follow where 1= 1
+	    <if test="user_id != null and user_id != ''">
+	       and user_id = #{user_id}
+	    </if>
+	    <if test="scenic_id != null and scenic_id != ''">
+	       and scenic_id = #{scenic_id}
+	    </if>
+	</select>
+		<!-- 收藏列表 -->
+	<select id="collectList" parameterType="pd" resultType="pd">
+	    select t2.* from t_scenic_follow t1 left join t_scenic_content t2 on t1.scenic_id = t2.id where category_id != -2
+	    <if test="user_id != null and user_id != ''">
+	       and user_id = #{user_id}
+	    </if>
+	    <if test="scenic_id != null and scenic_id != ''">
+	       and scenic_id = #{scenic_id}
+	    </if>
+	    <if test="category_id != null and category_id != ''">
+	       and category_id = #{category_id}
+	    </if>
+	    <if test="scenic_status != null and scenic_status != ''">
+	       and scenic_status = 1
+	    </if>
+	</select>
+	<insert id="userLatLng" parameterType="pd">
+	  insert into t_user_latlng(lat,lng,create_time,user_id,scenic_id)
+	  values(#{lat},#{lng},#{create_time},#{user_id},#{scenic_id})
+	</insert>
+	<select id="fotoPlace" parameterType="pd" resultType="pd">
+	    SELECT * from (SELECT
+			a.lat,
+			a.lng,
+			a.create_time AS visit_time,
+			a.user_id, a.scenic_id
+		FROM
+			t_user_latlng a
+		WHERE
+			create_time = (
+				SELECT
+					max(create_time)
+				FROM
+					t_user_latlng
+				WHERE
+					scenic_id = a.scenic_id
+			)) t1 inner join t_scenic_content t2
+		on t1.scenic_id = t2.id
+		where t1.user_id = #{user_id}
+		ORDER BY t1.visit_time
+	</select>
+	<!-- app手机接口 -->
+	<select id="selectScenicTicketByPage" parameterType="pd" resultType="pd">
+	   select id,scenic_name,scenic_desc,scenic_logo,scenic_lat,scenic_lng,scenic_radius,scenic_content,scenic_click,scenic_phone,
+	   scenic_address,scenic_lable,scenic_ticket_price,scenic_buy_count from t_scenic_content
+	   where scenic_status = 1 and scenic_is_ticket = 1
+	</select>
+	  <!-- pc端分页查询票务 -->
+    <select id="selectPcTicketByPage" parameterType="page" resultType="pd">
+       select * from t_scenic_content  
+       where scenic_is_ticket = 1
+       and scenic_status = 1
+       order by scenic_order desc
+    </select>
+	<!-- pc端分页查询 -->
+	<select id="selectByPcPage" resultType="pd" parameterType="page">
+	   select scenic_name,id,scenic_desc,scenic_logo,scenic_click from t_scenic_content where scenic_status = 1
+	   and category_id = 2
+	   order by scenic_order desc
+	</select>
+	
+</mapper>

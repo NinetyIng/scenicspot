@@ -1,0 +1,16 @@
+.phone {
+/*     background: #111; */
+/*     border-radius: 55px; */
+/*     box-shadow: 0px 0px 0px 2px #aaa; */
+    width: 301px;
+    height: 620px;
+    padding: 103px 23px;
+    background: url(/statics/img/jishou.png);
+}
+.phone iframe {
+background-color: #ffffff;
+    width: 255px;
+    height: 420px;
+    display: block;
+    margin-top: 15px;
+}

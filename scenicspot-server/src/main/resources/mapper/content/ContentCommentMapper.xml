@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.server.mapper.content.ContentCommentMapper">
+	<!-- 文章回复 -->
+	<sql id="conditioncomment">
+		<if test="pd.comment_id != null">
+			and comment_id = #{pd.comment_id}
+		</if>
+		<if test="pd.content_id!= null">
+			and content_id = #{pd.content_id}
+		</if>
+		<if test="pd.p_id != null">
+			and p_id = #{pd.p_id}
+		</if>
+		<if test="pd.comment_author_logo != null">
+			and comment_author_logo = #{pd.comment_author_logo}
+		</if>
+		<if test="pd.comment_author != null">
+			and comment_author = #{pd.comment_author}
+		</if>
+		<if test="pd.user_id != null">
+			and user_id = #{pd.user_id}
+		</if>
+		<if test="pd.comment_context_time != null">
+			and comment_context_time = #{pd.comment_context_time}
+		</if>
+		<if test="pd.comment_context != null">
+			and comment_context = #{pd.comment_context}
+		</if>
+	</sql>
+	<sql id="tableName">t_content_comment</sql>
+	<select id="selectByPage" resultType="pd"  parameterType="page">
+		select * from t_content_comment where 1=1
+			<include refid="conditioncomment"></include>
+	</select>
+
+	<select id="selectByMap" resultType="pd"  parameterType="pd">
+		select * from <include refid="tableName"></include> where 1=1
+			<include refid="conditioncomment"></include>
+		order by comment_context_time desc
+		<if test="pd.limit != null and pd.limit != ''">
+		  limit #{pd.limit}
+		</if>	
+	</select>
+	
+	<select id="selectById" resultType="pd"  parameterType="Integer">
+		SELECT * from <include refid="tableName"></include> where content_id = #{content_id}
+	</select>
+	<insert id="insert" parameterType="pd">
+		insert into
+		<include refid="tableName"></include>
+		(content_id,p_id,comment_author_logo,comment_author,user_id,comment_context,comment_context_time)
+		values
+		(#{content_id},#{p_id},#{comment_author_logo},#{comment_author},#{user_id},#{comment_context},#{comment_context_time})
+	</insert>
+	<delete id="delete"   parameterType="pd">
+		delete from <include refid="tableName"></include> where content_id = #{content_id}
+	</delete>
+
+	<update id="update" parameterType="pd">
+		update <include refid="tableName"></include>
+		<set>
+			<if test="content_id != null">
+				content_id = #{content_id},
+			</if>
+			<if test="p_id != null">
+				p_id = #{p_id},
+			</if>
+			<if test="comment_author_logo != null">
+				comment_author_logo = #{comment_author_logo},
+			</if>
+			<if test="comment_author != null">
+				comment_author = #{comment_author},
+			</if>
+			<if test="user_id != null">
+				user_id = #{user_id},
+			</if>
+			<if test="comment_context != null">
+				comment_context = #{comment_context},
+			</if>
+			<if test="comment_context_time != null">
+				comment_context_time = #{comment_context_time},
+			</if>
+		</set>
+		where comment_id = #{comment_id}
+	</update>
+
+	<delete id="deleteComment" parameterType="pd">
+		delete from <include refid="tableName"></include> where 1=1
+		where comment_id in (${comment_ids})
+	</delete>
+	<!-- 文章回复结束 -->
+	
+	<!-- 点赞t_ythd_circle_thumbsup -->
+	<select id="selectThumbsupById" resultType="pd" parameterType="pd">
+		SELECT * from <include refid="tableName"></include> where user_id = #{user_id} and content_id = #{content_id}
+	</select>
+	
+	<select id="selectThumbsuplist" resultType="pd" parameterType="pd">
+		SELECT * from <include refid="tableName"></include> where content_id = #{content_id}
+	</select>
+	
+	<insert id="insertThumbsup" parameterType="pd">
+		insert into
+		<include refid="tableName"></include>
+		(content_id,user_id)
+		values
+		(#{content_id},#{user_id})
+	</insert>
+</mapper>

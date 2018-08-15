@@ -1,0 +1,9 @@
+- api模块 所有公众号的接口
+- manager模块 管理后台接口
+- server模块 管理后台逻辑层
+- platform模块 对接第三方平台
+- task模块 定时任务模块
+- server模块 管理后台服务层
+- ticket模块 前端票务服务层
+- content模块 前端内容服务层
+- api模块  前端接口集合

@@ -1,0 +1,110 @@
+
+
+
+/*fixed*/
+
+.fixed {
+	width: 100%;
+	position: fixed;
+	background: rgba(241, 241, 241, 0.8);
+}
+
+.wrap {
+	padding: 10px 20px;
+}
+.butt{
+	padding: 5px 10px;
+	border: 1px solid #4A4A4A;
+}
+
+/*鍐呭*/
+
+/*璺濈椤堕儴璺濈*/
+.content{
+}
+/*鏌ョ湅甯栧瓙*/
+.con{
+	padding: 15px 10px;
+	border: 1px solid #9B9B9B;
+	position: relative;
+}
+.img{
+	width: 100px;
+	height:100px;
+	position: absolute;
+	left: 10px;
+	top:10px;
+}
+.txt{
+	margin: 0 10px 0 110px;
+}
+	/*瀛椾笉鎹㈣骞跺啓鐪佺暐鍙�/
+.nowrap{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: block;
+	margin-bottom: 10px;
+}
+.marTop{
+	margin-top: 20px;
+}
+/*骞垮憡鎺ㄩ�*/
+.martop{
+	margin-top: 40px;
+}
+.but{
+	padding: 5px 10px;
+	background: #EB4E17;
+	color: #fff;
+	display: inline-block;
+	vertical-align: middle;
+}
+/*妯潯*/
+.box{
+	height: 4px;
+	background: #F0EFEF;
+}
+/*闃呰浜烘暟*/
+.ul{
+	display: flex;
+}
+.ul li{
+	flex: 1;
+	padding: 0 10px;
+}
+.ul li img{
+	border-radius: 50%;
+}
+.wrp{
+	border-bottom: 1px solid #F0EFEF;
+}
+/*鍏ㄩ儴鍥炲*/
+.pad{
+	padding: 10px 0;
+	font-size: 12px;
+	color: #999999;
+}
+.photo{
+	width: 30px;
+}
+.photo img{
+	border-radius: 50%;
+}
+.marLeft{
+	margin-left: 10px;
+}
+.marto{
+	margin-top: 10px;
+}
+/*鏌ョ湅鏇村*/
+.more{
+	width: 100%;
+	background: #000;
+	color: #fff;
+	text-align: center;
+	padding: 15px 0;
+}
+.scs{
+	padding:5px 20px;
+}
