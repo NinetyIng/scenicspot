@@ -125,7 +125,7 @@ public class FtpUtilsAbove {
 				ftpClient.changeWorkingDirectory(directoryName); // 在当前ftp回话上改变当前工作目录
 			}
 			String fileName = System.currentTimeMillis()+EAString.getRandomString(7)+".png";
-			ftpClient.storeFile(fileName,stream); 
+			ftpClient.storeFile(fileName,stream);
 			stream.close();
 			closeFtp();
 			return savePath.append("/")
@@ -144,8 +144,6 @@ public class FtpUtilsAbove {
 	/**
 	 * 上传音频
 	 * @param file
-	 * @param string
-	 * @param string2
 	 * @return
 	 * @throws IOException 
 	 */
@@ -358,14 +356,14 @@ public class FtpUtilsAbove {
 	public  String takeLiunx(String videoLocation, File imgFile) throws Exception { 
 		 String command = "ffmpeg -i " + videoLocation + " -y -f image2 -ss 00:00:06 -t 00:00:01 -s 750x322 " + imgFile.getAbsolutePath(); 
 		 try { 
-		 Runtime rt = Runtime.getRuntime(); 
-		 Process proc = rt.exec(command); 
-		 InputStream stderr = proc.getErrorStream(); 
-		 InputStreamReader isr = new InputStreamReader(stderr); 
-		 BufferedReader br = new BufferedReader(isr); 
-		 String line = null; 
-		 while ((line = br.readLine()) != null) 
-		 System.out.println("执行返回的信息流<>><><<><#############################################>><><><<><><>"+line);
+			 Runtime rt = Runtime.getRuntime();
+			 Process proc = rt.exec(command);
+			 InputStream stderr = proc.getErrorStream();
+			 InputStreamReader isr = new InputStreamReader(stderr);
+			 BufferedReader br = new BufferedReader(isr);
+			 String line = null;
+			 while ((line = br.readLine()) != null)
+			 System.out.println("执行返回的信息流<>><><<><#############################################>><><><<><><>"+line);
 		  } catch (Throwable t) { 
 		 t.printStackTrace(); 
 		 return ""; 

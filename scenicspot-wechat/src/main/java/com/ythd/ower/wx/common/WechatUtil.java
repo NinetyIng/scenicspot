@@ -82,7 +82,7 @@ public final class WechatUtil {
 	public static JSONObject getQRCodeTicket(int scene_id) {
 		String data = "{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_id\":" + scene_id	+ "}}}";
 		String requestUrl = String.join(StringUtils.EMPTY,QRCODE_TICKET_URL,getAccessToken());
-		JSONObject jsonObject = httpRequest(requestUrl, "POST", data);
+		JSONObject jsonObject = httpRequest(requestUrl, WechatConstant.REQUEST_METHOD_POST, data);
 		// 如果请求成功
 		if (null != jsonObject) {
 			try {
@@ -98,11 +98,9 @@ public final class WechatUtil {
 	/**
 	 * 获取accessToken 微信授权登陆
 	 */
-	public static String readAccessTokenApp(String code) throws Exception {
-		System.out.println("读取ACCESS——TOKEN");
+	public static String readAccessTokenApp(String code){
 		String jsonStr = HttpRequest
-				.sendPost(Configure.getAccessTokenUrl(Configure.getAppid(), Configure.getAppSecret(), code), "");
-		System.out.println(jsonStr);
+				.sendPost(Configure.getAccessTokenUrl(Configure.getAppid(), Configure.getAppSecret(), code), StringUtils.EMPTY);
 		JSONObject object = JSONObject.fromObject(jsonStr);
 		String accessToken = object.getString(WechatConstant.ACCESS_TOKEN);
 		return accessToken;
@@ -125,20 +123,18 @@ public final class WechatUtil {
 	 * @throws Exception
 	 */
 	public static JSONObject readUserList(String next_openid){
-		System.out.println("读取readUserList");
+
 		try {
 			String jsonStr = new String(
 					HttpRequest.sendPost(Configure.getUserListUrl(getAccessToken(), next_openid), StringUtils.EMPTY).getBytes(),
-					"utf-8");
-			System.out.println(jsonStr);
+					WechatConstant.REQUEST_CHARSET);
+			LOGGER.info("获取会员列表，获取到的会员信息:{}",jsonStr);
 			JSONObject object = JSONObject.fromObject(jsonStr);
-			System.out.println(object);
 			return object;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("获取会员列表失败,失败信息{}",e);
 		}
 		return null;
-
 	}
 	
 	
@@ -153,7 +149,6 @@ public final class WechatUtil {
 	public static JSONObject readUserInfo(String openId) {
 		try {
 			String jsonStr = new String(HttpRequest.sendGet(Configure.getUserInfoUrl(getAccessToken(), openId), StringUtils.EMPTY).getBytes(),"utf-8");
-
 			LOGGER.info("openid{}，获取到的用户信息",jsonStr);
 			JSONObject object = JSONObject.fromObject(jsonStr);
 			return object;
@@ -173,7 +168,6 @@ public final class WechatUtil {
 			String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
 			String jsonStr = HttpRequest.sendGet(url, "access_token=" + getAccessToken() + "&type=jsapi");
 			JSONObject object = JSONObject.fromObject(jsonStr);
-			System.out.println("读取getJsapiTicket==" + jsonStr);
 			return object.getString("ticket");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -493,85 +487,4 @@ public final class WechatUtil {
 		String url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=" + getAccessToken() + "&media_id=" + s;
 		return HttpRequest.sendGetForMedia(url, null);
 	}
-	
-	//判断是否包含表情符号
-	public static boolean containsEmoji(String source) {
-        int len = source.length();
-        boolean isEmoji = false;
-        for (int i = 0; i < len; i++) {
-            char hs = source.charAt(i);
-            if (0xd800 <= hs && hs <= 0xdbff) {
-                if (source.length() > 1) {
-                    char ls = source.charAt(i + 1);
-                    int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
-                    if (0x1d000 <= uc && uc <= 0x1f77f) {
-                        return true;
-                    }
-                }
-            } else {
-                // non surrogate
-                if (0x2100 <= hs && hs <= 0x27ff && hs != 0x263b) {
-                    return true;
-                } else if (0x2B05 <= hs && hs <= 0x2b07) {
-                    return true;
-                } else if (0x2934 <= hs && hs <= 0x2935) {
-                    return true;
-                } else if (0x3297 <= hs && hs <= 0x3299) {
-                    return true;
-                } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d
-                        || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c
-                        || hs == 0x2b1b || hs == 0x2b50 || hs == 0x231a) {
-                    return true;
-                }
-                if (!isEmoji && source.length() > 1 && i < source.length() - 1) {
-                    char ls = source.charAt(i + 1);
-                    if (ls == 0x20e3) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return isEmoji;
-    }
-    //判断字符串是否是表情字符
-    private static boolean isEmojiCharacter(char codePoint) {
-        return (codePoint == 0x0) || (codePoint == 0x9) || (codePoint == 0xA)
-                || (codePoint == 0xD)
-                || ((codePoint >= 0x20) && (codePoint <= 0xD7FF))
-                || ((codePoint >= 0xE000) && (codePoint <= 0xFFFD))
-                || ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF));
-    }
-
-    /**
-     * 过滤emoji 或者 其他非文字类型的字符
-     * 
-     * @param source
-     * @return
-     */
-    public static String filterEmoji(String source) {
-        if (StringUtils.isBlank(source)) {
-            return source;
-        }
-        StringBuilder buf = null;
-        int len = source.length();
-        for (int i = 0; i < len; i++) {
-            char codePoint = source.charAt(i);
-            if (isEmojiCharacter(codePoint)) {
-                if (buf == null) {
-                    buf = new StringBuilder(source.length());
-                }
-                buf.append(codePoint);
-            }
-        }
-        if (buf == null) {
-            return source;
-        } else {
-            if (buf.length() == len) {
-                buf = null;
-                return source;
-            } else {
-                return buf.toString();
-            }
-        }
-    }
 }

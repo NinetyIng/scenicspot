@@ -46,7 +46,7 @@ import org.apache.http.util.EntityUtils;
  * @since: 2018/8/16
  * @version: $Revision$
  */
-public class HttpClientUtils {
+public class HttpClientSSLUtils {
 
   private static final String TAG = "SDK_Sample.Util";
 

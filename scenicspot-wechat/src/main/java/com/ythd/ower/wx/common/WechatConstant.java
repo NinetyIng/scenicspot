@@ -14,7 +14,7 @@ public interface WechatConstant {
   String ACCESS_TOKEN = "access_token";
 
   String REQUEST_METHOD_POST = "POST";
-  String REQUEST_METHOD_GET = "POST";
+  String REQUEST_METHOD_GET = "GET";
 
   String RESPONSE_CODE = "errcode";
 

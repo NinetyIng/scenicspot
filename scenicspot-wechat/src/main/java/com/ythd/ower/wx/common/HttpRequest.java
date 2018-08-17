@@ -1,5 +1,6 @@
 package com.ythd.ower.wx.common;
 
+import com.ythd.ower.common.tools.FtpUtilsAbove;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,9 +23,6 @@ import javax.net.ssl.TrustManager;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.easaa.core.util.FtpUtilsAbove;
-
 import net.sf.json.JSONObject;
 
 public class HttpRequest {
@@ -85,13 +83,13 @@ public class HttpRequest {
         return result;
     }
 
-    
-    
-    
-    
+
+
+
+
     /**
      * 向指定URL发送GET方法的请求
-     * 
+     *
      * @param url
      *            发送请求的URL
      * @param param
@@ -99,15 +97,14 @@ public class HttpRequest {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGetForMedia(String url, String param) {
-        String result = "",urlNameString="";
+        String result = "",urlNameString;
         BufferedInputStream bin = null;
         try {
-        	if(StringUtils.isNotEmpty(param)){
-        		 urlNameString = url + "?" + param;
-        	}else{
-        		 urlNameString = url;
-        	}
-           
+            if(StringUtils.isNotEmpty(param)){
+               urlNameString = url + "?" + param;
+            }else{
+               urlNameString = url;
+            }
             URL realUrl = new URL(urlNameString);
             // 打开和URL之间的连接
             HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
@@ -144,7 +141,7 @@ public class HttpRequest {
     }
     /**
      * 向指定 URL 发送POST方法的请求
-     * 
+     *
      * @param url
      *            发送请求的 URL
      * @param param
@@ -154,7 +151,7 @@ public class HttpRequest {
     public static String sendPost(String url, String param) {
         PrintWriter out = null;
         BufferedReader in = null;
-        String result = "";
+        String result = org.apache.commons.lang3.StringUtils.EMPTY;
         try {
             URL realUrl = new URL(url);
            /* param=new String(param.getBytes(), "utf-8");*/
@@ -167,18 +164,11 @@ public class HttpRequest {
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
             conn.setRequestProperty("Charsert", "UTF-8");
-            // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            // 获取URLConnection对象对应的输出流
-            out = new PrintWriter(new OutputStreamWriter(conn.getOutputStream(),"utf-8"));
-
-          //  out = new PrintWriter(conn.getOutputStream());
-            // 发送请求参数
+            out = new PrintWriter(new OutputStreamWriter(conn.getOutputStream(),WechatConstant.REQUEST_CHARSET));
             out.print(param);
-            // flush输出流的缓冲
             out.flush();
-            // 定义BufferedReader输入流来读取URL的响应
             in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()));
             String line;
@@ -189,7 +179,6 @@ public class HttpRequest {
             System.out.println("发送 POST 请求出现异常！"+e);
             e.printStackTrace();
         }
-        //使用finally块来关闭输出流、输入流
         finally{
             try{
                 if(out!=null){
@@ -204,13 +193,13 @@ public class HttpRequest {
             }
         }
         return result;
-    } 
+    }
     public static String JSON="json";
     public static String XML="xml";
     public static String TEXT="text";
     /**
    	 * 发起https请求并获取结果
-   	 * 
+   	 *
    	 * @param requestUrl 请求地址
    	 * @param requestMethod 请求方式（GET、POST）
    	 * @param outputStr 提交的数据
@@ -234,18 +223,19 @@ public class HttpRequest {
    			httpUrlConn.setUseCaches(false);
    			// 设置请求方式（GET/POST）
    			httpUrlConn.setRequestMethod(requestMethod);
-   			if ("GET".equalsIgnoreCase(requestMethod))
-   				httpUrlConn.connect();
+   			if (WechatConstant.REQUEST_METHOD_GET.equalsIgnoreCase(requestMethod)){
+          httpUrlConn.connect();
+        }
    			// 当有数据需要提交时
    			if (null != outputStr) {
    				OutputStream outputStream = httpUrlConn.getOutputStream();
    				// 注意编码格式，防止中文乱码
-   				outputStream.write(outputStr.getBytes("UTF-8"));
+   				outputStream.write(outputStr.getBytes(WechatConstant.REQUEST_CHARSET));
    				outputStream.close();
    			}
    			// 将返回的输入流转换成字符串
    			InputStream inputStream = httpUrlConn.getInputStream();
-   			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+   			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, WechatConstant.REQUEST_CHARSET);
    			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
    			String str = null;
    			while ((str = bufferedReader.readLine()) != null) {
@@ -262,7 +252,7 @@ public class HttpRequest {
    				JSONObject jsonObject = JSONObject.fromObject(buffer.toString());
    	   			return jsonObject;
    			}else if(XML.equals(resultType)){
-   				
+
    			}else{
    				return buffer.toString();
    			}
