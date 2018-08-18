@@ -1,0 +1,102 @@
+@charset "UTF-8";
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.navigate-right:after, .push-right:after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../img/icons/arrow_right.png);
+  background-repeat: no-repeat;
+  background-size: 16px auto;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .guide-form {
+  padding: 0 15px;
+}
+.content .guide-form .input-row {
+  height: auto;
+}
+.content .guide-form .input-row > label {
+  font-size: 16px;
+  line-height: 21px;
+  color: #999;
+  padding: 15px 18px;
+}
+.content .guide-form .input-row > input {
+  height: auto;
+  font-size: 16px;
+  line-height: 21px;
+  color: #333;
+  padding: 15px 18px;
+}
+.content .guide-form .input-row input::-webkit-input-placeholder {
+  color: #999;
+}
+.content .guide-form .input-row 　　input::-moz-placeholder {
+  　　color: #999;
+}
+.content .guide-form .input-row 　　input::-moz-placeholder {
+  　　color: #999;
+}
+.content .guide-form .input-row 　　input::-ms-input-placeholder {
+  　　color: #999;
+}
+.content .cautions {
+  margin-top: 10px;
+  padding: 0 15px;
+  background-color: #fff;
+}
+.content .cautions .cautions-title {
+  font-size: 16px;
+  line-height: 21px;
+  color: #333333;
+  padding: 15px 18px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .cautions .cautions-items {
+  margin: 0;
+  padding: 21px 20px;
+}
+.content .cautions .cautions-items li {
+  font-size: 14px;
+  line-height: 21px;
+  color: #FC9313;
+}
+.content .cautions .cautions-items li span {
+  color: #666;
+}
+
+.bar-tab .btn-post {
+  top: 0;
+  line-height: 18px;
+  padding: 16px 0;
+  background: #FC9313;
+  color: #FFF;
+  font-size: 19px;
+}
+
+/*# sourceMappingURL=ddtx.css.map */

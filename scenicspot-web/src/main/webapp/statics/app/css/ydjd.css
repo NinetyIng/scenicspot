@@ -1,0 +1,222 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .banner-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #9DDBF0;
+  height: 184px;
+}
+.content .banner-wrap .banner {
+  position: absolute;
+  top: -30px;
+  width: 100%;
+}
+.content .hotel-info {
+  position: absolute;
+  background: #FFF;
+  top: 135px;
+  left: 5px;
+  right: 5px;
+  padding: 10px 15px 0 15px;
+}
+.content .hotel-info .hotel-wrap {
+  width: 100%;
+}
+.content .hotel-info .hotel-wrap .pro-title {
+  color: #333333;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+.content .hotel-info .hotel-wrap > span {
+  font-size: 13px;
+  line-height: 18px;
+  margin-right: 5px;
+}
+.content .hotel-info .hotel-wrap .pro-mark {
+  display: inline-block;
+}
+.content .hotel-info .hotel-wrap .pro-mark span {
+  font-size: 10px;
+  color: #FC9313;
+  line-height: 12px;
+  padding: 0px 7px;
+  border: 1px solid #FC9313;
+}
+.content .hotel-info .hotel-wrap .pro-mark span:not(last-child) {
+  margin-right: 5px;
+}
+.content .hotel-info .service {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.content .hotel-info .service .service-item {
+  line-height: 12px;
+  font-size: 12px;
+  color: #333333;
+}
+.content .hotel-info .service .service-item > img {
+  display: inline-block;
+  min-height: 12px;
+  max-height: 16px;
+  vertical-align: bottom;
+}
+.content .hotel-info .table-view {
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+.content .hotel-info .table-view .table-view-cell {
+  padding-right: 15px;
+}
+.content .hotel-info .table-view .table-view-cell .navigate-right {
+  margin-right: -15px;
+}
+.content .hotel-info .table-view .table-view-cell .navigate-right:after {
+  content: '';
+  color: #FFF;
+}
+.content .hotel-info .table-view .table-view-cell .media-object {
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+}
+.content .hotel-info .table-view .table-view-cell .media-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #333333;
+}
+.content .hotel-info .table-view .table-view-cell .media-body .title-name {
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+.content .hotel-info .table-view .table-view-cell .media-body p {
+  font-size: 14px;
+  line-height: 14px;
+  color: #999;
+}
+.content .hotel-info .table-view .table-view-cell .media-body .price {
+  color: #FF3C00;
+  font-size: 20px;
+  line-height: 18px;
+  text-align: center;
+}
+.content .custom-info {
+  margin-top: 170px;
+  background-color: #fff;
+  padding: 20px 15px;
+}
+.content .custom-info .item-input .input-label {
+  font-size: 15px;
+  line-height: 15px;
+  color: #999;
+  margin-bottom: 20px;
+}
+.content .custom-info .item-input > input {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+#popover {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 100%;
+  background-color: #FFF;
+}
+#popover .content {
+  position: relative;
+  background: #FFF;
+  min-height: 50px;
+  text-align: center;
+}
+
+.bar-tab .toolbar {
+  display: table-row;
+}
+.bar-tab .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.bar-tab .toolbar .total-price {
+  position: relative;
+  text-align: left;
+  padding-left: 15px;
+}
+.bar-tab .toolbar .total-price > div:first-child {
+  color: #FF3800;
+  font-size: 18px;
+  line-height: 14px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.bar-tab .toolbar .total-price > div:first-child > .person-num {
+  color: #999;
+  font-size: 10px;
+  line-height: 11px;
+  display: inline-block;
+}
+.bar-tab .toolbar .total-price > div:last-child {
+  line-height: 11px;
+  padding-left: 5px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  color: #999999;
+  font-size: 12px;
+  line-height: 48px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt > img {
+  display: inline-block;
+  width: 10px;
+  margin-top: -3px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.bar-tab .toolbar .bar-item {
+  font-size: 10px;
+  color: #999999;
+}
+.bar-tab .toolbar .btn-buy {
+  background: #ff7d13;
+  color: #fff;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=ydjd.css.map */

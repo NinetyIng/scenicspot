@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <style>
+        .content {
+            background: #FFF;
+            padding: 20px;
+        }
+        .header-title {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+        }
+        .btn-orange {
+            background-color: #ff7d13;
+            color: #FFF;
+            font-size: 16px;
+            line-height: 16px;
+            padding: 15px 20px;
+            border: none;
+            margin: 0 auto;
+        }
+        .input-group {
+            margin: 30px 0 80px 0;
+        }
+        .input-row {
+            position: relative;
+            height: auto;
+        }
+        .btn-verify {
+            position: absolute;
+            top: 9px;
+            right: 0;
+            width: 80px;
+            padding: 8px 10px;
+            color: #FFF;
+            background: #ff7d13;
+            border: none;
+        }
+        .btn-verify:hover, .btn-verify:active, .btn-orange:hover, .btn-orange:active {
+            background-color: #ff7d13;
+            color: #FFF;
+            outline: 0;
+        }
+        .input-row label {
+            line-height: 21px;
+            padding: 12px 0;
+            color: #333;
+        }
+        .input-row input {
+            height: 44px;
+            color: #666;
+        }
+        input::-webkit-input-placeholder {
+            color:#999;
+        }
+    　　input::-moz-placeholder {
+        　　color:#999;
+        }
+    　　input::-moz-placeholder {
+        　　color:#999;
+        }
+    　　input::-ms-input-placeholder {
+        　　color:#999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="header-title">绑定手机</div>
+        <form name="loginForm" class="input-group">
+            <div class="input-row">
+                <label>手机号：</label>
+                <input name="phoneNum" type="tel" placeholder="请输入手机号" oninput="checkPhoneNum()" onporpertychange="checkPhoneNum()" value="15221243212">
+            </div>
+            <div class="input-row">
+                <label>验证码：</label>
+                <input name="verifyCode" type="number" placeholder="请输入验证码" oninput="checkPhoneNum()">
+                <div class="btn btn-verify disabled">获取验证码</div>
+            </div>
+        </form>
+        <a class="btn btn-orange btn-block disabled">
+            提交
+        </a>
+    </div>
+    <script type="text/javascript">
+        var btnVerify = document.querySelector('.btn-verify');
+        var btnOrange = document.querySelector('.btn-orange');
+        var checkPhoneNum = function () {
+            var phoneNum = loginForm.phoneNum.value;
+            var verifyCode = loginForm.verifyCode.value;
+            var regex = /^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/;
+            if(regex.test(phoneNum)){
+                btnVerify.classList.remove('disabled');
+            }else {
+                btnVerify.classList.add('disabled');
+            }
+            if(verifyCode){
+                btnOrange.classList.remove('disabled');
+            }else {
+                btnOrange.classList.add('disabled');
+            }
+        }
+
+        btnVerify.addEventListener('click', function () {
+            var count = 5;
+            if(!btnVerify.classList.contains('disabled')){
+                btnVerify.classList.add('disabled');
+                var interval = setInterval(function () {
+                    count = count > 0 ? count-1 : 0;
+                    btnVerify.innerText = count + ' (s)';
+                    if(count === 0){
+                        window.clearInterval(interval);
+                        btnVerify.innerText = '获取验证码';
+                        btnVerify.classList.remove('disabled');
+                    }
+                }, 1000);
+            }
+        }, false);
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

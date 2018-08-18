@@ -1,0 +1,51 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.bar-header-secondary {
+  border-bottom: none;
+}
+.bar-header-secondary .segmented-control {
+  top: 0;
+  height: 100%;
+  font-family: PingFang-SC-Medium;
+  font-size: 16px;
+  border: none;
+}
+.bar-header-secondary .segmented-control .control-item {
+  padding-top: 12px;
+  border-left: none;
+}
+.bar-header-secondary .segmented-control .active {
+  background-color: #fff;
+  color: #FC9313;
+  border-bottom: 3px solid #FC9313;
+}
+
+.content .yydy-wrap {
+  width: 100%;
+  height: 100%;
+  background: url(../img/yydy/1.jpg) no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+/*# sourceMappingURL=yydy.css.map */

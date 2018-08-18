@@ -94,9 +94,9 @@ public class ContentController extends BaseController {
 			mv.addObject(ContentConstant.COMMON_MSG, ContentConstant.RequestType.REQUEST_EDIT);
 		}
 		pd.put(ContentConstant.ContentFiled.DISABLED,NumberContants.ONE);
-    mv.addObject(ContentConstant.CATEGORY_LIST,contentCategoryService.getByMap(pd));
-    mv.addObject(ContentConstant.SUBJECT_LIST,subjectService.getByMap(pd));
-    mv.setViewName("content/content_edit");
+		mv.addObject(ContentConstant.CATEGORY_LIST,contentCategoryService.getByMap(pd));
+		mv.addObject(ContentConstant.SUBJECT_LIST,subjectService.getByMap(pd));
+		mv.setViewName("content/content_edit");
 		return mv;
 	}
 

@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/app/css/mpddxq.css">
+</head>
+
+<body>
+    <!--底部导航栏-->
+    <footer class="bar bar-tab">
+        <div class="toolbar">
+            <span class="bar-item total-price">
+                <div>￥961</div>
+                <div>订单总价</div>
+            </span>
+            <span class="bar-item btn-buy" onclick="goLogin()">提交订单</span>
+        </div>
+    </footer>
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        <div class="order-info-wrap">
+            <div class="ticket-item">
+                <div class="title-wrap">
+                    <div class="ticket-title">【2017中、高考考生优惠票】燕子岩景区门票 （不含观光车） （每个手机号仅可预订一张）</div>
+                    <div class="delete-btn">
+                        <img src="/statics/app/img/icons/trash.png" alt="" />
+                    </div>
+                </div>
+                <ul class="table-view">
+                    <li class="table-view-cell">
+                        <a class="navigate-right choose-date" href="#dateSelect">
+                            选择日期
+                        </a>
+                    </li>
+                    <li class="table-view-cell">
+                        <a class="ticket-num">
+                            数量
+                            <div class="num-adjust">
+                                <div class="adjust-minus" onclick="minus()">
+                                    <img src="/statics/app/img/icons/minus.png" alt="" />
+                                </div>
+                                <div class="adjust-view">1</div>
+                                <div class="adjust-plus" onclick="plus()">
+                                    <img src="/statics/app/img/icons/plus.png" alt="" />
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ticket-item">
+                <div class="title-wrap">
+                    <div class="ticket-title">【2017中、高考考生优惠票】燕子岩景区门票 （不含观光车） （每个手机号仅可预订一张）</div>
+                    <div class="delete-btn">
+                        <img src="/statics/app/img/icons/trash.png" alt="" />
+                    </div>
+                </div>
+                <ul class="table-view">
+                    <li class="table-view-cell">
+                        <a class="navigate-right choose-date" href="#dateSelect">
+                            选择日期
+                        </a>
+                    </li>
+                    <li class="table-view-cell">
+                        <a class="ticket-num">
+                            数量
+                            <div class="num-adjust">
+                                <div class="adjust-minus" onclick="minus()">
+                                    <img src="/statics/app/img/icons/minus.png" alt="" />
+                                </div>
+                                <div class="adjust-view">1</div>
+                                <div class="adjust-plus" onclick="plus()">
+                                    <img src="/statics/app/img/icons/plus.png" alt="" />
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="action-add">
+                <img src="/statics/app/img/icons/plus.jpg" alt="" />
+                <span>同时购买该景区其他票</span>
+            </div>
+
+            <div class="traveller-list">
+                <div class="traveller-add">
+                    <div>出行人</div>
+                    <img src="/statics/app/img/icons/plus.png" />
+                </div>
+                <div class="traveller-item">
+                    <div class="item-label">出行人</div>
+                    <div class="item-content">
+                        <!--<div class="traveller-name">乌达</div>
+                        <div class="traveller-code">445895788956845278（成人）</div>-->
+                        <form class="input-group">
+                            <input class="traveller-name" type="text" placeholder="姓名">
+                            <input class="traveller-name" type="email" placeholder="联系电话">
+                            <input class="traveller-name" type="text" placeholder="身份证号">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="traveller-info">
+                <div class="info-item">
+                    <div>联系人</div>
+                    <div>乌达</div>
+                </div>
+                <div class="info-item">
+                    <div>联系电话</div>
+                    <div>15467464633</div>
+                </div>
+                <div class="info-item">
+                    <div>邮箱</div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--日期选择-->
+    <div id="dateSelect" class="modal">
+        <header class="bar bar-nav">
+            <a class="icon icon-close pull-right" href="#dateSelect"></a>
+            <h1 class="title">选择日期</h1>
+            <div class="pro-img"></div>
+        </header>
+        <div class="content">
+            <div class="date-header">
+                <div class="date-minus">
+                    <img src="/statics/app/img/icons/arrow_left_cover.png" alt="" />
+                </div>
+                <div class="date-view">2017年8月</div>
+                <div class="date-plus">
+                    <img src="/statics/app/img/icons/arrow_right.png" alt="" />
+                </div>
+            </div>
+            <div class="calendar-wrap">
+                <div class="calendar-week">
+                    <span class="calendar-week-item">日</span>
+                    <span class="calendar-week-item">一</span>
+                    <span class="calendar-week-item ">二</span>
+                    <span class="calendar-week-item ">三</span>
+                    <span class="calendar-week-item ">四</span>
+                    <span class="calendar-week-item ">五</span>
+                    <span class="calendar-week-item">六</span>
+                </div>
+                <div class="calendar-date">
+                    <div class="calendar-date-item disable empty_day"></div>
+                    <div class="calendar-date-item disable empty_day"></div>
+                    <div class="calendar-date-item disable empty_day"></div>
+                    <div class="calendar-date-item disable empty_day"></div>
+                    <div class="calendar-date-item disable empty_day"></div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">1</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">2</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">3</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">4</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">5</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">7</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">8</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">9</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">10</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">11</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">12</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">13</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item checked">
+                        <div class="date-info">14</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item">
+                        <div class="date-info">15</div>
+                        <div class="price-info">￥60</div>
+                        <div class="extra-info">充足</div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+                    <div class="calendar-date-item disable">
+                        <div class="date-info">6</div>
+                        <div class="price-info"></div>
+                        <div class="extra-info"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--绑定手机号-->
+    <div id="popover" class="popover">
+        <div class="content">
+            <img class="banner" src="/statics/app/img/icons/bundle.png" alt=""/>
+            <div class="tip-1">您还没有绑定手机号</div>
+            <div class="tip-2">下单前要确定绑定手机号哦</div>
+            <a class="btn btn-orange" href="绑定手机.html">
+                <span class="icon icon-right"></span>
+                去绑定
+            </a>
+            <img class="close" src="/statics/app/img/icons/close.png" onclick="closePopover()"/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var adjustView = document.querySelector('.adjust-view');
+
+        var minus = function () {
+            adjustView.innerText = adjustView.innerText - 1 > 0 ? adjustView.innerText - 1 : 1;
+        };
+
+        var plus = function () {
+            adjustView.innerText ++;
+        };
+
+        // 显示popover
+        var showPopover = function (popNode) {
+            var popover = popNode || document.getElementById('popNode');
+            popover.style.display = 'block';
+            var backdrop = document.createElement('div');
+            backdrop.classList.add('backdrop');
+            popover.parentNode.appendChild(backdrop);
+            popover.classList.add('visible');
+        };
+
+        // 隐藏popover
+        var hiddenPopover = function (popNode) {
+            var popover = popNode || document.getElementById('popNode');
+            popover.style.display = 'block';
+            var backdrop = document.querySelector('.backdrop');
+            popover.parentNode.removeChild(backdrop);
+            popover.classList.remove('visible');
+        };
+
+        // 绑定手机号
+        var goLogin = function () {
+            var popover = document.getElementById('popover');
+            showPopover(popover);
+        };
+
+        // 隐藏popover
+        var closePopover = function () {
+            var popover = document.getElementById('popover');
+            hiddenPopover(popover);
+        }
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

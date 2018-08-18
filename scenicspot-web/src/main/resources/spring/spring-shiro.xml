@@ -10,20 +10,22 @@
 	    <bean id="ShiroRealm" class="com.ythd.ower.server.upm.shiro.ShiroRealm" ></bean>
 		<!-- Shiro Filter -->
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+            <property name="unauthorizedUrl" value=""></property>
 			<property name="securityManager" ref="securityManager" />
 			<property name="loginUrl" value="/main/login.do" />
 			<property name="successUrl" value="/main/index.do" />
 			<property name="filterChainDefinitions">
 					<value>
 					/statics/** 			= anon
+					/static/** 			    = anon
 					/assets/**              = anon
 					/common/baidu/          = anon
-		           	/main/login.do	 			= anon
-		           	/main/doLogin.do	 		= anon
+		           	/main/login.do	 		= anon
+		           	/main/doLogin.do	 	= anon
+                    /client/**              = anon
 		           	/*                      = anon
 		           	/appwx/**				= anon
-					/healthCheck.do            = anon
-					/**.html                = anon
+					/healthCheck.do         = anon
 					/**						= authc
 					</value>
 			</property>

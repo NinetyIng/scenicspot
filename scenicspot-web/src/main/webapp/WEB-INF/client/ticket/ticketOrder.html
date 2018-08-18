@@ -1,0 +1,375 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的订单</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/app/css/wddd.css">
+</head>
+
+<body>
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left"></a>
+        <h1 class="title">我的订单</h1>
+    </header>
+    <nav class="bar bar-standard bar-header-secondary">
+        <div class="segmented-control">
+            <a class="control-item active all" href="#all">
+                <!--<img src="img/icons/all_selected.png" alt="">-->
+                全部
+            </a>
+            <a class="control-item wait_payment" href="#waitPayment">
+                <!--<img src="img/icons/wait_payment.png" alt="">-->
+                待付款
+            </a>
+            <a class="control-item wait_trip" href="#waitTrip">
+                <!--<img src="img/icons/wait_trip.png" alt="">-->
+                待出行
+            </a>
+            <a class="control-item refund" href="#refund">
+                <!--<img src="img/icons/refund.png" alt="">-->
+                取消/退款
+            </a>
+        </div>
+    </nav>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        <!--全部-->
+        <ul id="all" class="control-content table-view active">
+            <li class="table-view-cell media">
+               <div class="order-header">
+                   <div class="order-id">订单编号：<span>46874141545</span></div>
+                   <div class="order-status">待付款</div>
+               </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                    <div class="btn btn-pay btn-outlined">去支付</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待出行</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">已完成</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">退款中</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+        </ul>
+        <!--待付款-->
+        <ul id="waitPayment" class="control-content table-view active">
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待付款</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                    <div class="btn btn-pay btn-outlined">去支付</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待出行</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">已完成</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">退款中</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+        </ul>
+        <!--待出行-->
+        <ul id="waitTrip" class="control-content table-view active">
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待付款</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                    <div class="btn btn-pay btn-outlined">去支付</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待出行</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">已完成</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">退款中</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+        </ul>
+        <!--取消/退款-->
+        <ul id="refund" class="control-content table-view active">
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待付款</div>
+                </div>
+                <div class="order-content">
+                    <img src="img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                    <div class="btn btn-pay btn-outlined">去支付</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">待出行</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">取消订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">已完成</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <div class="order-header">
+                    <div class="order-id">订单编号：<span>46874141545</span></div>
+                    <div class="order-status">退款中</div>
+                </div>
+                <div class="order-content">
+                    <img src="/statics/app/img/wddd/1.jpg" alt="">
+                    <div class="pro-wrap">
+                        <div class="pro-title">荔波小七孔门票</div>
+                        <div class="pro-type">门票类型：<span>成人票</span></div>
+                        <div class="pro-date">出行日期：<span>2017-8-24</span></div>
+                        <div class="pro-price">￥40</div>
+                    </div>
+                </div>
+                <div class="order-footer">
+                    <div class="btn btn-cancel btn-outlined">删除订单</div>
+                </div>
+            </li>
+        </ul>
+        <!--加载更多-->
+        <div class="load-more">
+            <button class="btn btn-block" onclick="loadMore()">加载更多</button>
+        </div>
+    </div>
+    <!--设定预加载效果-->
+    <div class="spinner">
+        <div class="loading">
+            <img src="/statics/app/img/icons/loading.gif" alt=""/>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function loadMore() {
+            var loadingPanel = document.querySelector('.spinner');
+            loadingPanel.style.display = 'flex';
+            setTimeout(function () {
+                loadingPanel.style.display = 'none';
+            }, 3000);
+        };
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

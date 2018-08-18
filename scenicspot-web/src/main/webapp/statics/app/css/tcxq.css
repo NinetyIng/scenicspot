@@ -1,0 +1,301 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .pro-img {
+  width: 100%;
+  height: 220px;
+}
+.content img {
+  width: 100%;
+  display: block;
+}
+.content .pro-bref {
+  background: #FFF;
+  padding: 15px;
+  color: #999;
+  /*box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/
+}
+.content .pro-bref .pro-title {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.content .pro-bref .pro-intro {
+  color: #999;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.content .pro-bref .pro-price {
+  color: #FF3C00;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.content .pro-bref .pro-price span:last-child {
+  color: #999;
+  font-size: 14px;
+  text-decoration: line-through;
+  padding-left: 10px;
+}
+.content .pro-bref .pro-others {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+.content .pro-choose {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  line-height: 14px;
+  color: #666;
+  background: #FFF;
+  margin-top: 10px;
+}
+.content .pro-choose img {
+  width: 16px;
+}
+.content .pro-detail {
+  background: #FFF;
+  margin-top: 10px;
+  padding: 15px;
+  color: #666;
+  font-size: 15px;
+}
+.content .pro-detail .pro-title {
+  font-family: PingFang-SC-Bold;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 18px;
+  color: #333333;
+  border-left: 3px solid #FC9313;
+  padding-left: 10px;
+  margin-bottom: 25px;
+}
+.content .pro-detail .hidden {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.content .pro-detail .btn-wrap {
+  padding: 5px;
+}
+.content .pro-detail .btn-wrap > img {
+  width: 16px;
+  margin: 0 auto;
+}
+.content .img-wrap {
+  margin-top: 10px;
+}
+.content .img-wrap > img {
+  margin-bottom: 10px;
+}
+
+.bar-tab {
+  color: #666;
+}
+.bar-tab .icon > img {
+  width: 18px;
+}
+
+.bar-tab .toolbar {
+  display: table-row;
+}
+.bar-tab .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.bar-tab .toolbar .bar-item {
+  font-size: 10px;
+  color: #666;
+}
+.bar-tab .toolbar .collect, .bar-tab .toolbar .custom {
+  width: 66px;
+  border-right: 1px solid #ddd;
+}
+.bar-tab .toolbar .collect:before, .bar-tab .toolbar .custom:before {
+  content: '';
+  display: block;
+  margin: 4px auto 2px;
+  width: 18px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: 18px auto;
+}
+.bar-tab .toolbar .collect:before {
+  background-image: url(../img/icons/favorites.png);
+}
+.bar-tab .toolbar .custom:before {
+  background-image: url(../img/icons/custom.png);
+}
+.bar-tab .toolbar .btn-buy {
+  background: #ff7d13;
+  color: #fff;
+  font-size: 16px;
+}
+
+#specificationPage {
+  top: 220px;
+  overflow: visible;
+  height: calc(100% - 220px);
+  min-height: calc(100% - 220px);
+  z-index: 20;
+}
+#specificationPage .bar-nav {
+  background-color: #fff;
+  height: 70px;
+}
+#specificationPage .bar-nav .title {
+  color: #333;
+}
+#specificationPage .bar-nav .icon {
+  color: #333;
+}
+#specificationPage .bar-nav div {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  top: -40px;
+  left: 20px;
+  background-image: url(../img/tcxq/1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 4px solid #fff;
+  border-radius: 5px;
+}
+#specificationPage .content {
+  background: #fff;
+  padding-top: 70px;
+}
+#specificationPage .content .spec {
+  padding-left: 15px;
+}
+#specificationPage .content .spec .padding-left-5 {
+  padding-left: 5px;
+}
+#specificationPage .content .spec .spec-title {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+  line-height: 20px;
+}
+#specificationPage .content .spec .spec-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 15px 5px;
+  width: auto;
+  border-bottom: 1px solid #ddd;
+}
+#specificationPage .content .spec .spec-list li {
+  float: left;
+  padding: 8px 10px;
+  font-size: 15px;
+  color: #FC9313;
+  line-height: 14px;
+  border: 1px solid #FC9313;
+  border-radius: 50px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+#specificationPage .content .spec .spec-list:before, #specificationPage .content .spec .spec-list:after {
+  content: '';
+  display: table;
+}
+#specificationPage .content .spec .spec-list:after {
+  clear: both;
+}
+#specificationPage .content .spec .pro-num {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+#specificationPage .content .spec .pro-num .num-label {
+  line-height: 30px;
+  color: #666;
+}
+#specificationPage .content .spec .pro-num .num-adjust {
+  border: 1px solid #666;
+  height: 30px;
+  line-height: 30px;
+  color: #333;
+  font-size: 13px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+#specificationPage .content .spec .pro-num .num-adjust .adjust-view {
+  width: 50px;
+}
+#specificationPage .content .spec .pro-num .num-adjust > div {
+  text-align: center;
+  width: 35px;
+  height: 29px;
+  display: inline-block;
+  border-right: 1px solid #666;
+}
+#specificationPage .content .spec .pro-num .num-adjust > div:last-child {
+  border-right: none;
+}
+#specificationPage .content .spec .pro-num .num-adjust > div > img {
+  width: 12px;
+  display: inline-block;
+}
+#specificationPage .order-bar .toolbar {
+  display: table-row;
+}
+#specificationPage .order-bar .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+#specificationPage .order-bar .toolbar .total-price {
+  text-align: left;
+  padding-left: 15px;
+}
+#specificationPage .order-bar .toolbar .total-price > div:first-child {
+  color: #FF3800;
+  font-size: 18px;
+  line-height: 14px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+#specificationPage .order-bar .toolbar .total-price > div:last-child {
+  line-height: 11px;
+  padding-left: 5px;
+}
+#specificationPage .order-bar .toolbar .bar-item {
+  font-size: 10px;
+  color: #999999;
+}
+#specificationPage .order-bar .toolbar .btn-buy {
+  background: #ff7d13;
+  color: #fff;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=tcxq.css.map */

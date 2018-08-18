@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/app//statics/app/css/tcxq.css">
+</head>
+
+<body>
+    <!--底部导航栏-->
+    <footer class="bar bar-tab footer-bar">
+        <div class="toolbar" style="display: table-row;">
+            <span class="bar-item custom" style="">客服</span>
+            <span class="bar-item collect" style="">收藏</span>
+            <span class="bar-item btn-buy" style="">立即购买</span>
+        </div>
+    </footer>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        <!--产品详情顶部图片-->
+        <img class="pro-img" src="/statics/app/img/tcxq/1.jpg" />
+        <!--产品简介-->
+        <div class="pro-bref">
+            <div class="pro-title">都匀毛尖茶</div>
+            <p class="pro-intro">都匀毛尖茶产于贵州南部的都匀市。它以优美的外形， 独特的风格列为中国名茶珍品之一。</p>
+            <div class="pro-price">
+                <span>¥ 200.00</span>
+                <span>￥380.00</span>
+            </div>
+            <div class="pro-others">
+                <span class="pro-address">都匀</span>
+                <span class="pro-post">快递 0.00</span>
+                <span class="pro-has-sell">已售1120件</span>
+            </div>
+        </div>
+        <a class="pro-choose" onclick="openModal()">
+            <div class="">选择：盒装</div>
+            <img src="/statics/app/img/icons/arrow_right.png" alt=""/>
+        </a>
+        <!--产品介绍-->
+        <div class="pro-detail">
+            <div class="pro-title">产品介绍</div>
+            <p class="pro-content hidden">都匀毛尖， 中国十大名茶之一。1956年，由毛泽东亲 笔命名，又名“白毛尖”、“细毛尖”、“鱼钩茶”、 “雀舌茶”，是贵州三大名茶之一。外形条索紧结纤细 卷曲、披毫，色绿翠。香清高，味鲜浓，叶底嫩绿匀整... 防治坏血病和护御放射性元素等多种功效与作用。</p>
+            <div class="btn-wrap" onclick="showDetailInfo()">
+                <img src="/statics/app/img/icons/arrow_down.png" alt=""/>
+            </div>
+        </div>
+        <!--产品图片-->
+        <div class="img-wrap">
+            <img src="/statics/app/img/tcxq/2.jpg" alt=""/>
+            <img src="/statics/app/img/tcxq/3.png" alt=""/>
+            <img src="/statics/app/img/tcxq/4.jpg" alt=""/>
+        </div>
+    </div>
+    <!--产品规格选择-->
+    <div id="specificationPage" class="modal">
+        <header class="bar bar-nav">
+            <a class="icon icon-close pull-right" onclick="closeModal()"></a>
+            <h1 class="title">都均毛尖茶</h1>
+            <div class="pro-img"></div>
+        </header>
+
+        <!--底部导航栏-->
+        <footer class="bar bar-tab order-bar">
+            <div class="toolbar">
+            <span class="bar-item total-price">
+                <div>￥961</div>
+                <div>订单总价</div>
+            </span>
+                <span class="bar-item btn-buy">提交订单</span>
+            </div>
+        </footer>
+        <div class="content">
+            <div class="spec">
+                <div class="spec-title padding-left-5">规格</div>
+                <ul class="spec-list padding-left-5">
+                    <li>礼盒包装</li>
+                    <li>礼盒包装</li>
+                    <li>礼盒包装</li>
+                    <li>礼盒包装</li>
+                    <li>礼盒包装</li>
+                    <li>礼盒包装</li>
+                </ul>
+                <div class="pro-num">
+                    <div class="num-label">数量</div>
+                    <div class="num-adjust">
+                        <div class="adjust-minus" onclick="minus()">
+                            <img src="/statics/app/img/icons/minus.png" alt="" />
+                        </div>
+                        <div class="adjust-view">1</div>
+                        <div class="adjust-plus" onclick="plus()">
+                            <img src="/statics/app/img/icons/plus.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var flag = 0;
+        var showDetailInfo = function () {
+            var toggleBtn = document.querySelector('.btn-wrap img');
+            var proContent = document.querySelector('.pro-content');
+            if(toggleBtn){
+                if(proContent.classList.contains('hidden')){
+                    proContent.classList.remove('hidden');
+                    toggleBtn.setAttribute('src', '/statics/app/img/icons/arrow_up.png');
+                }else {
+                    proContent.classList.add('hidden');
+                    toggleBtn.setAttribute('src', '/statics/app/img/icons/arrow_down.png');
+                }
+            }
+        };
+
+        var adjustView = document.querySelector('.adjust-view');
+
+        var minus = function () {
+            adjustView.innerText = adjustView.innerText - 1 > 0 ? adjustView.innerText - 1 : 1;
+        };
+
+        var plus = function () {
+            adjustView.innerText ++;
+        };
+        
+        var openModal = function () {
+            var modal = document.getElementById('specificationPage');
+            showModal(modal);
+        };
+
+        // 隐藏modal
+        var closeModal = function () {
+            var modal = document.getElementById('specificationPage');
+            hiddenModal(modal);
+        };
+
+        // 显示modal
+        var showModal = function (popNode) {
+            flag = 1;
+            var modal = popNode || document.getElementById('popNode');
+            var footBar = document.querySelector('.footer-bar');
+            footBar.style.display = 'none';
+            var backdrop = document.createElement('div');
+            backdrop.classList.add('backdrop');
+            modal.parentNode.appendChild(backdrop);
+            modal.classList.add('active');
+        };
+
+        // 隐藏modal
+        var hiddenModal = function (popNode) {
+            flag = 0;
+            var modal = popNode || document.getElementById('popNode');
+            var footBar = document.querySelector('.footer-bar');
+            footBar.style.display = 'table';
+            var backdrop = document.querySelector('.backdrop');
+            modal.parentNode.removeChild(backdrop);
+            modal.classList.remove('active');
+        };
+        document.addEventListener('touchmove', function (event) {
+            if(flag === 1){
+                event.preventDefault();
+            }
+        },false);
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

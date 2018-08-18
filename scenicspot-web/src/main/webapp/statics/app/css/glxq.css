@@ -1,0 +1,342 @@
+@charset "UTF-8";
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .tour-tips {
+  background: #FFF;
+  margin-bottom: 10px;
+}
+.content .tour-tips .banner-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+}
+.content .tour-tips .banner-wrap img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.content .tour-tips .tips-wrap {
+  padding: 18px 15px;
+  font-family: PingFang-SC-Bold;
+  font-weight: 800;
+  font-size: 19px;
+  color: #333;
+  line-height: 18px;
+}
+.content .tour-tips .tips-wrap .follow-operations {
+  margin-top: 10px;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  color: #666;
+}
+.content .tour-tips .tips-wrap .follow-operations .follow-num {
+  padding-left: 20px;
+  background: url("../img/icons/follow.png") no-repeat;
+  background-size: 14px auto;
+  background-position: 0 center;
+}
+.content .tour-tips .tips-wrap .follow-operations .reply-num {
+  margin-left: 20px;
+  padding-left: 20px;
+  background: url("../img/icons/reply.png") no-repeat;
+  background-size: 14px auto;
+  background-position: 0 center;
+}
+.content .tips-bref {
+  background: #FFF;
+  padding: 20px 15px;
+}
+.content .tips-bref .tag {
+  margin-bottom: 18px;
+}
+.content .tips-bref p:not(:last-child) {
+  font-size: 14px;
+  line-height: 21px;
+  color: #666;
+  margin-bottom: 18px;
+}
+.content .tips-bref .route .date {
+  font-size: 14px;
+  line-height: 21px;
+  color: #FC9313;
+}
+.content .tips-bref .spread {
+  text-align: center;
+}
+.content .tips-bref .spread:after {
+  content: '';
+  display: inline-block;
+  margin-left: 5px;
+  width: 13px;
+  height: 13px;
+  background-image: url(../img/icons/arrow_down.png);
+  background-repeat: no-repeat;
+  background-size: 13px auto;
+  background-position: bottom;
+}
+.content .tour-detail {
+  background: #FFF;
+  margin-top: 10px;
+  padding: 20px 15px;
+}
+.content .tour-detail .day-schedule .sche-title {
+  font-family: PingFang-SC-Bold;
+  font-size: 16px;
+  line-height: 18px;
+  color: #454553;
+}
+.content .tour-detail .day-schedule .tip-title {
+  border-left: 3px solid #FC9313;
+  padding-left: 5px;
+}
+.content .tour-detail .day-schedule > p {
+  font-size: 14px;
+  line-height: 21px;
+  color: #666;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.content .tour-detail .sceen-introl {
+  padding: 30px 0;
+}
+.content .tour-detail .sceen-introl:first-child {
+  padding-top: 50px;
+}
+.content .tour-detail .sceen-introl:last-child {
+  padding-bottom: 0;
+}
+.content .tour-detail .sceen-introl .sceen-title {
+  height: 1px;
+  border-top: 1px solid #FFB200;
+  text-align: center;
+}
+.content .tour-detail .sceen-introl .sceen-title span {
+  position: relative;
+  top: -12px;
+  background: #fff;
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 18px;
+  color: #FFB200;
+}
+.content .tour-detail .sceen-introl .sceen-img {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.content .tour-detail .sceen-introl .sceen-img img {
+  width: 100%;
+}
+.content .tour-detail .sceen-introl p {
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+.content .tour-detail .table-view {
+  border: none;
+}
+.content .tour-detail .table-view .table-view-cell .navigate-right {
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #EFEFEF;
+}
+.content .tour-detail .table-view .table-view-cell .navigate-right:after {
+  content: '';
+}
+.content .tour-detail .table-view .table-view-cell .img-wrap {
+  position: relative;
+}
+.content .tour-detail .table-view .table-view-cell .img-wrap span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FC9313;
+  padding: 5px;
+  color: #FFF;
+  font-size: 11px;
+  line-height: 12px;
+}
+.content .tour-detail .table-view .table-view-cell .media-object {
+  width: 114px;
+  height: 96px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body {
+  position: relative;
+  color: #333333;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .title-name {
+  font-size: 16px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .grade {
+  font-size: 14px;
+  color: #666666;
+  margin-left: 6px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .mark {
+  margin-top: 9px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .mark span {
+  font-size: 10px;
+  color: #FC9313;
+  line-height: 12px;
+  padding: 2px 7px;
+  border: 1px solid #FC9313;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .mark span:not(last-child) {
+  margin-right: 5px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body p {
+  font-size: 15px;
+  line-height: 13px;
+}
+.content .tour-detail .table-view .table-view-cell .media-body .moods {
+  color: #999;
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+.content .tour-detail .table-view .table-view-cell .price {
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 15px;
+  color: #FF3C00;
+  margin-top: 5px;
+  font-size: 17px;
+  line-height: 20px;
+  z-index: 9;
+}
+.content .pro-comment {
+  background: #FFF;
+}
+.content .pro-comment .pro-comment-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  line-height: 14px;
+  color: #666;
+  background: #FFF;
+  margin-top: 10px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .pro-comment .pro-comment-more img {
+  width: 16px;
+}
+.content .pro-comment .comment-item {
+  margin: 15px 15px 0 15px;
+  padding-bottom: 10px;
+}
+.content .pro-comment .comment-item:not(:last-child) {
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .pro-comment .comment-item .avatar {
+  vertical-align: bottom;
+  width: 41px;
+  height: 41px;
+  border-radius: 50% 50%;
+  overflow: hidden;
+}
+.content .pro-comment .comment-item .comment-wrap {
+  margin-left: 10px;
+  display: inline-block;
+}
+.content .pro-comment .comment-item .comment-wrap .user-name {
+  font-size: 15px;
+  color: #333;
+  line-height: 15px;
+  margin-bottom: 5px;
+}
+.content .pro-comment .comment-item .comment-wrap .time {
+  font-size: 12px;
+  color: #666;
+  line-height: 12px;
+}
+.content .pro-comment .comment-item > p {
+  margin-top: 10px;
+}
+
+.bar-tab {
+  color: #666;
+}
+.bar-tab .icon > img {
+  width: 18px;
+}
+
+.bar-tab .toolbar {
+  display: table-row;
+}
+.bar-tab .toolbar .comment-input {
+  margin-top: 7px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  padding: 10px 15px;
+  border: none;
+  background: #F5F5F5;
+  margin-left: 15px;
+}
+.bar-tab .toolbar input::-webkit-input-placeholder {
+  color: #999;
+}
+.bar-tab .toolbar 　　input::-moz-placeholder {
+  　　color: #999;
+}
+.bar-tab .toolbar 　　input::-moz-placeholder {
+  　　color: #999;
+}
+.bar-tab .toolbar 　　input::-ms-input-placeholder {
+  　　color: #999;
+}
+.bar-tab .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.bar-tab .toolbar .bar-item {
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
+}
+.bar-tab .toolbar .favorite {
+  width: 66px;
+  border-right: 1px solid #ddd;
+}
+.bar-tab .toolbar .favorite:before {
+  content: '';
+  display: block;
+  margin: 4px auto 2px;
+  width: 18px;
+  height: 18px;
+  background-image: url(../img/icons/follow.png);
+  background-repeat: no-repeat;
+  background-size: 18px auto;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 13px;
+  background-color: #FC9313;
+  line-height: 13px;
+  padding: 4px 8px;
+  color: #FFF;
+}
+
+/*# sourceMappingURL=glxq.css.map */
