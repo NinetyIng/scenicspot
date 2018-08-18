@@ -165,7 +165,7 @@
 					"data" : data,
 					"success" : function(data) {
 						if (data.result == 200) {
-							window.location.href = '/seo/getseolist';
+							window.location.href = '/seo/getseolist.do';
 						}else {
 							bootbox.alert("保存失败！");
 						}
@@ -180,7 +180,7 @@
 					"data" : data,
 					"success" : function(data) {
 						if (data.result == 200) {
-							window.location.href = '/seo/getseolist';
+							window.location.href = '/seo/getseolist.do';
 						} else {
 							bootbox.alert("编辑失败！");
 						}

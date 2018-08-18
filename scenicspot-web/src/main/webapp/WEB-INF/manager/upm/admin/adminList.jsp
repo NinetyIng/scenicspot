@@ -14,11 +14,11 @@
 					<div class="ibox-title">
 						<h5>管理员列表</h5>
 						<div class="ibox-tools">
-							<a href="/sys/upm/admin/edit" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增管理员</a>
+							<a href="/sys/upm/admin/edit.do" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增管理员</a>
 						</div>
 					</div>
 					<div class="ibox-content">
-						<form action="/sys/upm/role/listPage" method="post" name="Form" id="Form">
+						<form action="/sys/upm/role/listPage.do" method="post" name="Form" id="Form">
 							<div class="project-list">
  								<table id="simple-table" class="center table table-striped table-bordered table-hover">
 									<thead>
@@ -48,7 +48,7 @@
 														<td>${item.creator}</td>
 														<td>${item.create_time}</td>
 														<td class="center">
-															<a href="/sys/upm/admin/edit?id=${item.admin_id}" class="btn btn-primary btn-sm" title="编辑">
+															<a href="/sys/upm/admin/edit.do?id=${item.admin_id}" class="btn btn-primary btn-sm" title="编辑">
                            										<i class="fa fa-pencil"></i>
                        										</a>
                        										<a href="/sys/upm/admin/delete?type_id=${item.admin_id}" class="btn btn-warning btn-sm" title="删除">

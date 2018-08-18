@@ -1,5 +1,5 @@
 var Login ={
-		url:"/main/doLogin",
+		url:"/main/doLogin.do",
 		check:function(){
 			if ($("#loginname").val() == "") {
 				$("#loginname").tips({
@@ -38,7 +38,7 @@ var Login ={
 				var code = loginname+",ea,"+password;
 				Ajax.request(this.url,{"data":{KEYDATA:code,tm:new Date().getTime()},"success":function(data){
 					if(data.result == "200"){
-						window.location.href="/main/index";
+						window.location.href="/main/index.do";
 					}else{
 						alert(data.msg);
 					}

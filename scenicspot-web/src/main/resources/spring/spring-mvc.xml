@@ -69,7 +69,7 @@
 
 	<bean id="accessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
 	<aop:config>
-		<aop:pointcut id="web" expression="execution (* com.ythd.ower.api.controller.*.*(..))"/>
+		<aop:pointcut id="web" expression="execution (* com.ythd.ower.manager.controller.*.*(..))"/>
 		<aop:aspect ref="accessLogRecordAspect">
 			<aop:around method="handleApi" pointcut-ref="web" />
 		</aop:aspect>

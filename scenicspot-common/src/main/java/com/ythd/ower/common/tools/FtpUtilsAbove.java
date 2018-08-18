@@ -13,8 +13,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.properties.PropertiesHelper;
 import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,15 +31,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 
 public class FtpUtilsAbove {
-	PropertiesHelper helper = PropertiesHelper.getAppInstance();
-	
+
 	private FTPClient ftpClient;
 	private Ftp ftpPropery = new Ftp();
 	public FtpUtilsAbove(){
-		ftpPropery.setIpAddr(helper.getSysValue("ip"));
-		ftpPropery.setPwd(helper.getSysValue("passowrd"));
-		ftpPropery.setPort(Integer.valueOf(helper.getSysValue("port")));
-		ftpPropery.setUserName(helper.getSysValue("username"));
+
+		ftpPropery.setIpAddr(ConfigureManager.getSystemConfig().getFtpConfigure().getIp());
+		ftpPropery.setPwd(ConfigureManager.getSystemConfig().getFtpConfigure().getPassword());
+		ftpPropery.setPort(ConfigureManager.getSystemConfig().getFtpConfigure().getPort());
+		ftpPropery.setUserName(ConfigureManager.getSystemConfig().getFtpConfigure().getUsername());
 	}
 	
 	/**
@@ -54,8 +57,9 @@ public class FtpUtilsAbove {
 	}
 	
 	public String upload(MultipartFile file, String projectName, String modelName) throws IOException{
-		if (file.getBytes().length == 0 && file.getSize() == 0 && file.getOriginalFilename().equals("")) {
-			return "";
+		if (file.getBytes().length == 0 && file.getSize() == 0
+				&& file.getOriginalFilename().equals(StringUtils.EMPTY)) {
+			return StringUtils.EMPTY;
 		}
 		ftpClient = new FTPClient();
 		ftpClient.setBufferSize(5024*1024);
@@ -72,7 +76,7 @@ public class FtpUtilsAbove {
 			int reply = ftpClient.getReplyCode();
 			if (!FTPReply.isPositiveCompletion(reply)) {
 				ftpClient.disconnect();
-				return "";
+				return StringUtils.EMPTY;
 			}
 			ftpClient.changeWorkingDirectory(ftpPropery.getPath());
 			String[] directoryNames = { projectName, modelName, String.valueOf(year), String.valueOf(month),
@@ -125,7 +129,7 @@ public class FtpUtilsAbove {
 				ftpClient.changeWorkingDirectory(directoryName); // 在当前ftp回话上改变当前工作目录
 			}
 			String fileName = System.currentTimeMillis()+EAString.getRandomString(7)+".png";
-			ftpClient.storeFile(fileName,stream); 
+			ftpClient.storeFile(fileName,stream);
 			stream.close();
 			closeFtp();
 			return savePath.append("/")
@@ -144,8 +148,6 @@ public class FtpUtilsAbove {
 	/**
 	 * 上传音频
 	 * @param file
-	 * @param string
-	 * @param string2
 	 * @return
 	 * @throws IOException 
 	 */
@@ -358,14 +360,14 @@ public class FtpUtilsAbove {
 	public  String takeLiunx(String videoLocation, File imgFile) throws Exception { 
 		 String command = "ffmpeg -i " + videoLocation + " -y -f image2 -ss 00:00:06 -t 00:00:01 -s 750x322 " + imgFile.getAbsolutePath(); 
 		 try { 
-		 Runtime rt = Runtime.getRuntime(); 
-		 Process proc = rt.exec(command); 
-		 InputStream stderr = proc.getErrorStream(); 
-		 InputStreamReader isr = new InputStreamReader(stderr); 
-		 BufferedReader br = new BufferedReader(isr); 
-		 String line = null; 
-		 while ((line = br.readLine()) != null) 
-		 System.out.println("执行返回的信息流<>><><<><#############################################>><><><<><><>"+line);
+			 Runtime rt = Runtime.getRuntime();
+			 Process proc = rt.exec(command);
+			 InputStream stderr = proc.getErrorStream();
+			 InputStreamReader isr = new InputStreamReader(stderr);
+			 BufferedReader br = new BufferedReader(isr);
+			 String line = null;
+			 while ((line = br.readLine()) != null)
+			 System.out.println("执行返回的信息流<>><><<><#############################################>><><><<><><>"+line);
 		  } catch (Throwable t) { 
 		 t.printStackTrace(); 
 		 return ""; 

@@ -23,7 +23,7 @@
 					<div class="ibox-title">
 						<h5>微信回复列表</h5>
 						<div class="ibox-tools">
-							<a href="/sys/wechat/edit_reply" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
+							<a href="/sys/wechat/edit_reply.do" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
 						</div>
 					</div>
 					<div class="ibox-content">
@@ -63,7 +63,7 @@
 														<td>${item.create_time}</td>
 
 														<td class="center">
-															<a href="/sys/wechat/edit_reply?id=${item.id}" class="btn btn-primary btn-sm" title="编辑">
+															<a href="/sys/wechat/edit_reply.do?id=${item.id}" class="btn btn-primary btn-sm" title="编辑">
                            										<i class="fa fa-pencil"></i>
                        										</a>
                        										<a href="/sys/wechat/del_reply?id=${item.id}" class="btn btn-warning btn-sm" title="删除" OnClick="return confirm('确认删除吗？')">

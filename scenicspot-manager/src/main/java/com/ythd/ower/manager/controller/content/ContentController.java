@@ -55,7 +55,7 @@ public class ContentController extends BaseController {
 
 	String menuUrl = "/sys/content/list";
 
-	@RequestMapping(value = { "list", "" })
+	@RequestMapping(value = { "list.do", "" })
 	public ModelAndView list(Page page) {
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, UpmConstant.UPM_SEL)){
       LOGGER.error("{},无查询文章权限",Jurisdiction.getUsername());
@@ -83,7 +83,7 @@ public class ContentController extends BaseController {
 	 * 跳转到文章编辑页面
 	 * @return
 	 */
-	@RequestMapping("editPage")
+	@RequestMapping("editPage.do")
 	public ModelAndView editPage(){
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -104,7 +104,7 @@ public class ContentController extends BaseController {
 	/**
 	 * 文章保存
 	 */
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/save.do")
 	@ResponseBody
 	public void save(HttpServletResponse response){
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, UpmConstant.UPM_ADD)){
@@ -142,7 +142,7 @@ public class ContentController extends BaseController {
 			super.outJsonString(response, false, e.getMessage(), null);
 		}
 	}
-	@RequestMapping("delete")
+	@RequestMapping("delete.do")
 	public void contentDelete(HttpServletResponse response){
 		PageData pd = this.getPageData();
 		try{
@@ -165,7 +165,7 @@ public class ContentController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public void edit(HttpServletResponse response) throws Exception {
 		logBefore(logger, Jurisdiction.getUsername() + "修改Content");
@@ -207,7 +207,7 @@ public class ContentController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = "/saveImag")
+	@RequestMapping(value = "/saveImag.do")
 	public void saveImag(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(required = false) MultipartFile file,
 			@RequestParam(value = "tname", required = false) String tname,
@@ -243,7 +243,7 @@ public class ContentController extends BaseController {
 	 * 
 	 * @param response
 	 */
-	@RequestMapping("delImg")
+	@RequestMapping("delImg.do")
 	public void deleteImg(HttpServletResponse response) {
 		try {
 			PageData pd = this.getPageData();
@@ -265,7 +265,7 @@ public class ContentController extends BaseController {
 	 * 跳转到相册界面
 	 * @return
 	 */
-	@RequestMapping("resource/addPage")
+	@RequestMapping("resource/addPage.do")
 	public ModelAndView addResourcePage() {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -278,7 +278,7 @@ public class ContentController extends BaseController {
 	/**
 	 * 图片删除
 	 */
-	@RequestMapping("resource/delete")
+	@RequestMapping("resource/delete.do")
 	public void delete(HttpServletResponse response) {
 		try {
 			PageData pd = this.getPageData();
@@ -299,7 +299,7 @@ public class ContentController extends BaseController {
 	/**
 	 * 图片上传
 	 */
-	@RequestMapping("resource/uploadImg")
+	@RequestMapping("resource/uploadImg.do")
 	public void saveStockImg(HttpServletResponse response, HttpServletRequest request) {
 		try {
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -327,7 +327,7 @@ public class ContentController extends BaseController {
 	 * @param response
 	 * @param request
 	 */
-	@RequestMapping("resource/pushContentAlbumsData")
+	@RequestMapping("resource/pushContentAlbumsData.do")
 	public void pushContentAlbumsData(HttpServletResponse response, HttpServletRequest request){
 		try {
 			PageData pd=getPageData();

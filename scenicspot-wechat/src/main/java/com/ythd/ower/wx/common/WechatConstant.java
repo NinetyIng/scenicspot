@@ -1,10 +1,7 @@
 package com.ythd.ower.wx.common;
 
 /**
- * The class  ${CLASS_NAME}.
- *
  * Description:
- *
  * @author: liujunbo
  * @since: 2018/8/15
  * @version: $Revision$
@@ -14,7 +11,7 @@ public interface WechatConstant {
   String ACCESS_TOKEN = "access_token";
 
   String REQUEST_METHOD_POST = "POST";
-  String REQUEST_METHOD_GET = "POST";
+  String REQUEST_METHOD_GET = "GET";
 
   String RESPONSE_CODE = "errcode";
 

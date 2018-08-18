@@ -13,7 +13,18 @@
         <dependency>
             <groupId>com.ythd.ower</groupId>
             <artifactId>scenicspot-data</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ythd.ower</groupId>
+            <artifactId>scenicspot-wechat</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.ythd.ower</groupId>
+                    <artifactId>scenicspot-data</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

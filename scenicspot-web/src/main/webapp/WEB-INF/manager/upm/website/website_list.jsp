@@ -82,7 +82,7 @@
 															<c:if test="${websitelist.size()>0}">
 																<c:if test="${QX.edit == 1}">
 																	<a class="btn btn-xs btn-success" title="编辑"
-																		onclick="javascript:window.location.href='/website/webSiteAddEdit?id=${item.id}'">
+																		onclick="javascript:window.location.href='/website/webSiteAddEdit.do?id=${item.id}'">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"
 																		title="编辑"></i>
 																	</a>

@@ -16,7 +16,7 @@
 						<div class="ibox-title">
 							<h5>景区列表</h5>
 							<div class="ibox-tools">
-								<a href="/sys/scenic/editPage" class="btn btn-primary btn-xs"><i
+								<a href="/sys/scenic/editPage.do" class="btn btn-primary btn-xs"><i
 									class="fa fa-plus"></i>&nbsp;新增景区</a>
 							</div>
 						</div>
@@ -90,7 +90,7 @@
 														
 														<%-- <c:if test="${QX.edit == 1}"> --%>
 														<a
-															href="/sys/scenic/editPage?id=${item.id}"
+															href="/sys/scenic/editPage.do?id=${item.id}"
 															class="btn btn-primary btn-sm" title="编辑"> <i
 																class="fa fa-pencil"></i>
 														</a> 

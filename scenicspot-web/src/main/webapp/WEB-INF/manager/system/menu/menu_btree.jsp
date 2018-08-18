@@ -69,7 +69,7 @@
     	initTree();
     });
     function initTree(){
-    	Ajax.request("/menu/menuJson",{"success":function(data){
+    	Ajax.request("/menu/menuJson.do",{"success":function(data){
     		if(data.result == "200"){
     			$("#treeview11").treeview({
     				color : "#428bca",

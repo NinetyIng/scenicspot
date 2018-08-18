@@ -116,18 +116,18 @@
 		if (r==true){
 			$.ajax({
 				   type: "POST",
-				   url: "/sys/upm/template/templateDelete",
+				   url: "/sys/upm/template/templateDelete.do",
 				   dataType : "json",
 				   data : {
 					   template_id: template_id
 				   },
 				   success: function(data){
 				      alert(data.msg);
-				      window.location.href='/sys/upm/template/templateList';
+				      window.location.href='/sys/upm/template/templateList.do';
 				   },
 				   error : function(data){
 					  alert(data.msg);
-					  window.location.href='/sys/upm/template/templateList';
+					  window.location.href='/sys/upm/template/templateList.do';
 				   }
 				});
 		 }

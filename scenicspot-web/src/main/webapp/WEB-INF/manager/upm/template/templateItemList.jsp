@@ -128,11 +128,11 @@
 				   },
 				   success: function(data){
 				      alert(data.msg);
-				      window.location.href='/sys/upm/template/templateItemList';
+				      window.location.href='/sys/upm/template/templateItemList.do';
 				   },
 				   error : function(data){
 					  alert(data.msg);
-					  window.location.href='/sys/upm/template/templateItemList';
+					  window.location.href='/sys/upm/template/templateItemList.do';
 				   }
 				});
 		 }

@@ -20,19 +20,17 @@
     <dependencies>
         <dependency>
             <groupId>com.ythd.ower</groupId>
-            <artifactId>scenicspot-server</artifactId>
+            <artifactId>scenicspot-data</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tencent</groupId>
+            <artifactId>wetchatpay</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

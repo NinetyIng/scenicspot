@@ -11,12 +11,12 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox">
-					<form action="/sys/scenic/list" method="post" name="Form"
+					<form action="/sys/scenic/list.do" method="post" name="Form"
 						id="Form">
 						<div class="ibox-title">
 							<h5>攻略列表</h5>
 							<div class="ibox-tools">
-								<a href="/sys/scenic/addLinePage" class="btn btn-primary btn-xs"><i
+								<a href="/sys/scenic/addLinePage.do" class="btn btn-primary btn-xs"><i
 									class="fa fa-plus"></i>&nbsp;新增攻略</a>
 							</div>
 						</div>

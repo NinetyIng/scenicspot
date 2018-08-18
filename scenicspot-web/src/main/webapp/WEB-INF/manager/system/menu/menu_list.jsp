@@ -61,7 +61,7 @@
 									</tbody>
 								</table>
 								 <button type="button" onclick="window.location.href='/menu/toAdd.do?MENU_ID=${MENU_ID}'" class="btn btn-w-m btn-success">添加</button>
-								 <button type="button" onclick="window.location.href='/menu/list?MENU_ID=${pd.PARENT_ID}'" class="btn btn-w-m btn-danger">返回</button>
+								 <button type="button" onclick="window.location.href='/menu/list.do?MENU_ID=${pd.PARENT_ID}'" class="btn btn-w-m btn-danger">返回</button>
 							</div>
 						</form>
 					</div>
@@ -75,9 +75,9 @@
 	<script type="text/javascript">
 		   function del(menu_id,parent_id){
 			   if(confirm("确定删除菜单")){
-				   Ajax.request("/menu/delete",{"data":{"MENU_ID":menu_id},"success":function(item){
+				   Ajax.request("/menu/delete.do",{"data":{"MENU_ID":menu_id},"success":function(item){
 			          	 if(item.result =="200"){
-			          		 window.location.href="/menu/list?MENU_ID="+parent_id;
+			          		 window.location.href="/menu/list.do?MENU_ID="+parent_id;
 			          	 }else{
 			          		 alert(item.msg);
 			          	 }

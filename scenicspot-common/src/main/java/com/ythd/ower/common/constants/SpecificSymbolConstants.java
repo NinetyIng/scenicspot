@@ -19,4 +19,6 @@ public interface SpecificSymbolConstants {
     String VERTICAL_LINE = "|";
     String UNDERLINE = "_";
     String PLUS = "+";
+    String EQUEL = "=";
+
 }

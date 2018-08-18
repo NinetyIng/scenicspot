@@ -150,7 +150,7 @@
 					"data" : data,
 					"success" : function(data) {
 						if (data.result == 200) {
-							window.location.href='/links/getlinkslist';
+							window.location.href='/links/getlinkslist.do';
 						} else {
 							bootbox.alert("保存失败！");
 						}
@@ -161,7 +161,7 @@
 					"data" : data,
 					"success" : function(data) {
 						if (data.result == 200) {
-							window.location.href='/links/getlinkslist';
+							window.location.href='/links/getlinkslist.do';
 						} else {
 							bootbox.alert("编辑失败！");
 						}

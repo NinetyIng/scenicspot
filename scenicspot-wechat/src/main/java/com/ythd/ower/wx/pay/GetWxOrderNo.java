@@ -1,5 +1,6 @@
 package com.ythd.ower.wx.pay;
 
+import com.ythd.ower.wx.common.HttpRequest;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,15 +13,13 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-import com.easaa.wechat.common.HttpRequest;
-
 /**
  * 获取微信预下单编号
  * 
  * @author Leno
  *
  */
-public class GetWxOrderno {
+public class GetWxOrderNo {
 	public static Map doXML(String url, String xmlParam) {
 		Map map = new HashMap();
 		try {
@@ -61,14 +60,12 @@ public class GetWxOrderno {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map doXMLParse(String strxml) throws Exception {
 		if (null == strxml || "".equals(strxml)) {
 			return null;
 		}
-
 		Map m = new HashMap();
-		InputStream in = String2Inputstream(strxml);
+		InputStream in = string2Inputstream(strxml);
 		SAXBuilder builder = new SAXBuilder();
 		Reader xmlStreamReader = new InputStreamReader(in, "gbk");
 		Document doc = builder.build(xmlStreamReader);
@@ -119,7 +116,7 @@ public class GetWxOrderno {
 		return sb.toString();
 	}
 
-	public static InputStream String2Inputstream(String str) {
+	public static InputStream string2Inputstream(String str) {
 		return new ByteArrayInputStream(str.getBytes());
 	}
 

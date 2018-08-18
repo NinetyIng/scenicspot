@@ -38,7 +38,7 @@ public class AdminController extends BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 
-	String menuUrl = "user/listUsers";
+	String menuUrl = "user/listUsers.do";
 	@Resource(name="adminService")
 	private AdminService adminService;
 	@Resource(name="roleService")
@@ -48,7 +48,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/listUsers")
+	@RequestMapping(value="/listUsers.do")
 	public ModelAndView listUsers(Page page)throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){
 			LOGGER.error("{}，无查询系统用户的权限",Jurisdiction.getUsername());
@@ -83,7 +83,7 @@ public class AdminController extends BaseController {
 	/**删除用户
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/deleteU")
+	@RequestMapping(value="/deleteU.do")
 	public void deleteU(HttpServletResponse response) throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){
 			LOGGER.error("{}，无删除管理员权限",Jurisdiction.getUsername());
@@ -99,7 +99,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goAddU")
+	@RequestMapping(value="/goAddU.do")
 	public ModelAndView goAddU()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd =  this.getPageData();
@@ -115,7 +115,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/saveU")
+	@RequestMapping(value="/saveU.do")
 	public void saveU(HttpServletResponse response){
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){
 			LOGGER.error("{}，无添加管理员权限",Jurisdiction.getUsername());
@@ -141,7 +141,7 @@ public class AdminController extends BaseController {
 	/**判断用户名，邮箱，编码是否存在
 	 * @return
 	 */
-	@RequestMapping(value="/hasExist")
+	@RequestMapping(value="/hasExist.do")
 	public void hasExist(HttpServletResponse response){
 		PageData pd = null;
 		try{	
@@ -164,7 +164,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goEditU")
+	@RequestMapping(value="/goEditU.do")
 	public ModelAndView goEditU() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd  = this.getPageData();
@@ -188,7 +188,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/view")
+	@RequestMapping(value="/view.do")
 	public ModelAndView view() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -206,7 +206,7 @@ public class AdminController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goEditUfromOnline")
+	@RequestMapping(value="/goEditUfromOnline.do")
 	public ModelAndView goEditUfromOnline() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -222,7 +222,7 @@ public class AdminController extends BaseController {
 	/**
 	 * 修改用户
 	 */
-	@RequestMapping(value="/editU")
+	@RequestMapping(value="/editU.do")
 	public void editU(HttpServletResponse response){
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){
 			LOGGER.error("{}。无编辑管理员权限",Jurisdiction.getUsername());
@@ -244,7 +244,7 @@ public class AdminController extends BaseController {
 	 * 批量删除
 	 * @throws Exception 
 	 */
-	@RequestMapping(value="/deleteAllU")
+	@RequestMapping(value="/deleteAllU.do")
 	public void deleteAllU(HttpServletResponse response){
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){
 			LOGGER.error("{}。无删除管理员权限",Jurisdiction.getUsername());
