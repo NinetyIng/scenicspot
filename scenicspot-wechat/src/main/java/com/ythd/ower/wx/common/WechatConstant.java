@@ -1,10 +1,7 @@
 package com.ythd.ower.wx.common;
 
 /**
- * The class  ${CLASS_NAME}.
- *
  * Description:
- *
  * @author: liujunbo
  * @since: 2018/8/15
  * @version: $Revision$

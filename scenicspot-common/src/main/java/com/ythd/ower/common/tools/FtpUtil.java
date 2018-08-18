@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.properties.PropertiesHelper;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.lang.StringUtils;
@@ -27,17 +28,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class FtpUtil {
 
 	private static FTPClient ftp;
-
 	private static Ftp ftpPropery = new Ftp();
-
 	static {
-		PropertiesHelper helper = PropertiesHelper.getAppInstance();
 		try {
-			// p.load(in);
-			ftpPropery.setIpAddr(helper.getSysValue("ip"));
-			ftpPropery.setPwd(helper.getSysValue("passowrd"));
-			ftpPropery.setPort(Integer.valueOf(helper.getSysValue("port")));
-			ftpPropery.setUserName(helper.getSysValue("username"));
+			ftpPropery.setIpAddr(ConfigureManager.getSystemConfig().getFtpConfigure().getIp());
+			ftpPropery.setPwd(ConfigureManager.getSystemConfig().getFtpConfigure().getPassword());
+			ftpPropery.setPort(ConfigureManager.getSystemConfig().getFtpConfigure().getPort());
+			ftpPropery.setUserName(ConfigureManager.getSystemConfig().getFtpConfigure().getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

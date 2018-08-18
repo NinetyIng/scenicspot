@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 配置springmvc -->
+    <!-- 1.开启springmvc注解模式 -->
+    <!-- 简化配置: 1.自动注册 org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter
+        org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping
+        2.提供一系列功能：数据绑定 ，数字日期的format @NumberFormat @DataTimeFormat,xml，json默认读写支持 -->
+    <mvc:annotation-driven/>
+
+    <!-- servlet-mapping 映射路径“/”要做的操作 -->
+    <!-- 静态资源默认servlet处理 1.例如 js css 2.允许 / 做整体映射 -->
+    <mvc:default-servlet-handler/>
+    <context:component-scan base-package="com.ythd.ower.api"/>
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/client/"/>
+        <property name="suffix" value=".html"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
+    </bean>
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine"/>
+    </bean>
+
+    <bean id="accessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
+    <aop:config>
+        <aop:pointcut id="web" expression="execution (* com.ythd.ower.api.*.*(..))"/>
+        <aop:aspect ref="accessLogRecordAspect">
+            <aop:around method="handleApi" pointcut-ref="web" />
+        </aop:aspect>
+    </aop:config>
+
+    <!-- 自动为切面方法中匹配的方法所在的类生成代理对象。 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+</beans>

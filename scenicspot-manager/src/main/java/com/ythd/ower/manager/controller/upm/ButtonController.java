@@ -36,14 +36,14 @@ public class ButtonController extends BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ButtonRightController.class);
 
-	String menuUrl = "button/list";
+	String menuUrl = "button/list.do";
 	@Resource(name="buttonService")
 	private ButtonService buttonService;
 	/**保存
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/save")
+	@RequestMapping(value="/save.do")
 	public void save(HttpServletResponse response) throws Exception{
 		LOGGER.info("{},按钮保存",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return;}
@@ -62,7 +62,7 @@ public class ButtonController extends BaseController {
 	/**删除
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/delete")
+	@RequestMapping(value="/delete.do")
 	public void delete(HttpServletResponse response) throws Exception{
 		LOGGER.info("{},删除按钮",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;}
@@ -80,7 +80,7 @@ public class ButtonController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/edit")
+	@RequestMapping(value="/edit.do")
 	public void edit(HttpServletResponse response) throws Exception{
 		LOGGER.info("{},编辑按钮",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;}
@@ -97,7 +97,7 @@ public class ButtonController extends BaseController {
 	 * @param page
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/list")
+	@RequestMapping(value="/list.do")
 	public ModelAndView list(Page page) throws Exception{
 		LOGGER.info("{},按钮列表",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){
@@ -123,7 +123,7 @@ public class ButtonController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goAdd")
+	@RequestMapping(value="/goAdd.do")
 	public ModelAndView goAdd()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -137,7 +137,7 @@ public class ButtonController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/goEdit")
+	@RequestMapping(value="/goEdit.do")
 	public ModelAndView goEdit()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -152,7 +152,7 @@ public class ButtonController extends BaseController {
 	 * @param
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/excel")
+	@RequestMapping(value="/excel.do")
 	public ModelAndView exportExcel() throws Exception{
 		LOGGER.info("{},导出Fhbutton到excel",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}

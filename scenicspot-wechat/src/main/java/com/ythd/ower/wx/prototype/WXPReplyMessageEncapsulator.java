@@ -1,7 +1,9 @@
 package com.ythd.ower.wx.prototype;
+import com.ythd.ower.wx.model.*;
+
 import java.util.List;
 
-import com.easaa.wechat.model.*;
+
 /**
  * 回复消息封装
  * @author WL
@@ -115,7 +117,6 @@ public class WXPReplyMessageEncapsulator {
 
 		/**
 		 * 生成新闻回复
-		 * @param list
 		 * @return
 		 */
 		public String getNewsXml(WXPReplyNewsMessage message){
@@ -147,7 +148,6 @@ public class WXPReplyMessageEncapsulator {
 	
 		/**
 		 * 生成新闻回复
-		 * @param list
 		 * @return
 		 */
 		public String getTextXml(WXPReplyTextMessage message){

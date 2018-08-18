@@ -36,13 +36,13 @@ public class MenuController extends BaseController {
 	@Resource(name="menuService")
 	private MenuService menuService;
 
-	String menuUrl = "/menu/main";
+	String menuUrl = "/menu/main.do";
 
 	/**
 	 * 显示菜单列表
 	 * @return
 	 */
-	@RequestMapping("list")
+	@RequestMapping("list.do")
 	public ModelAndView list()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -61,7 +61,7 @@ public class MenuController extends BaseController {
 		return mv;
 	}
 
-	@RequestMapping("main")
+	@RequestMapping("main.do")
 	public ModelAndView main() throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
 		ModelAndView mv = this.getModelAndView();
@@ -74,7 +74,7 @@ public class MenuController extends BaseController {
 		return mv;
 	}
 	
-	@RequestMapping("menuJson")
+	@RequestMapping("menuJson.do")
 	public void menuJson(HttpServletResponse response) throws Exception{
 		JSONArray arr = JSONArray.fromObject(menuService.listAllMenu("0"));
 		String json = arr.toString().replaceAll("target", "tags").replaceAll("MENU_NAME", "text").replaceAll("subMenu", "nodes").replaceAll("hasMenu", "checked").replaceAll("MENU_URL", "href");;
@@ -86,7 +86,7 @@ public class MenuController extends BaseController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping(value="/toEdit")
+	@RequestMapping(value="/toEdit.do")
 	public ModelAndView toEdit(String id)throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = null;
@@ -98,7 +98,7 @@ public class MenuController extends BaseController {
 			pd.put("MENU_ID",pd.get("PARENT_ID").toString());
 			mv.addObject("pds", menuService.getMenuById(pd));
 			mv.addObject("MENU_ID", pd.get("PARENT_ID").toString());
-			mv.addObject("MSG", "edit");
+			mv.addObject("MSG", "edit.do");
 			pd.put("MENU_ID",id);
 			mv.addObject("QX",Jurisdiction.getHC());
 			mv.setViewName("system/menu/menu_edit");
@@ -109,7 +109,7 @@ public class MenuController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value="/edit")
+	@RequestMapping(value="/edit.do")
 	public void edit(Menu menu,HttpServletResponse response)throws Exception{
 		LOGGER.info("{},开始编辑菜单",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){
@@ -129,7 +129,7 @@ public class MenuController extends BaseController {
 	 * 请求新增菜单页面
 	 * @return
 	 */
-	@RequestMapping(value="/toAdd")
+	@RequestMapping(value="/toAdd.do")
 	public ModelAndView toAdd()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		try{
@@ -138,7 +138,7 @@ public class MenuController extends BaseController {
 			pd.put("MENU_ID",MENU_ID);
 			mv.addObject("pds", menuService.getMenuById(pd));
 			mv.addObject("MENU_ID", MENU_ID);
-			mv.addObject("MSG", "add");
+			mv.addObject("MSG", "add.do");
 			mv.setViewName("system/menu/menu_edit");
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -151,7 +151,7 @@ public class MenuController extends BaseController {
 	 * @param menu
 	 * @return
 	 */
-	@RequestMapping(value="/add")
+	@RequestMapping(value="/add.do")
 	public void add(Menu menu,HttpServletResponse response)throws Exception{
 		LOGGER.info("{},开始增加菜单",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){
@@ -176,7 +176,7 @@ public class MenuController extends BaseController {
 	 * 删除菜单
 	 * @param MENU_ID
 	 */
-	@RequestMapping(value="/delete")
+	@RequestMapping(value="/delete.do")
 	@ResponseBody
 	public void delete(@RequestParam String MENU_ID,HttpServletResponse response)throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){

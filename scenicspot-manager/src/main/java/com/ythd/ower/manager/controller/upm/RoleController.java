@@ -42,7 +42,7 @@ import net.sf.json.JSONArray;
 @RequestMapping(value="/role/")
 public class RoleController extends BaseController {
 	
-	String menuUrl = "role/list";
+	String menuUrl = "role/list.do";
 	@Resource(name="menuService")
 	private MenuService menuService;
 	@Resource(name="roleService")
@@ -56,7 +56,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("list")
+	@RequestMapping("list.do")
 	public ModelAndView list()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = null;
@@ -89,20 +89,13 @@ public class RoleController extends BaseController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping(value="/toAdd")
+	@RequestMapping(value="/toAdd.do")
 	public ModelAndView toAdd(){
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		try{
 			pd = this.getPageData();
-			/*if(pd.getAsInt("parent_id")==2) {
-				Session session = Jurisdiction.getSession();
-				User user = (User)session.getAttribute(Const.SESSION_USER);
-				if(EAUtil.isEmpty(user.getSCHOOL_ID())) {
-					mv.addObject("schools", schoolService.selectForSelect(pd));
-				}
-			}*/
-			mv.addObject("msg", "add");
+			mv.addObject("msg", "add.do");
 			mv.setViewName("system/role/role_edit");
 			mv.addObject("pd", pd);
 		} catch(Exception e){
@@ -115,10 +108,10 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/add")
+	@RequestMapping(value="/add.do")
 	public void add(HttpServletResponse response)throws Exception{
-	/*	if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return ;} //校验权限
-*/		logBefore(logger, Jurisdiction.getUsername()+"新增角色");
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return ;} //校验权限
+		logBefore(logger, Jurisdiction.getUsername()+"新增角色");
 		/**
 		 * 获取当前登录管理员
 		 */
@@ -156,7 +149,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/toEdit")
+	@RequestMapping(value="/toEdit.do")
 	public ModelAndView toEdit( String  ROLE_ID )throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -164,14 +157,7 @@ public class RoleController extends BaseController {
 			pd = this.getPageData();
 			pd.put("ROLE_ID", ROLE_ID);
 			pd = roleService.findObjectById(pd);
-			/*if(pd.getAsInt("PARENT_ID")==2) {
-				Session session = Jurisdiction.getSession();
-				User user = (User)session.getAttribute(Const.SESSION_USER);
-				if(EAUtil.isEmpty(user.getSCHOOL_ID())) {
-					mv.addObject("schools", schoolService.selectForSelect(pd));
-				}
-			}*/
-			mv.addObject("msg", "edit");
+			mv.addObject("msg", "edit.do");
 			mv.addObject("pd", pd);
 			mv.setViewName("system/role/role_edit");
 		} catch(Exception e){
@@ -184,11 +170,11 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/edit")
+	@RequestMapping(value="/edit.do")
 	public void edit(HttpServletResponse response)throws Exception{
-		/*if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
-*/		logBefore(logger, Jurisdiction.getUsername()+"修改角色");
-		PageData pd = new PageData();
+		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return;} //校验权限
+		logBefore(logger, Jurisdiction.getUsername()+"修改角色");
+		PageData pd;
 		try{
 			pd = this.getPageData();
 			roleService.edit(pd);
@@ -203,7 +189,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/delete")
+	@RequestMapping(value="/delete.do")
 	public void deleteRole(@RequestParam String ROLE_ID,HttpServletResponse response)throws Exception{
 		/*if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
 */		logBefore(logger, Jurisdiction.getUsername()+"删除角色");
@@ -234,7 +220,7 @@ public class RoleController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/menuqx")
+	@RequestMapping(value="/menuqx.do")
 	public ModelAndView listAllMenu(Model model,String ROLE_ID)throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		try{
@@ -258,7 +244,7 @@ public class RoleController extends BaseController {
 	 * @param menuIds 菜单ID集合
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/saveMenuqx")
+	@RequestMapping(value="/saveMenuqx.do")
 	public void saveMenuqx(@RequestParam String ROLE_ID,@RequestParam String menuIds,HttpServletResponse response)throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){} //校验权限
 		logBefore(logger, Jurisdiction.getUsername()+"修改菜单权限");
@@ -292,7 +278,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/b4Button")
+	@RequestMapping(value="/b4Button.do")
 	public ModelAndView b4Button(@RequestParam String ROLE_ID,@RequestParam String msg,Model model)throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		try{
@@ -344,7 +330,7 @@ public class RoleController extends BaseController {
 	 * @param out
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/saveB4Button")
+	@RequestMapping(value="/saveB4Button.do")
 	public void saveB4Button(@RequestParam String ROLE_ID,@RequestParam String menuIds,@RequestParam String msg,HttpServletResponse response)throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){} //校验权限
 		logBefore(logger, Jurisdiction.getUsername()+"修改"+msg+"权限");

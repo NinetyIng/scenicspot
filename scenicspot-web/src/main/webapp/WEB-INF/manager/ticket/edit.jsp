@@ -257,9 +257,9 @@
 		    	return;
 		    }
 		    submitFlag = true;
-		    Ajax.request("/sys/ticket/eidt",{"data":$("#commentForm").serialize(),"success":function(data){
+		    Ajax.request("/sys/ticket/eidt.do",{"data":$("#commentForm").serialize(),"success":function(data){
 		    	if(data.result == 200){
-		    		window.location.href="/sys/ticket/list";
+		    		window.location.href="/sys/ticket/list.do";
 		    	}else{
 		    		submitFlag = false;
 		    		bootbox.alert(data.msg);

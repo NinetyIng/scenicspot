@@ -1,9 +1,10 @@
 package com.ythd.ower.wx.common;
 
+import com.ythd.ower.common.config.ConfigureManager;
+import com.ythd.ower.common.constants.SpecificSymbolConstants;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.properties.PropertiesHelper;
 import com.ythd.ower.common.tools.EAString;
-import com.ythd.ower.common.tools.EAUtil;
 import com.ythd.ower.wx.entity.Template;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,8 +44,6 @@ public final class WechatUtil {
 	 * 最后刷新时间
 	 */
 	private static long lastTime;
-
-	private final static String QRCODE_TICKET_URL = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=";
 	/**
 	 * 读取token
 	 * 
@@ -53,7 +52,7 @@ public final class WechatUtil {
 	public static String getAccessToken() {
 		if (System.currentTimeMillis() - lastTime > 7100000) {
 			try {
-				ACCESSTOKEN = WechatUtil.readAccessToken();
+				ACCESSTOKEN = WechatUtil.readAccessToken(StringUtils.EMPTY);
 				lastTime = System.currentTimeMillis();
 			} catch (Exception e) {
 				ACCESSTOKEN = StringUtils.EMPTY;
@@ -62,7 +61,7 @@ public final class WechatUtil {
 		}
 		if (EAString.isNullStr(ACCESSTOKEN)) {
 			try {
-				ACCESSTOKEN = WechatUtil.readAccessToken();
+				ACCESSTOKEN = WechatUtil.readAccessToken(StringUtils.EMPTY);
 				lastTime = System.currentTimeMillis();
 			} catch (Exception e) {
 				ACCESSTOKEN = StringUtils.EMPTY;
@@ -81,8 +80,9 @@ public final class WechatUtil {
 	 */
 	public static JSONObject getQRCodeTicket(int scene_id) {
 		String data = "{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_id\":" + scene_id	+ "}}}";
-		String requestUrl = String.join(StringUtils.EMPTY,QRCODE_TICKET_URL,getAccessToken());
-		JSONObject jsonObject = httpRequest(requestUrl, WechatConstant.REQUEST_METHOD_POST, data);
+		String url = ConfigureManager.getWxConfig().getUrlConfigure().getTgqrcodeUrl(getAccessToken());
+		LOGGER.info("生产推广二维码的url为：{}",url);
+		JSONObject jsonObject = httpRequest(url, WechatConstant.REQUEST_METHOD_POST, data);
 		// 如果请求成功
 		if (null != jsonObject) {
 			try {
@@ -96,24 +96,18 @@ public final class WechatUtil {
 	}
 
 	/**
-	 * 获取accessToken 微信授权登陆
-	 */
-	public static String readAccessTokenApp(String code){
-		String jsonStr = HttpRequest
-				.sendPost(Configure.getAccessTokenUrl(Configure.getAppid(), Configure.getAppSecret(), code), StringUtils.EMPTY);
-		JSONObject object = JSONObject.fromObject(jsonStr);
-		String accessToken = object.getString(WechatConstant.ACCESS_TOKEN);
-		return accessToken;
-	}
-
-	/**
 	 * 获取accessToken
+	 * 获取accessToken 微信授权登陆 传code
 	 */
-	public static String readAccessToken(){
+	public static String readAccessToken(String code){
+		String url = ConfigureManager.getWxConfig().getUrlConfigure().getAccessTokenUrl(ConfigureManager.getWxConfig().getAppId()
+				,ConfigureManager.getWxConfig().getAppKey(),code);
+		LOGGER.info("获取accessToken的url为：{}",url);
 		String jsonStr = HttpRequest
 				.sendPost(Configure.getAccessTokenUrl(Configure.getAppid(), Configure.getAppSecret()), StringUtils.EMPTY);
 		JSONObject object = JSONObject.fromObject(jsonStr);
 		String accessToken = object.getString(WechatConstant.ACCESS_TOKEN);
+		LOGGER.info("获取的token为{}",accessToken);
 		return accessToken;
 	}
 
@@ -123,8 +117,9 @@ public final class WechatUtil {
 	 * @throws Exception
 	 */
 	public static JSONObject readUserList(String next_openid){
-
 		try {
+			String url = ConfigureManager.getWxConfig().getUrlConfigure().getUserListUrl(getAccessToken(),next_openid);
+			LOGGER.info("读取会员列表的url为：{}",url);
 			String jsonStr = new String(
 					HttpRequest.sendPost(Configure.getUserListUrl(getAccessToken(), next_openid), StringUtils.EMPTY).getBytes(),
 					WechatConstant.REQUEST_CHARSET);
@@ -148,7 +143,9 @@ public final class WechatUtil {
 	 */
 	public static JSONObject readUserInfo(String openId) {
 		try {
-			String jsonStr = new String(HttpRequest.sendGet(Configure.getUserInfoUrl(getAccessToken(), openId), StringUtils.EMPTY).getBytes(),"utf-8");
+			String url = ConfigureManager.getWxConfig().getUrlConfigure().getUserInfoUrl(getAccessToken(),openId);
+			LOGGER.info("网页授权获取用户OpenID的url为：{}",url);
+			String jsonStr = new String(HttpRequest.sendGet(url, StringUtils.EMPTY).getBytes(),WechatConstant.REQUEST_CHARSET);
 			LOGGER.info("openid{}，获取到的用户信息",jsonStr);
 			JSONObject object = JSONObject.fromObject(jsonStr);
 			return object;
@@ -165,9 +162,11 @@ public final class WechatUtil {
 	 */
 	public static String getJsapiTicket() {
 		try {
-			String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
-			String jsonStr = HttpRequest.sendGet(url, "access_token=" + getAccessToken() + "&type=jsapi");
+			String url = ConfigureManager.getWxConfig().getUrlConfigure().getJsapiUrl(getAccessToken());
+			LOGGER.info("网页授权获取用户OpenID的url为：{}",url);
+			String jsonStr = HttpRequest.sendGet(url,StringUtils.EMPTY);
 			JSONObject object = JSONObject.fromObject(jsonStr);
+			LOGGER.info("获取到JSAPI凭证信息为{}",object.toString());
 			return object.getString("ticket");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,16 +183,14 @@ public final class WechatUtil {
 	public static Map<String, String> createShareTicket(String url) {
 		String access_token = getAccessToken();
 		String jsapi_ticket = getJsapiTicket();
-		Map<String, String> api = new HashMap<String, String>();
+		Map<String, String> api = new HashMap<>();
 		api.put("access_token", access_token);
 		api.put("jsapi_ticket", jsapi_ticket);
-		Map<String, String> ret = sign(jsapi_ticket, url);// );
+		Map<String, String> ret = sign(jsapi_ticket, url);
 		api.put("timestamp", ret.get("timestamp"));
 		api.put("nonceStr", ret.get("nonceStr"));
 		api.put("signature", ret.get("signature"));
 		api.put("appId", Configure.getAppid());
-		System.out.println("创建微信API，微信分享：：：：：" + api);
-		System.out.println("创建微信API，微信分享链接地址：：：：：" + url);
 		return api;
 	}
 
@@ -202,11 +199,12 @@ public final class WechatUtil {
 	 */
 	public static String getOpenId(String code) {
 		try {
-			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Configure.getAppid() + "&secret="
-					+ Configure.getAppSecret() + "&code=" + code + "&grant_type=authorization_code";
-			String jsonStr = HttpRequest.sendPost(url, "");
+			String url = ConfigureManager.getWxConfig().getUrlConfigure().getOpenIdUrl(ConfigureManager.getWxConfig().getAppId()
+					,ConfigureManager.getWxConfig().getAppKey(),code);
+			LOGGER.info("网页授权获取用户OpenID的url为：{}",url);
+			String jsonStr = HttpRequest.sendPost(url, StringUtils.EMPTY);
 			JSONObject object = JSONObject.fromObject(jsonStr);
-			System.out.println("读取OPEN-ID==" + jsonStr);
+			LOGGER.info("获取到的用户openid信息为：{}",object.toString());
 			return object.getString("openid");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -217,9 +215,10 @@ public final class WechatUtil {
 	/**
 	 * 创建菜单
 	 */
-	public static String createMenu(String params) throws Exception {
-		String jsonStr = HttpRequest
-				.sendPost("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + getAccessToken(), params);
+	public static String createMenu(String params){
+		String url = ConfigureManager.getWxConfig().getUrlConfigure().getCreateMenu(getAccessToken());
+		LOGGER.info("请求 创建菜单url为：{}",url);
+		String jsonStr = HttpRequest.sendPost(url, params);
 		JSONObject object = JSONObject.fromObject(jsonStr);
 		return object.getString("errmsg");
 	}
@@ -227,7 +226,7 @@ public final class WechatUtil {
 	/**
 	 * 查询设置的行业信息
 	 */
-	public static String getIndustryInfo() throws Exception {
+	public static String getIndustryInfo() {
 		String jsonStr = HttpRequest.sendPost(
 				"https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=" + getAccessToken(), "");
 		return jsonStr;
@@ -236,10 +235,10 @@ public final class WechatUtil {
 	/**
 	 * 查询所有模板列表
 	 */
-	public static String getPtemplateInfo() throws Exception {
-		String jsonStr = HttpRequest.sendPost(
-				"https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=" + getAccessToken(),
-				"");
+	public static String getPtemplateInfo(){
+		String url = ConfigureManager.getWxConfig().getUrlConfigure().getTemplateListUrl(getAccessToken());
+		LOGGER.info("请求所有模板的url为：{}",url);
+		String jsonStr = HttpRequest.sendPost(url,StringUtils.EMPTY);
 		return jsonStr;
 	}
 
@@ -251,8 +250,9 @@ public final class WechatUtil {
 	 */
 	public static boolean sendTemplateMsg(Template template) {
 		try {
-			String jsonStr = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + getAccessToken();
-			JSONObject jsonResult = httpRequest(jsonStr, WechatConstant.REQUEST_METHOD_POST, template.toJSON());
+			String url = ConfigureManager.getWxConfig().getUrlConfigure().getSendTemplateUrl(getAccessToken());
+			LOGGER.info("发送模板消息url为：{}",url);
+			JSONObject jsonResult = httpRequest(url, WechatConstant.REQUEST_METHOD_POST, template.toJSON());
 			if (jsonResult != null) {
 				int errorCode = jsonResult.getInt(WechatConstant.RESPONSE_CODE);
 				String errorMessage = jsonResult.getString(WechatConstant.RESPONSE_MSG);
@@ -274,7 +274,7 @@ public final class WechatUtil {
 	 */
 	public static String getMenuInfo() throws Exception {
 		String jsonStr = HttpRequest
-				.sendPost("https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + getAccessToken(), StringUtils.EMPTY);
+				.sendPost(ConfigureManager.getWxConfig().getUrlConfigure().getMenuInfoUrl(getAccessToken()), StringUtils.EMPTY);
 		return jsonStr;
 	}
 
@@ -422,8 +422,8 @@ public final class WechatUtil {
 	 */
 	public static String getAuthorUrl(String redirect_uri) {
 		redirect_uri = EAString.base64Encode(redirect_uri);
-		int dc = EAString.countOccurrencesOf(redirect_uri, "=");
-		String url = EAString.delete(redirect_uri, "=");
+		int dc = EAString.countOccurrencesOf(redirect_uri, SpecificSymbolConstants.EQUEL);
+		String url = EAString.delete(redirect_uri,  SpecificSymbolConstants.EQUEL);
 		String wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + Configure.getAppid()
 				+ "&redirect_uri=";
 		if (EAString.isNullStr(redirect_uri)) {
@@ -462,7 +462,7 @@ public final class WechatUtil {
 	 */
 	public static String getRedirectUrl(String redirect_uri, int dengHaoShu) {
 		for (int i = 0; i < dengHaoShu; i++) {
-			redirect_uri = redirect_uri + "=";
+			redirect_uri = redirect_uri +  SpecificSymbolConstants.EQUEL;
 		}
 		redirect_uri = EAString.base64Decode(redirect_uri);
 		return redirect_uri;
@@ -474,10 +474,10 @@ public final class WechatUtil {
 	 */
 	public static PageData getParamValueByUrl(String redirectUrl) {
 		String paramUrl = redirectUrl.substring(redirectUrl.indexOf("?") + 1, redirectUrl.length());
-		String[] paramAry = paramUrl.split("&");
+		String[] paramAry = paramUrl.split(SpecificSymbolConstants.AMPERSAND);
 		PageData paramMap = new PageData();
 		for (String s : paramAry) {
-			String[] singleParam = s.split("=");
+			String[] singleParam = s.split( SpecificSymbolConstants.EQUEL);
 			paramMap.put(singleParam[0], singleParam[1]);
 		}
 		return paramMap;
@@ -485,6 +485,6 @@ public final class WechatUtil {
 
 	public static String getMediaInfo(String s) {
 		String url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=" + getAccessToken() + "&media_id=" + s;
-		return HttpRequest.sendGetForMedia(url, null);
+		return HttpRequest.sendGetForMedia(url, StringUtils.EMPTY);
 	}
 }

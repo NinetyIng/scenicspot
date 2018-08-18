@@ -24,7 +24,7 @@
     <dependency>
       <artifactId>scenicspot-task</artifactId>
       <groupId>com.ythd.ower</groupId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>scenicspot-data</artifactId>
@@ -36,7 +36,7 @@
     <dependency>
       <artifactId>scenicspot-manager</artifactId>
       <groupId>com.ythd.ower</groupId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>scenicspot-data</artifactId>
@@ -48,7 +48,7 @@
     <dependency>
       <artifactId>scenicspot-platform</artifactId>
       <groupId>com.ythd.ower</groupId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>scenicspot-data</artifactId>
@@ -60,7 +60,7 @@
     <dependency>
       <artifactId>scenicspot-api</artifactId>
       <groupId>com.ythd.ower</groupId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>scenicspot-data</artifactId>

@@ -13,8 +13,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.properties.PropertiesHelper;
 import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,15 +31,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 
 public class FtpUtilsAbove {
-	PropertiesHelper helper = PropertiesHelper.getAppInstance();
-	
+
 	private FTPClient ftpClient;
 	private Ftp ftpPropery = new Ftp();
 	public FtpUtilsAbove(){
-		ftpPropery.setIpAddr(helper.getSysValue("ip"));
-		ftpPropery.setPwd(helper.getSysValue("passowrd"));
-		ftpPropery.setPort(Integer.valueOf(helper.getSysValue("port")));
-		ftpPropery.setUserName(helper.getSysValue("username"));
+
+		ftpPropery.setIpAddr(ConfigureManager.getSystemConfig().getFtpConfigure().getIp());
+		ftpPropery.setPwd(ConfigureManager.getSystemConfig().getFtpConfigure().getPassword());
+		ftpPropery.setPort(ConfigureManager.getSystemConfig().getFtpConfigure().getPort());
+		ftpPropery.setUserName(ConfigureManager.getSystemConfig().getFtpConfigure().getUsername());
 	}
 	
 	/**
@@ -54,8 +57,9 @@ public class FtpUtilsAbove {
 	}
 	
 	public String upload(MultipartFile file, String projectName, String modelName) throws IOException{
-		if (file.getBytes().length == 0 && file.getSize() == 0 && file.getOriginalFilename().equals("")) {
-			return "";
+		if (file.getBytes().length == 0 && file.getSize() == 0
+				&& file.getOriginalFilename().equals(StringUtils.EMPTY)) {
+			return StringUtils.EMPTY;
 		}
 		ftpClient = new FTPClient();
 		ftpClient.setBufferSize(5024*1024);
@@ -72,7 +76,7 @@ public class FtpUtilsAbove {
 			int reply = ftpClient.getReplyCode();
 			if (!FTPReply.isPositiveCompletion(reply)) {
 				ftpClient.disconnect();
-				return "";
+				return StringUtils.EMPTY;
 			}
 			ftpClient.changeWorkingDirectory(ftpPropery.getPath());
 			String[] directoryNames = { projectName, modelName, String.valueOf(year), String.valueOf(month),

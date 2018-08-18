@@ -3,13 +3,12 @@ package com.ythd.ower.wx.pay;
 import com.tencent.WXPay;
 import com.tencent.common.RandomStringGenerator;
 import com.tencent.common.XMLParser;
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.constants.SpecificSymbolConstants;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.tools.HttpClientSSLUtils;
 import com.ythd.ower.common.tools.MD5;
-import com.ythd.ower.data.config.ConfigureManager;
 import com.ythd.ower.wx.common.WechatConstant;
-import com.ythd.ower.wx.common.WechatUtil;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -18,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
@@ -130,7 +131,7 @@ public class PayUtil {
 		String result = new String(data);
 		Map<String, Object> mapdata = XMLParser.getMapFromXML(result);
 		if (mapdata != null && RETURN_SUCCESS.equals(mapdata.get(RETURN_CODE)) && RETURN_SUCCESS.equals(mapdata.get(RESULT_CODE))) {
-			String timestamp = (System.currentTimeMillis() / 1000) + "";
+			String timestamp = (System.currentTimeMillis() / 1000) + StringUtils.EMPTY;
 			List<NameValuePair> sencondSign = new LinkedList<>();
 			sencondSign.add(new BasicNameValuePair(APPID, ConfigureManager.getWxConfig().getPayConfigure().getPayAppId()));
 			String noncestrS = RandomStringGenerator.getRandomStringByLength(32);

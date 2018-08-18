@@ -19,7 +19,7 @@
 					<div class="ibox-title">
 						<h5>商品列表</h5>
 						<div class="ibox-tools">
-							<a href="/test/editPage" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
+							<a href="/test/editPage.do" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
 						</div>
 					</div>
 					<div class="ibox-content">
@@ -78,7 +78,7 @@
 														<td>50</td>
 														<td>123</td>
 														<td class="center">
-															<a href="/goods/edit?id=1" class="btn btn-primary btn-sm" title="编辑">
+															<a href="/goods/edit.do?id=1" class="btn btn-primary btn-sm" title="编辑">
                            										<i class="fa fa-pencil"></i>
                        										</a>
                        										<a href="/goods/del?id=1" class="btn btn-warning btn-sm" title="删除">

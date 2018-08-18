@@ -11,18 +11,19 @@
 		<!-- Shiro Filter -->
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 			<property name="securityManager" ref="securityManager" />
-			<property name="loginUrl" value="/main/login" />
-			<property name="successUrl" value="/main/index" />
+			<property name="loginUrl" value="/main/login.do" />
+			<property name="successUrl" value="/main/index.do" />
 			<property name="filterChainDefinitions">
 					<value>
 					/statics/** 			= anon
 					/assets/**              = anon
 					/common/baidu/          = anon
-		           	/main/login	 			= anon
-		           	/main/doLogin	 		= anon
+		           	/main/login.do	 			= anon
+		           	/main/doLogin.do	 		= anon
 		           	/*                      = anon
 		           	/appwx/**				= anon
-					/healthCheck            = anon
+					/healthCheck.do            = anon
+					/**.html                = anon
 					/**						= authc
 					</value>
 			</property>

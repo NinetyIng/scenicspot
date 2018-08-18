@@ -14,7 +14,7 @@
 					<div class="ibox-title">
 						<h5>菜单列表</h5>
 						<div class="ibox-tools">
-							<a href="/sys/upm/menu/edit" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
+							<a href="/sys/upm/menu/edit.do" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
 						</div>
 					</div>
 					<div class="ibox-content">

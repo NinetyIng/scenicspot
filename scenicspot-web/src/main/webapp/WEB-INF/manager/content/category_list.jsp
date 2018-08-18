@@ -15,7 +15,7 @@
 					<div class="ibox-title">
 						<h5>文章栏目</h5>
 						<div class="ibox-tools">
-						<a href="/sys/content/category/edit?CATEGORY_ID=0"
+						<a href="/sys/content/category/edit.do?CATEGORY_ID=0"
 							class="btn btn-primary btn-xs"> <i class="fa fa-plus"></i>&nbsp;新增</a>
 					</div>
 					</div>
@@ -56,7 +56,7 @@
 														  </c:if>
 														</td>
 														<td class="center">
-															<a href="/sys/content/category/edit?CATEGORY_ID=${item.CATEGORY_ID}"
+															<a href="/sys/content/category/edit.do?CATEGORY_ID=${item.CATEGORY_ID}"
 																	class="btn btn-primary btn-sm" title="编辑"> <i
 																		class="fa fa-pencil"></i>
 															</a>

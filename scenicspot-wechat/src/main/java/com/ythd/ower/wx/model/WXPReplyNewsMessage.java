@@ -2,7 +2,7 @@ package com.ythd.ower.wx.model;
 
 import java.util.List;
 
-import com.easaa.wechat.protocol.WXMessageType;
+import com.ythd.ower.wx.prototype.WXMessageType;
 
 /**
  * 回复图文消息

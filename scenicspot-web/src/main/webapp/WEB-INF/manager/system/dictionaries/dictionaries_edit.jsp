@@ -69,7 +69,7 @@
 							<tr>
 								<td class="center" colspan="10">
 									<a class="btn btn-mini btn-primary" onclick="Dictionnaries.save();">保存</a>
-									<a class="btn btn-mini btn-danger" onclick="window.location.href='/dictionaries/list?DICTIONARIES_ID=${pd.DICTIONARIES_ID}'">取消</a>
+									<a class="btn btn-mini btn-danger" onclick="window.location.href='/dictionaries/list.do?DICTIONARIES_ID=${pd.DICTIONARIES_ID}'">取消</a>
 								</td>
 							</tr>
 						</table>

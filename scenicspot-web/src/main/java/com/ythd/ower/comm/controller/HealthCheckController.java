@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HealthCheckController {
 
-    @RequestMapping("healthCheck")
+    @RequestMapping("healthCheck.do")
     public GenericResponseDto healthCheck(){
         return DtoUtils.getSuccessResponse();
     }

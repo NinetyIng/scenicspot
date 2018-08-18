@@ -21,7 +21,7 @@ import net.sf.json.JSONArray;
 @RequestMapping("/sys/storage/")
 public class StorageController extends BaseController {
 
-	@RequestMapping("list")
+	@RequestMapping("list.do")
 	public ModelAndView list() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		mv.setViewName("/system/storage/list");
@@ -35,7 +35,7 @@ public class StorageController extends BaseController {
 	/**
 	 * 删除文件
 	 */
-	@RequestMapping("deleteFile")
+	@RequestMapping("deleteFile.do")
 	public void deleteFilt(String pathName,HttpServletResponse response){
 		try{
 			FtpUtil.removeAllFiles(pathName);

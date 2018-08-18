@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.ythd.ower</groupId>
             <artifactId>scenicspot-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
