@@ -15,7 +15,7 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
-			<form action="/sys/user/editAction" method="post"
+			<form action="/sys/user/editAction.do" method="post"
 				class="form-horizontal m-t" id="commentForm">
 				<input type="hidden" value="${dataModel.user_id}" name="user_id" />
 				<div class="col-sm-13">

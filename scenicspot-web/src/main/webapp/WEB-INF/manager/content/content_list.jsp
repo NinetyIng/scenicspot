@@ -326,7 +326,7 @@
 		}
 		function edit(contentId){
 			var title = "添加文章";
-			var url = "<%=basePath%>sys/content/editPage.do";
+			var url = "<%=basePath%>sys/content/editPage.do.do";
 			if(contentId){
 				title = "编辑文章";
 				url = '<%=basePath%>sys/content/editPage.do?CONTENT_ID='+contentId;

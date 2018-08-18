@@ -1,5 +1,14 @@
 package com.ythd.ower.wx.pay;
 
+import com.tencent.WXPay;
+import com.tencent.common.RandomStringGenerator;
+import com.tencent.common.XMLParser;
+import com.ythd.ower.common.config.ConfigureManager;
+import com.ythd.ower.common.constants.SpecificSymbolConstants;
+import com.ythd.ower.common.dto.PageData;
+import com.ythd.ower.common.tools.HttpClientSSLUtils;
+import com.ythd.ower.common.tools.MD5;
+import com.ythd.ower.wx.common.WechatConstant;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -9,20 +18,56 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import com.easaa.core.util.MD5;
-import com.easaa.core.util.Util;
-import com.easaa.entity.PageData;
-import com.easaa.wechat.common.Configure;
-import com.tencent.WXPay;
-import com.tencent.common.RandomStringGenerator;
-import com.tencent.common.XMLParser;
 
 public class PayUtil {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PayUtil.class);
+
+	private static final String APPID = "appid";
+
+	private static final String BODY = "body";
+
+	private static final String  MCH_ID = "mch_id";
+
+	private static final String NONCE_STR = "nonce_str";
+
+	private static final String NOTIFY_URL = "notify_url";
+
+	private static final String OPENID = "openid";
+
+	private static final String OUT_TRADE_NO = "out_trade_no";
+
+	private static final String SPBILL_CREATE_IP = "spbill_create_ip";
+
+	private static final String TOTAL_FEE = "total_fee";
+
+	private static final String TRADE_TYPE = "trade_type";
+
+	private static final String SIGN = "sign";
+
+	private static final String RETURN_CODE = "return_code";
+	private static final String RESULT_CODE = "result_code";
+
+	private static final String RETURN_SUCCESS = "SUCCESS";
+
+	private static final String NONCESTR = "noncestr";
+
+	private static final String PACKAGE = "package";
+
+	private static final String PREPAY_ID = "prepay_id";
+
+	private static final String SIGNTYPE = "signType";
+	private static final String TIMESTAMP = "timeStamp";
+
+
+
 	
 	public static String toXml(List<NameValuePair> params) throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
@@ -33,7 +78,7 @@ public class PayUtil {
 			sb.append("</" + params.get(i).getName() + ">");
 		}
 		sb.append("</xml>");
-		System.out.println("xml<><><><><><><>><><><>" + sb.toString());
+		LOGGER.info("拼接的xml参数信息为：{}",sb);
 		return sb.toString();
 	}
 	/**
@@ -42,20 +87,17 @@ public class PayUtil {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static String genPackageSign(List<NameValuePair> params) throws UnsupportedEncodingException {
+	public static String genPackageSign(List<NameValuePair> params){
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < params.size(); i++) {
 			sb.append(params.get(i).getName());
-			sb.append('=');
+			sb.append(SpecificSymbolConstants.EQUEL);
 			sb.append(params.get(i).getValue());
-			sb.append('&');
-			System.out.println("key:" + params.get(i).getName() + "    value:" + params.get(i).getValue());
+			sb.append(SpecificSymbolConstants.AMPERSAND);
 		}
 		sb.append("key=");
-		sb.append(Configure.getKey());
-		System.out.println(Configure.getKey());
-		String sign =  MD5.MD5Encode(sb.toString(), "utf-8").toUpperCase();
-		System.out.println(sign);
+		sb.append(ConfigureManager.getWxConfig().getPayConfigure().getPayAppKey());
+		String sign =  MD5.MD5Encode(sb.toString(), WechatConstant.REQUEST_CHARSET).toUpperCase();
 		return sign;
 	}
 	
@@ -63,50 +105,48 @@ public class PayUtil {
 	 * 场馆支付签名
 	 * 
 	 */
-	public static  PageData wxSignPack(String pay_money,String billNo,String body,String open_id) throws ParserConfigurationException, IOException, SAXException {
+	public static PageData wxPaySign(String pay_money, String billNo, String body, String open_id) throws ParserConfigurationException,IOException ,SAXException{
 		PageData resultParam = new PageData();
-		List<NameValuePair> signParams = new LinkedList<NameValuePair>();
-		WXPay.initSDKConfiguration(null, Configure.getAppid(), Configure.getMchid(), null, null, null);
+		List<NameValuePair> signParams = new LinkedList<>();
+		WXPay.initSDKConfiguration(null,ConfigureManager.getWxConfig().getPayConfigure().getPayAppId(),ConfigureManager.getWxConfig().getPayConfigure().getPayMchtId(), null, null, null);
 		String totalmoney = String.format("%.0f",
-				BigDecimal.valueOf(Double.parseDouble(pay_money)).doubleValue() * 100); // 支付金额（元）
-		signParams.add(new BasicNameValuePair("appid", Configure.getAppid())); // 应用ID
-		signParams.add(new BasicNameValuePair("body", String.valueOf(body))); // 商品描述
-		signParams.add(new BasicNameValuePair("mch_id", Configure.getMchid())); // 商户号
+				BigDecimal.valueOf(Double.parseDouble(pay_money)).doubleValue() * 100);
+		signParams.add(new BasicNameValuePair(APPID, ConfigureManager.getWxConfig().getPayConfigure().getPayAppId()));
+		signParams.add(new BasicNameValuePair(BODY, String.valueOf(body)));
+		signParams.add(new BasicNameValuePair(MCH_ID, ConfigureManager.getWxConfig().getPayConfigure().getPayMchtId()));
 		String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
-		signParams.add(new BasicNameValuePair("nonce_str", nonce_str)); // 随机字符串
-		signParams.add(new BasicNameValuePair("notify_url", Configure.notify_url)); // 回调地址
+		signParams.add(new BasicNameValuePair(NONCE_STR, nonce_str));
+		signParams.add(new BasicNameValuePair(NOTIFY_URL, ConfigureManager.getWxConfig().getPayConfigure().getNotifyUrl()));
 		/*resultParam.put("nonceStr", nonce_str);*/
-		signParams.add(new BasicNameValuePair("openid", open_id)); // openid
-		signParams.add(new BasicNameValuePair("out_trade_no", billNo)); // 商户订单号
-		resultParam.put("out_trade_no", billNo);
-		signParams.add(new BasicNameValuePair("spbill_create_ip", "58.250.174.48")); // 终端IP
-		signParams.add(new BasicNameValuePair("total_fee", totalmoney)); // 总金额
-		signParams.add(new BasicNameValuePair("trade_type", "JSAPI")); // 交易类型
+		signParams.add(new BasicNameValuePair(OPENID, open_id));
+		signParams.add(new BasicNameValuePair(OUT_TRADE_NO, billNo));
+		resultParam.put(OUT_TRADE_NO, billNo);
+		signParams.add(new BasicNameValuePair(SPBILL_CREATE_IP, "58.250.174.48"));
+		signParams.add(new BasicNameValuePair(TOTAL_FEE, totalmoney));
+		signParams.add(new BasicNameValuePair(TRADE_TYPE, "JSAPI"));
 		String sign = PayUtil.genPackageSign(signParams);
-		signParams.add(new BasicNameValuePair("sign", sign)); // 签名
-		byte[] data = Util.httpPost(Configure.UNIFIEDORDER, PayUtil.toXml(signParams)); //第一次签名认证，wx_url接口链接
+		signParams.add(new BasicNameValuePair(SIGN, sign));
+
+		byte[] data = HttpClientSSLUtils.httpPost(ConfigureManager.getWxConfig().getUrlConfigure().getUnifiedOrderUrl(), PayUtil.toXml(signParams));
 		String result = new String(data);
 		Map<String, Object> mapdata = XMLParser.getMapFromXML(result);
-		if (mapdata != null && "SUCCESS".equals(mapdata.get("return_code")) && "SUCCESS".equals(mapdata.get("result_code"))) {
-			String timestamp = (System.currentTimeMillis() / 1000) + "";
-			List<NameValuePair> sencondSign = new LinkedList<NameValuePair>();
-			sencondSign.add(new BasicNameValuePair("appId", Configure.getAppid()));
+		if (mapdata != null && RETURN_SUCCESS.equals(mapdata.get(RETURN_CODE)) && RETURN_SUCCESS.equals(mapdata.get(RESULT_CODE))) {
+			String timestamp = (System.currentTimeMillis() / 1000) + StringUtils.EMPTY;
+			List<NameValuePair> sencondSign = new LinkedList<>();
+			sencondSign.add(new BasicNameValuePair(APPID, ConfigureManager.getWxConfig().getPayConfigure().getPayAppId()));
 			String noncestrS = RandomStringGenerator.getRandomStringByLength(32);
-			sencondSign.add(new BasicNameValuePair("nonceStr", noncestrS));
-			sencondSign.add(new BasicNameValuePair("package", "prepay_id="+(String)mapdata.get("prepay_id")));
-			/*sencondSign.add(new BasicNameValuePair("partnerid", Configure.getMchid()));*/
-			sencondSign.add(new BasicNameValuePair("signType", "MD5"));
-			sencondSign.add(new BasicNameValuePair("timeStamp", timestamp));
+			sencondSign.add(new BasicNameValuePair(NONCESTR, noncestrS));
+			sencondSign.add(new BasicNameValuePair(PACKAGE, String.join(SpecificSymbolConstants.EQUEL,PREPAY_ID,(String)mapdata.get(PREPAY_ID))));
+			sencondSign.add(new BasicNameValuePair(SIGNTYPE, "MD5"));
+			sencondSign.add(new BasicNameValuePair(TIMESTAMP, timestamp));
 			String signS = PayUtil.genPackageSign(sencondSign);
 			resultParam.put("paySign", signS);
-			resultParam.put("timestamp", timestamp);
-			resultParam.put("pack_age", "prepay_id="+(String)mapdata.get("prepay_id"));
-			resultParam.put("nonceStr", noncestrS);
+			resultParam.put(TIMESTAMP, timestamp);
+			resultParam.put("pack_age", String.join(SpecificSymbolConstants.EQUEL,PREPAY_ID,(String)mapdata.get(PREPAY_ID)));
+			resultParam.put(NONCESTR, noncestrS);
 			return resultParam;
 		}
 		return null;
 	}
-	
-	
-	
+
 }

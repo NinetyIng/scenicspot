@@ -137,7 +137,7 @@
                 <a href="/main/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/main/default" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/main/default.do" frameborder="0" data-id="index_v1.html" seamless></iframe>
             </div>
             <div class="footer">
                 <div class="pull-right">&copy; 2017-2020 <a target="_blank">汉唐影视城后台管理系统</a>

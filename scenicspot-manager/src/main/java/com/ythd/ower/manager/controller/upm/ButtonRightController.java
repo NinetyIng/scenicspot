@@ -38,7 +38,7 @@ public class ButtonRightController extends BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ButtonRightController.class);
 
-	String menuUrl = "buttonrights/list";
+	String menuUrl = "buttonrights/list.do";
 
 	@Resource(name="buttonRightService")
 	private ButtonRightService buttonrightService;
@@ -50,7 +50,7 @@ public class ButtonRightController extends BaseController {
 	/**列表
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/list")
+	@RequestMapping(value="/list.do")
 	public ModelAndView list() throws Exception{
 		LOGGER.info("列表Buttonrights，登录者{}",Jurisdiction.getUsername());
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){
@@ -94,7 +94,7 @@ public class ButtonRightController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/upRb")
+	@RequestMapping(value="/upRb.do")
 	@ResponseBody
 	public void updateRolebuttonrightd(HttpServletResponse response)throws Exception{
 		LOGGER.info("分配按钮权限，登录者{}",Jurisdiction.getUsername());

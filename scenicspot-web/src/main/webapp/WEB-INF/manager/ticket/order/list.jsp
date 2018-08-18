@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox">
-					<form action="/sys/ticket/order/list" method="post" name="Form"
+					<form action="/sys/ticket/order/list.do" method="post" name="Form"
 						id="Form">
 						<div class="ibox-title">
 							<h5>操作提示：</h5>   点击票务识别号可查询票务公司的具体票务信息
@@ -127,7 +127,7 @@
 														<p>联系电话:${item.contactMobile}</p>
 														</td>
 														<td>
-														<a href="/sys/scenic/editPage?id=${item.scenicId}">${item.scenicName}</a>
+														<a href="/sys/scenic/editPage.do?id=${item.scenicId}">${item.scenicName}</a>
 														</td>
 														<td>
 														<p style="color:blue;cursor: pointer;" onclick="openTicketMsg('${item.thirdNo}');">
@@ -191,7 +191,7 @@
 														<td class="center">
 														<%-- <c:if test="${QX.edit == 1}"> --%>
 														<a
-															href="/sys/ticket/order/editPage?id=${item.id}"
+															href="/sys/ticket/order/editPage.do?id=${item.id}"
 															class="btn btn-primary btn-sm" title="编辑"> <i
 																class="fa fa-pencil"></i>
 														</a> 

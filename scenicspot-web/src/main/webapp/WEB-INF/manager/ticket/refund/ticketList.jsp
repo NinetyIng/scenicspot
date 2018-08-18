@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox">
-					<form action="/sys/scenic/list" method="post" name="Form"
+					<form action="/sys/scenic/list.do" method="post" name="Form"
 						id="Form">
 						<div class="ibox-content">
 							<div class="search-condition row">
@@ -89,7 +89,7 @@
 														<td class="center">
 														<%-- <c:if test="${QX.edit == 1}"> --%>
 															<a
-																href="/sys/scenic/editPage?id=${item.id}"
+																href="/sys/scenic/editPage.do?id=${item.id}"
 																class="btn btn-primary btn-sm" title="编辑"> <i
 																	class="fa fa-pencil"></i>
 															</a> 

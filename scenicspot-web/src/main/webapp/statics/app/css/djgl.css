@@ -1,0 +1,71 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content > .table-view {
+  border: none;
+}
+.content > .table-view:first-child {
+  margin-top: 0;
+}
+.content > .table-view .gl-item {
+  padding: 15px;
+}
+.content > .table-view .gl-item:not(:last-child) {
+  border-bottom: 1px solid #EFEFEF;
+}
+.content > .table-view .gl-item .title-wrap > div:first-child {
+  display: inline-block;
+  font-family: PingFang-SC-Medium;
+  font-size: 19px;
+  line-height: 18px;
+  padding: 10px;
+  color: #FFF;
+  background: #FFB200;
+}
+.content > .table-view .gl-item .title-wrap .gl-title {
+  display: inline-block;
+  font-family: PingFang-SC-Bold;
+  font-size: 19px;
+  line-height: 18px;
+  color: #333;
+  margin-left: 15px;
+  position: relative;
+  top: -8px;
+}
+.content > .table-view .gl-item .img-wrap {
+  margin-top: 15px;
+  height: 154px;
+  overflow: hidden;
+}
+.content > .table-view .gl-item .img-wrap img {
+  width: 100%;
+}
+.content > .table-view .gl-item p {
+  font-family: PingFang-SC-Medium;
+  font-size: 14px;
+  line-height: 18px;
+  color: #999;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/*# sourceMappingURL=djgl.css.map */

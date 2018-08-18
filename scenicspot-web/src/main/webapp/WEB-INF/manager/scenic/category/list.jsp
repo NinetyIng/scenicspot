@@ -127,7 +127,7 @@
 					   },
 					   success: function(data){
 						   if(data.code==200){
-					      	   window.location.href='/sys/scenic/categorylist';
+					      	   window.location.href='/sys/scenic/categorylist.do';
 						   }else{
 							   bootbox.alert(data.msg);
 						   }

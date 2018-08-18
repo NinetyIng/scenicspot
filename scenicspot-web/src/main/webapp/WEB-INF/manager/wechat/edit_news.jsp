@@ -358,7 +358,7 @@
 			function onAddResult(data){
 				if(data.result==200){
 					alert(data.msg);
-					window.location.href = "/sys/wechat/reply_list";
+					window.location.href = "/sys/wechat/reply_list.do";
 				}else{
 					alert(data.msg);
 				}

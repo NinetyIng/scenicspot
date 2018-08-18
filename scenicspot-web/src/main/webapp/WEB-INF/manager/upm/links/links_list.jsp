@@ -42,7 +42,7 @@
 							<div class="col-md-5">
 								<div class="input-group">
 									<c:if test="${QX.add == 1}">
-										<button class="btn btn-primary" onclick="javascript:window.location.href='/links/linksAddEdit'"
+										<button class="btn btn-primary" onclick="javascript:window.location.href='/links/linksAddEdit.do'"
 											type="button">
 											<i class="fa fa-plus"></i>&nbsp;添加
 										</button>
@@ -84,7 +84,7 @@
 															<c:if test="${linkslist.size()>0}">
 																<c:if test="${QX.edit == 1}">
 																	<a class="btn btn-xs btn-success" title="编辑"
-																		onclick="javascript:window.location.href='/links/linksAddEdit?id=${item.id}'">
+																		onclick="javascript:window.location.href='/links/linksAddEdit.do?id=${item.id}'">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"
 																		title="编辑"></i>
 																	</a>

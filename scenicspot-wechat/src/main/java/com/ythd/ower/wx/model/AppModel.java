@@ -1,16 +1,15 @@
 package com.ythd.ower.wx.model;
 
-import com.ythd.ower.wx.common.WechatConstant;
+import com.ythd.ower.wx.common.WechatUtil;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-import com.easaa.wechat.common.WechatUtil;
 public class AppModel {
 	private static AppModel __model=null;  
 	//private WXAPIModel apiModel=new WXAPIModel();
@@ -25,7 +24,7 @@ public class AppModel {
     }	
 	
 	public WXAPIModel getApiModel(String url){
-		String access_token=WechatUtil.getAccessToken();
+		String access_token= WechatUtil.getAccessToken();
 		String jsapi_ticket=WechatUtil.getJsapiTicket();
 		WXAPIModel api=new WXAPIModel();
 		api.setAccess_token(access_token);
@@ -95,10 +94,4 @@ public class AppModel {
          }    
         return __model;  
     }
-//	public WXAPIModel getApiModel() {
-//		return apiModel;
-//	}
-//	public void setApiModel(WXAPIModel apiModel) {
-//		this.apiModel = apiModel;
-//	} 
 }

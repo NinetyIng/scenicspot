@@ -36,7 +36,7 @@ public class ContentCategoryController extends BaseController {
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = { "list", "" })
+	@RequestMapping(value = { "list.do", "" })
 	public ModelAndView list() throws Exception {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -50,7 +50,7 @@ public class ContentCategoryController extends BaseController {
 	/**
 	 * 编辑页面
 	 */
-	@RequestMapping(value = "edit")
+	@RequestMapping(value = "edit.do")
 	public ModelAndView edit() {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = this.getPageData();
@@ -60,7 +60,7 @@ public class ContentCategoryController extends BaseController {
 		return mv;
 	}
 
-	@RequestMapping(value = "editAction")
+	@RequestMapping(value = "editAction.do")
 	public ModelAndView editAction(@RequestParam(required=false,value = "CATEGORY_ICON") MultipartFile file,HttpServletRequest request) {
 		ModelAndView mv = this.getModelAndView();
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -105,7 +105,7 @@ public class ContentCategoryController extends BaseController {
 	 * 检查栏目下面是否有文章  
 	 * 
 	 */
-	@RequestMapping("del")
+	@RequestMapping("del.do")
 	public void del(HttpServletResponse response){
 		try{
 			PageData pd = this.getPageData();

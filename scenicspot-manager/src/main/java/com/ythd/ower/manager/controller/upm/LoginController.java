@@ -33,7 +33,7 @@ public class LoginController  extends BaseController {
 	
 
 	
-	@RequestMapping("index")
+	@RequestMapping("index.do")
 	public ModelAndView index(){
 		ModelAndView mv = this.getModelAndView();
 		PageData param = this.getPageData();
@@ -46,7 +46,7 @@ public class LoginController  extends BaseController {
 	/**
 	 * 登录页面
 	 */
-	@RequestMapping("login")
+	@RequestMapping("login.do")
 	public ModelAndView login(){
 		ModelAndView mv = this.getModelAndView();
 		mv.setViewName("login");
@@ -54,7 +54,7 @@ public class LoginController  extends BaseController {
 		return mv;
 	}
 	
-	@RequestMapping("doLogin")
+	@RequestMapping("doLogin.do")
 	public void  doLogin(HttpServletResponse response){
 		PageData pd = this.getPageData();
 		try {
@@ -70,7 +70,7 @@ public class LoginController  extends BaseController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value="/default")
+	@RequestMapping(value="/default.do")
 	public ModelAndView defaultPage() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData param = new PageData();
@@ -85,7 +85,7 @@ public class LoginController  extends BaseController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value="/logout")
+	@RequestMapping(value="/logout.do")
 	public ModelAndView logout() throws Exception{
 		String USERNAME = Jurisdiction.getUsername();	//当前登录的用户名
 		logBefore(logger, USERNAME+"退出系统");

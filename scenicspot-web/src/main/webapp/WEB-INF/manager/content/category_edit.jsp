@@ -35,7 +35,7 @@
                         <h5>编辑类目</h5>
                     </div>
                     <div class="ibox-content">
-                        <form action="/sys/content/category/editAction" method="post" class="form-horizontal m-t" id="editForm" enctype="multipart/form-data">
+                        <form action="/sys/content/category/editAction.do" method="post" class="form-horizontal m-t" id="editForm" enctype="multipart/form-data">
                           <%--  <input type="hidden" name=user_id value="${dataModel.user_id}" />
                           CATEGORY_ICON,CATEGORY_NAME,CATEGORY_TAGS,PARENT_ID,ORDER_BY,DISABLED
                            --%>

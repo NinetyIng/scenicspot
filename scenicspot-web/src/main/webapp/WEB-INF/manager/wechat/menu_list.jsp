@@ -23,7 +23,7 @@
 					<div class="ibox-title">
 						<h5>微信菜单列表</h5>
 						<div class="ibox-tools">
-							<a href="/sys/wechat/edit_menu" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
+							<a href="/sys/wechat/edit_menu.do" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;新增</a>
 							<a class="btn btn-primary btn-xs" href="javascript:void(0)" onclick="releaseMenu()">发布到公众号</a>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 										 <li class="dd-item" data-id="1">
 		                                    <div class="dd-handle">
 		                                    	<span class="pull-right">
-													<a style="cursor:pointer;" class="green" href="/sys/wechat/edit_menu?id=${rootMenu.id}" title="编辑">
+													<a style="cursor:pointer;" class="green" href="/sys/wechat/edit_menu.do?id=${rootMenu.id}" title="编辑">
 														<i class="ace-icon fa fa-pencil bigger-130"></i>
 													</a>
 													&nbsp;
@@ -56,7 +56,7 @@
 				                                        <li class="dd-item" data-id="2">
 				                                            <div class="dd-handle">
 				                                                <span class="pull-right">
-					                                                <a style="cursor:pointer;" class="green" href="/sys/wechat/edit_menu?id=${subMenu.id}" title="编辑">
+					                                                <a style="cursor:pointer;" class="green" href="/sys/wechat/edit_menu.do?id=${subMenu.id}" title="编辑">
 																		<i class="ace-icon fa fa-pencil bigger-130"></i>
 																	</a>
 																	&nbsp;

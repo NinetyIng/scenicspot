@@ -113,7 +113,7 @@
                  Ajax.request(url,{"data":data,"success":function(item){
                 	 if(item.result =="200"){
                 		 window.parent.initTree();
-                		 window.location.href="/menu/list?MENU_ID="+item.data.PARENT_ID;
+                		 window.location.href="/menu/list.do?MENU_ID="+item.data.PARENT_ID;
                 	 }
                  }});
         	 });

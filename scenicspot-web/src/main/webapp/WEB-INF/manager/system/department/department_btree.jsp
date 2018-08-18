@@ -41,7 +41,7 @@
         <div class="col-sm-8" style="height:900px;">
             <div class="ibox float-e-margins" style="height:100%">
                 <div class="ibox-content" style="height:100%">
-                   <iframe name="treeFrame" id="treeFrame" frameborder="0" src="<%=basePath%>/department/list?DEPARTMENT_ID=${DEPARTMENT_ID}" style="margin:0 auto;width:100%;height:100%;"></iframe>
+                   <iframe name="treeFrame" id="treeFrame" frameborder="0" src="<%=basePath%>/department/list.do?DEPARTMENT_ID=${DEPARTMENT_ID}" style="margin:0 auto;width:100%;height:100%;"></iframe>
                 </div>
             </div>
         </div>

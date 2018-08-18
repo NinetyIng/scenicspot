@@ -1,0 +1,253 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.navigate-right:after, .push-right:after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../img/icons/arrow_right.png);
+  background-repeat: no-repeat;
+  background-size: 16px auto;
+}
+
+.content {
+  background: #F7F7F7;
+}
+.content .order-info-wrap {
+  margin: 10px 0;
+}
+.content .order-info-wrap .flight-wrap {
+  background: #FFF;
+  margin-bottom: 10px;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen {
+  padding: 15px;
+  position: relative;
+  display: block;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: 15px;
+  top: calc(50% - 8px);
+  background-image: url(../img/icons/arrow_right.png);
+  background-repeat: no-repeat;
+  background-size: 16px auto;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen .flight-item .aircraft-info {
+  line-height: 15px;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen .flight-item .aircraft-info > div {
+  display: inline-block;
+  font-family: PingFang-SC-Bold;
+  font-size: 15px;
+  color: #333;
+  line-height: 21px;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen .flight-item .aircraft-info .icon-trip {
+  font-size: 11px;
+  line-height: 11px;
+  padding: 3px;
+  color: #FC9313;
+  border: 1px solid #FC9313;
+  border-radius: 3px 3px;
+  margin-right: 15px;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen .flight-item .trip-info {
+  font-size: 13px;
+  line-height: 13px;
+  color: #999999;
+  margin-top: 10px;
+  padding-left: 35px;
+}
+.content .order-info-wrap .flight-wrap .flight-chosen .flight-item:not(:last-child) {
+  margin-bottom: 18px;
+}
+.content .order-info-wrap .flight-wrap .flight-price {
+  padding: 15px;
+}
+.content .order-info-wrap .flight-wrap .flight-price .first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content .order-info-wrap .flight-wrap .flight-price .first-row > div:first-child {
+  font-size: 15px;
+  color: #333;
+  line-height: 15px;
+}
+.content .order-info-wrap .flight-wrap .flight-price .first-row > div:last-child a {
+  font-size: 13px;
+  line-height: 13px;
+  color: #FC9313;
+}
+.content .order-info-wrap .flight-wrap .flight-price .first-row > div:last-child a:last-child {
+  margin-left: 17px;
+}
+.content .order-info-wrap .flight-wrap .flight-price .second-row {
+  font-size: 13px;
+  line-height: 13px;
+  color: #999;
+  margin-top: 12px;
+}
+.content .order-info-wrap .traveller-list {
+  background-color: #fff;
+  padding-left: 15px;
+}
+.content .order-info-wrap .traveller-list .traveller-add {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 15px 15px 15px 0;
+  line-height: 14px;
+}
+.content .order-info-wrap .traveller-list .traveller-add > img {
+  width: 18px;
+}
+.content .order-info-wrap .traveller-list .traveller-item {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+}
+.content .order-info-wrap .traveller-list .traveller-item .item-label img {
+  position: relative;
+  bottom: -2px;
+  width: 18px;
+  margin-right: 5px;
+}
+.content .order-info-wrap .traveller-list .traveller-item .item-content {
+  padding: 15px;
+}
+.content .order-info-wrap .traveller-list .traveller-item .item-content div {
+  line-height: 15px;
+}
+.content .order-info-wrap .traveller-list .traveller-item .item-content .traveller-name {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 10px;
+}
+.content .order-info-wrap .traveller-list .traveller-item .item-content .traveller-code {
+  font-size: 13px;
+  color: #666;
+}
+.content .order-info-wrap .traveller-info {
+  margin: 10px 0;
+  padding-left: 15px;
+  background-color: #fff;
+}
+.content .order-info-wrap .traveller-info .info-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 15px 15px 0;
+}
+.content .order-info-wrap .traveller-info .info-item:not(:first-child) {
+  border-top: 1px solid #ddd;
+}
+.content .order-info-wrap .traveller-info .info-item > div {
+  line-height: 15px;
+  color: #333;
+}
+.content .order-info-wrap .traveller-info .info-item > div:first-child {
+  margin-right: 25px;
+  color: #666;
+  flex: 3;
+}
+.content .order-info-wrap .traveller-info .info-item > div:last-child {
+  flex: 7;
+}
+
+#popover {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 100%;
+  background-color: #FFF;
+}
+#popover .content {
+  position: relative;
+  background: #FFF;
+  min-height: 50px;
+  text-align: center;
+}
+
+.bar-tab .toolbar {
+  display: table-row;
+}
+.bar-tab .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.bar-tab .toolbar .total-price {
+  position: relative;
+  text-align: left;
+  padding-left: 15px;
+}
+.bar-tab .toolbar .total-price > div:first-child {
+  color: #FF3800;
+  font-size: 18px;
+  line-height: 14px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.bar-tab .toolbar .total-price > div:first-child > .person-num {
+  color: #999;
+  font-size: 10px;
+  line-height: 11px;
+  display: inline-block;
+}
+.bar-tab .toolbar .total-price > div:last-child {
+  line-height: 11px;
+  padding-left: 5px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  color: #999999;
+  font-size: 12px;
+  line-height: 48px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt > img {
+  display: inline-block;
+  width: 10px;
+  margin-top: -3px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.bar-tab .toolbar .bar-item {
+  font-size: 10px;
+  color: #999999;
+}
+.bar-tab .toolbar .btn-buy {
+  background: #ff7d13;
+  color: #fff;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=jpddxq.css.map */

@@ -1,6 +1,7 @@
 package com.ythd.ower.wx.prototype;
 
-import com.easaa.wechat.model.*;
+
+import com.ythd.ower.wx.model.*;
 
 public class WXPReceivedMessageParser {
 	private static final String HEAD_CDATA = "<![CDATA[";
