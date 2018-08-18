@@ -1,6 +1,9 @@
 package com.ythd.ower.common.dto;
 
+import com.ythd.ower.common.constants.ErrorCodesContants;
+import com.ythd.ower.common.exception.BizServiceException;
 import com.ythd.ower.common.tools.Tools;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 分页类
@@ -19,7 +22,24 @@ public class Page {
 	private String pageStr;		//最终页面显示的底部翻页导航，详细见：getPageStr();
 	private PageData pd = new PageData();
 	
-	
+	public static Page builder(PageData pageData){
+		if(StringUtils.isEmpty(pageData.getAsString("currentPage"))){
+			throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
+		}
+		Page page = new Page();
+		page.setCurrentPage(pageData.getAsInteger("currentPage"));
+		if(StringUtils.isNotEmpty(pageData.getAsString("pageSize"))){
+			try {
+				page.setShowCount(pageData.getAsInt("pageSize") > page.getShowCount() ? page.getShowCount() : pageData.getAsInt("pageSize"));
+			}catch (Exception e){
+				throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
+			}
+		}
+		page.setApp(Boolean.TRUE);
+		page.setPd(pageData);
+		return page;
+	}
+
 	public Page(){
 	}
 	

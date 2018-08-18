@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.content.mapper.AppCommentMapper">
+
+   <resultMap id="CommentFild" type="com.ythd.ower.content.model.ContentCommentModel">
+       <id property="id" column="COMMENT_ID" jdbcType="DECIMAL" ></id>
+       <result property="userPhoto" column="COMMENT_AUTHOR_LOGO" jdbcType="VARCHAR"></result>
+       <result property="author" column="COMMENT_AUTHOR" jdbcType="VARCHAR"></result>
+       <result property="content" column="COMMENT_CONTEXT" jdbcType="VARCHAR"></result>
+       <result property="putime" column="COMMENT_CONTEXT_TIME" jdbcType="VARCHAR"></result>
+       <result property="userId" column="USER_ID" jdbcType="VARCHAR"></result>
+   </resultMap>
+    <!-- 评论列表按评论时间降序 -->
+    <select id="findCommentListByPage" parameterType="page" resultMap="CommentFild">
+        SELECT COMMENT_ID,CONTENT_ID,COMMENT_AUTHOR_LOGO,COMMENT_AUTHOR,USER_ID,COMMENT_CONTEXT,COMMENT_CONTEXT_TIME
+        FROM T_CONTENT_COMMENT
+        WHERE  IFNULL(COMMENT_STATUS,0) = 1
+        ORDER BY COMMENT_CONTEXT_TIME DESC
+    </select>
+    <insert id="addComment" parameterType="com.ythd.ower.content.model.ContentCommentModel">
+        INSERT INTO T_CONTENT_COMMENT(CONTENT_ID,COMMENT_AUTHOR_LOGO,COMMENT_AUTHOR,USER_ID,COMMENT_CONTEXT,COMMENT_CONTEXT_TIME,COMMENT_STATUS)
+        VALUES (#{contentId},#{userPhoto},#{author},#{userId},#{content},#{putime},#{status})
+    </insert>
+
+    <insert id="addPrase" parameterType="pd">
+        INSERT INTO T_CONTENT_THUMBSUP(CONTENT_ID,USER_ID)
+        VALUES (#{contentId},#{userId})
+    </insert>
+
+</mapper>

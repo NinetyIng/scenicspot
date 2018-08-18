@@ -1,5 +1,6 @@
 package com.ythd.ower.common.ibox;
 
+import com.ythd.ower.common.dto.ErrorCode;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.Field;
@@ -56,11 +57,17 @@ public class DtoUtils {
         return getFailResponse(errorCode, null);
     }
 
+    public static GenericResponseDto getFailResponse(ErrorCode errorCode) {
+        GenericResponseDto resp = getDefaultResponse();
+        resp.setErrorCode(errorCode.getCode());
+        resp.setErrorDesc(errorCode.getDesc());
+        return resp;
+    }
+
+
     public static GenericResponseDto getFailResponse(String errorCode, boolean isNeedValid) {
         GenericResponseDto resp = getDefaultResponse();
         resp.setErrorCode(errorCode);
-        resp.setErrorDesc(MsgConfig.get(errorCode));
-
         if (isNeedValid) {
             resp.put("needValidCode", "1");
         }
