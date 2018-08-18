@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>旅游门票</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/app/css/lymp.css">
+</head>
+
+<body>
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <!--<header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left"></a>
+        <h1 class="title">旅游门票</h1>
+    </header>-->
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        <ul class="table-view">
+            <li class="table-view-cell media">
+                <a class="navigate-right">
+                    <div class="img-wrap">
+                        <img class="media-object pull-left" src="/statics/app/img/lymp/1.jpg"/>
+                        <span>TOP1</span>
+                    </div>
+                    <div class="media-body">
+                        <div class="title-name">
+                            荔波小七孔
+                            <span class="grade">5A级景区</span>
+                        </div>
+                        <p class="mark">
+                            <span>AAAAA</span>
+                            <span>可订今日票</span>
+                        </p>
+                        <p class="moods">1356人购买</p>
+                        <p class="distance">距离300m</p>
+                    </div>
+                    <div class="price">¥ 40起</div>
+                </a>
+            </li>
+            <li class="table-view-cell media">
+                <a class="navigate-right">
+                    <div class="img-wrap">
+                        <img class="media-object pull-left" src="/statics/app/img/lymp/2.jpg"/>
+                        <span>TOP2</span>
+                    </div>
+                    <div class="media-body">
+                        <div class="title-name">
+                            中国天眼
+                        </div>
+                        <p class="mark">
+                            <span>优惠</span>
+                            <span>可订今日票</span>
+                        </p>
+                        <p class="moods">256人购买</p>
+                        <p class="distance">距离600m</p>
+                    </div>
+                    <div class="price">¥ 110起</div>
+                </a>
+            </li>
+            <li class="table-view-cell media">
+                <a class="navigate-right">
+                    <div class="img-wrap">
+                        <img class="media-object pull-left" src="/statics/app/img/lymp/3.jpg"/>
+                        <span>TOP3</span>
+                    </div>
+                    <div class="media-body">
+                        <div class="title-name">
+                            荔波水春河漂流
+                        </div>
+                        <p class="mark">
+                            <span>优惠</span>
+                            <span>可订今日票</span>
+                        </p>
+                        <p class="moods">1356人购买</p>
+                        <p class="distance">距离1km</p>
+                    </div>
+                    <div class="price">¥ 115起</div>
+                </a>
+            </li>
+            <li class="table-view-cell media">
+                <a class="navigate-right">
+                    <div class="img-wrap">
+                        <img class="media-object pull-left" src="/statics/app/img/lymp/4.jpg"/>
+                    </div>
+                    <div class="media-body">
+                        <div class="title-name">
+                            荔波小七孔
+                            <span class="grade">4A级景区</span>
+                        </div>
+                        <p class="mark">
+                            <span>AAAAA</span>
+                            <span>可订今日票</span>
+                        </p>
+                        <p class="moods">1356人购买</p>
+                        <p class="distance">距离1.3km</p>
+                    </div>
+                    <div class="price">¥ 52起</div>
+                </a>
+            </li>
+            <li class="table-view-cell media">
+                <a class="navigate-right">
+                    <div class="img-wrap">
+                        <img class="media-object pull-left" src="/statics/app/img/lymp/5.jpg"/>
+                    </div>
+                    <div class="media-body">
+                        <div class="title-name">
+                            茂兰自然保护区
+                            <span class="grade">4A级景区</span>
+                        </div>
+                        <p class="mark">
+                            <span>AAAA</span>
+                            <span>可订今日票</span>
+                        </p>
+                        <p class="moods">1356人购买</p>
+                        <p class="distance">距离1.5km</p>
+                    </div>
+                    <div class="price">¥ 42起</div>
+                </a>
+            </li>
+        </ul>
+        <div class="load-more">
+            <button class="btn btn-block" onclick="loadMore()">加载更多</button>
+        </div>
+    </div>
+    <!--设定预加载效果-->
+    <div class="spinner">
+        <div class="loading">
+            <img src="/statics/app/img/icons/loading.gif" alt=""/>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function loadMore() {
+            var loadingPanel = document.querySelector('.spinner');
+            loadingPanel.style.display = 'flex';
+            setTimeout(function () {
+                loadingPanel.style.display = 'none';
+            }, 3000);
+        };
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

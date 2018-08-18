@@ -20,25 +20,30 @@
     <!-- servlet-mapping 映射路径“/”要做的操作 -->
     <!-- 静态资源默认servlet处理 1.例如 js css 2.允许 / 做整体映射 -->
     <mvc:default-servlet-handler/>
-    <context:component-scan base-package="com.ythd.ower.api"/>
+
+    <context:component-scan base-package="com.ythd.ower.api" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/client/"/>
         <property name="suffix" value=".html"/>
-        <property name="templateMode" value="HTML5"/>
+        <property name="templateMode" value="HTML"/>
         <property name="cacheable" value="false"/>
+        <property name="characterEncoding" value="UTF-8"/>
     </bean>
-    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+    <bean id="thymeleafTemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-        <property name="templateEngine" ref="templateEngine"/>
+        <property name="templateEngine" ref="thymeleafTemplateEngine"/>
+        <property name="characterEncoding" value="UTF-8" />
     </bean>
 
-    <bean id="accessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
+    <bean id="appAccessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
     <aop:config>
         <aop:pointcut id="web" expression="execution (* com.ythd.ower.api.*.*(..))"/>
-        <aop:aspect ref="accessLogRecordAspect">
+        <aop:aspect ref="appAccessLogRecordAspect">
             <aop:around method="handleApi" pointcut-ref="web" />
         </aop:aspect>
     </aop:config>

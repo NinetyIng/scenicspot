@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>旅游动态</title>
+    <meta name="author" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="email=no" name="format-detection" />
+    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/app/css/lydt.css">
+</head>
+
+<body>
+    <div class="content">
+        <!--旅游动态顶部图片-->
+        <div class="top-case">
+            <img class="news-img" src="/statics/app/img/lydt/1.jpg" />
+            <span>都匀市检察院职务犯罪预防走进高速运管中心 为预防志愿者发放聘书</span>
+        </div>
+        <!--旅游动态-->
+        <div class="travel-follow">
+            <div class="follow-item">
+                <div class="content-left">
+                    <div class="news-title">2017全国独竹漂比赛将在贵州都匀开赛</div>
+                    <div class="follow-operations">
+                        <span class="follow-num">420</span>
+                        <span class="reply-num">342</span>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <img src="/statics/app/img/lydt/2.jpg" alt=""/>
+                </div>
+            </div>
+            <div class="follow-item">
+                <div class="content-left">
+                    <div class="news-title">“大美黔菜”展示品鉴活动在都匀举行</div>
+                    <div class="follow-operations">
+                        <span class="follow-num">420</span>
+                        <span class="reply-num">342</span>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <img src="/statics/app/img/lydt/3.jpg" alt=""/>
+                </div>
+            </div>
+        </div>
+        <!--推广-->
+        <div class="travel-promotion">
+            <div class="promotion-item">
+                <div class="promotion-title">[门票] 荔波小七孔（门票+观光车）+卧龙谷漂游...</div>
+                <div class="promotion-img">
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/4.jpg" alt=""/>
+                        <span>跟团游</span>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/5.jpg" alt=""/>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/6.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="promotion-type">旅游推广</div>
+            </div>
+        </div>
+        <div class="travel-promotion">
+            <div class="promotion-item">
+                <div class="promotion-title">[门票] 茂兰自然保护区</div>
+                <div class="promotion-img">
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/7.jpg" alt=""/>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/8.jpg" alt=""/>
+                    </div>
+                    <div class="img-wrap">
+                        <img src="/statics/app/img/lydt/9.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="promotion-type">旅游推广</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var showDetailInfo = function () {
+            var toggleBtn = document.querySelector('.btn-wrap img');
+            var proContent = document.querySelector('.pro-content');
+            if(toggleBtn){
+                if(proContent.classList.contains('hidden')){
+                    proContent.classList.remove('hidden');
+                    toggleBtn.setAttribute('src', '/statics/app/img/icons/arrow_up.png');
+                }else {
+                    proContent.classList.add('hidden');
+                    toggleBtn.setAttribute('src', '/statics/app/img/icons/arrow_down.png');
+                }
+            }
+        }
+    </script>
+</body>
+<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+</html>

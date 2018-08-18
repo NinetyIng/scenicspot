@@ -1,0 +1,193 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .banner-wrap {
+  overflow: hidden;
+  height: 190px;
+}
+.content .banner-wrap .banner {
+  width: 100%;
+}
+.content .any-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 14px;
+  color: #333;
+  margin-bottom: 15px;
+}
+.content .any-more .more div {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 13px;
+  color: #666;
+}
+.content .any-more .more img {
+  position: relative;
+  width: 17px;
+  padding-left: 5px;
+  top: 1px;
+}
+.content .popular-info {
+  background: #FFF;
+  padding: 15px;
+}
+.content .popular-info .slide-box {
+  height: 180px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+.content .popular-info .slide-box .wrap {
+  height: 200px;
+  display: -webkit-box;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.content .popular-info .slide-box .wrap .slide-item {
+  width: 120px;
+  text-align: center;
+  margin-right: 15px;
+  overflow: hidden;
+}
+.content .popular-info .slide-box .wrap .slide-item img {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ccc;
+  vertical-align: bottom;
+}
+.content .popular-info .slide-box .wrap .slide-item p {
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content .popular-info .slide-box .wrap .slide-item .price {
+  color: #FF3C00;
+  font-size: 17px;
+}
+.content .favourite-info {
+  background: #FFF;
+  margin-top: 10px;
+  padding: 15px;
+}
+.content .favourite-info .favourite-wrap {
+  padding: 10px 0;
+}
+.content .favourite-info .favourite-wrap .row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.content .favourite-info .favourite-wrap .row .favourite-item {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+}
+.content .favourite-info .favourite-wrap .row .favourite-item:first-child {
+  margin-right: 20px;
+}
+.content .favourite-info .favourite-wrap .row .favourite-item img {
+  width: 100%;
+  border: 1px solid #ccc;
+  vertical-align: bottom;
+}
+.content .favourite-info .favourite-wrap .row .favourite-item p {
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content .favourite-info .favourite-wrap .row .favourite-item .price {
+  color: #FF3C00;
+  font-size: 17px;
+}
+
+.bar-tab .toolbar {
+  display: table-row;
+}
+.bar-tab .toolbar span {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+.bar-tab .toolbar .total-price {
+  position: relative;
+  text-align: left;
+  padding-left: 15px;
+}
+.bar-tab .toolbar .total-price > div:first-child {
+  color: #FF3800;
+  font-size: 18px;
+  line-height: 14px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.bar-tab .toolbar .total-price > div:first-child > .person-num {
+  color: #999;
+  font-size: 10px;
+  line-height: 11px;
+  display: inline-block;
+}
+.bar-tab .toolbar .total-price > div:last-child {
+  line-height: 11px;
+  padding-left: 5px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  color: #999999;
+  font-size: 12px;
+  line-height: 48px;
+}
+.bar-tab .toolbar .total-price > span.detail-txt > img {
+  display: inline-block;
+  width: 10px;
+  margin-top: -3px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.bar-tab .toolbar .bar-item {
+  font-size: 10px;
+  color: #999999;
+}
+.bar-tab .toolbar .btn-buy {
+  background: #ff7d13;
+  color: #fff;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=spsy.css.map */

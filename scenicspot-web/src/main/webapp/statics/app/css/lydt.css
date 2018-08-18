@@ -1,0 +1,123 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+.content img {
+  width: 100%;
+  display: block;
+}
+.content .top-case {
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 55.5%;
+  overflow: hidden;
+}
+.content .top-case > span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #fff;
+  padding: 13px 60px 13px 16px;
+  font-size: 18px;
+  z-index: 9;
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), transparent);
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.71), transparent);
+  background: -moz-linear-gradient(right, rgba(0, 0, 0, 0.71), transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.71), transparent);
+}
+.content .travel-follow .follow-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 15px 10px 15px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .travel-follow .follow-item .content-left {
+  padding-right: 10px;
+}
+.content .travel-follow .follow-item .content-left .news-title {
+  color: #454553;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.content .travel-follow .follow-item .content-left .follow-operations {
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  color: #666;
+}
+.content .travel-follow .follow-item .content-left .follow-operations .follow-num {
+  padding-left: 20px;
+  background: url("../img/icons/follow.png") no-repeat;
+  background-size: 14px auto;
+  background-position: 0 center;
+}
+.content .travel-follow .follow-item .content-left .follow-operations .reply-num {
+  margin-left: 20px;
+  padding-left: 20px;
+  background: url("../img/icons/reply.png") no-repeat;
+  background-size: 14px auto;
+  background-position: 0 center;
+}
+.content .travel-follow .follow-item .content-right {
+  width: 120px;
+  height: 70px;
+  overflow: hidden;
+}
+.content .travel-follow .follow-item .content-right > img {
+  height: 100%;
+  width: auto;
+}
+.content .travel-promotion .promotion-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 15px 15px 10px 15px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .travel-promotion .promotion-item .promotion-title {
+  color: #454553;
+  font-size: 18px;
+  margin-bottom: 20px;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content .travel-promotion .promotion-item .promotion-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.content .travel-promotion .promotion-item .promotion-img .img-wrap {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+  height: 74px;
+}
+.content .travel-promotion .promotion-item .promotion-img .img-wrap:not(:last-child) {
+  margin-right: 10px;
+}
+.content .travel-promotion .promotion-item .promotion-img .img-wrap > img {
+  height: 100%;
+  width: auto;
+}
+.content .travel-promotion .promotion-item .promotion-img .img-wrap > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FC9313;
+  padding: 0px 5px;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+}
+.content .travel-promotion .promotion-item .promotion-type {
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  color: #666666;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=lydt.css.map */

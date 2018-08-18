@@ -8,7 +8,7 @@ public class Const {
 	public static final String SESSION_allmenuList = "allmenuList"; // 全部菜单
 	public static final String SESSION_QX = "QX";
 	public static final String SESSION_USERNAME = "USERNAME"; // 用户名
-	public static final String LOGIN = "/mian/login"; // 登录地址
+	public static final String LOGIN = "/mian/login.do"; // 登录地址
 	public static final String SESSION_USERROL = "USERROL"; // 用户对象
 	public static final String SESSION_ROLE_RIGHTS = "sessionRoleRights";
 	public static final String SESSION_menuList = "menuList"; // 当前菜单

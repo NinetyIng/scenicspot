@@ -19,7 +19,7 @@ public class ConfigureLoadListener implements ApplicationListener<ContextRefresh
     private SystemConfigMapper systemConfigMapper;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        if(contextRefreshedEvent.getApplicationContext().getParent() == null)//root application context 没有parent，他就是老大.
+        if(contextRefreshedEvent.getApplicationContext().getParent() == null)
         {
             //需要执行的逻辑代码，当spring容器初始化完成后就会执行该方法。
             LOGGER.info("开始加载系统配置文件");

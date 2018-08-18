@@ -1,0 +1,191 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.navigate-right:after, .push-right:after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../img/icons/arrow_right.png);
+  background-repeat: no-repeat;
+  background-size: 16px auto;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+  /*.input-row {
+    background: #ffffff;
+    height: 44px;
+    label, input{
+      height: 44px;
+      line-height: 44px;
+    }
+    input {
+      text-align: right;
+    }
+  }*/
+}
+.content .prod-info {
+  background-color: #fff;
+  margin-top: 10px;
+}
+.content .prod-info .title-wrap {
+  padding: 15px;
+}
+.content .prod-info .title-wrap .type-name {
+  font-size: 16px;
+  color: #333;
+  line-height: 18px;
+  padding-left: 10px;
+  border-left: 2px solid #FC9313;
+}
+.content .prod-info .property-wrap {
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 21px;
+  border-top: 1px solid #E0E0E0;
+}
+.content .prod-info .property-wrap .prod-name {
+  font-size: 15px;
+  color: #333;
+  line-height: 15px;
+  padding-bottom: 15px;
+}
+.content .prod-info .property-wrap .property-item {
+  font-size: 15px;
+  line-height: 15px;
+  margin-bottom: 13px;
+}
+.content .prod-info .property-wrap .property-item > span:first-child {
+  color: #666;
+}
+.content .prod-info .property-wrap .property-item > span:last-child {
+  color: #333;
+}
+.content .prod-info .property-wrap .property-item:last-child {
+  margin-bottom: 0;
+}
+.content .traveller-info {
+  margin-top: 10px;
+  background-color: #fff;
+  padding-left: 15px;
+}
+.content .traveller-info .traveller-add {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 15px 15px 15px 0;
+  line-height: 14px;
+}
+.content .traveller-info .traveller-item {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+}
+.content .traveller-info .traveller-item .item-label img {
+  position: relative;
+  bottom: -2px;
+  width: 18px;
+  margin-right: 5px;
+}
+.content .traveller-info .traveller-item .item-content {
+  padding: 15px;
+}
+.content .traveller-info .traveller-item .item-content div {
+  line-height: 15px;
+}
+.content .traveller-info .traveller-item .item-content .traveller-name {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 10px;
+}
+.content .traveller-info .traveller-item .item-content .traveller-code {
+  font-size: 13px;
+  color: #666;
+}
+.content .btn-wrap {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.content .btn-orange {
+  background-color: #ff7d13;
+  color: #FFF;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 15px 20px;
+  border: none;
+  margin: 0 auto;
+}
+.content .table-view {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.content .table-view .ticket-num {
+  position: relative;
+}
+.content .table-view .ticket-num:hover {
+  background: #FFF;
+}
+.content .table-view .ticket-num .num-adjust {
+  position: absolute;
+  border: 1px solid #666;
+  top: calc(50% - 15px);
+  right: 20px;
+  height: 30px;
+  line-height: 30px;
+  color: #333;
+  font-size: 13px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.content .table-view .ticket-num .num-adjust .adjust-view {
+  width: 50px;
+}
+.content .table-view .ticket-num .num-adjust > div {
+  text-align: center;
+  width: 35px;
+  height: 29px;
+  display: inline-block;
+  border-right: 1px solid #666;
+}
+.content .table-view .ticket-num .num-adjust > div:last-child {
+  border-right: none;
+}
+.content .table-view .ticket-num .num-adjust > div > img {
+  width: 12px;
+}
+.content .table-view .ticket-num .amount {
+  position: absolute;
+  top: calc(50% - 15px);
+  right: 20px;
+  height: 30px;
+  line-height: 30px;
+  color: #333;
+  font-size: 13px;
+  background-color: #fff;
+  border: none;
+}
+
+/*# sourceMappingURL=tkxq.css.map */

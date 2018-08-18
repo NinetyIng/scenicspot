@@ -1,0 +1,131 @@
+body, input, textarea, button, select {
+  font-family: PingFang-SC-Medium, "Helvetica Neue", Helvetica, sans-serif, system-ui, sans-serif;
+}
+
+input, button, select, textarea {
+  outline: none;
+}
+
+.bar-nav {
+  background-color: #000;
+}
+.bar-nav .icon-left-nav {
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.bar-nav .title {
+  font-family: PingFang-SC-Medium;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.content {
+  background: #EFEFEF;
+}
+.content .banner-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #9DDBF0;
+  height: 184px;
+}
+.content .banner-wrap .banner {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+}
+.content .flight-info {
+  position: absolute;
+  background: #FFF;
+  top: 135px;
+  left: 5px;
+  right: 5px;
+  border-radius: 5px 5px;
+}
+.content .flight-info .segmented-control {
+  background: #EFEFEF;
+  border: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.content .flight-info .segmented-control .control-item {
+  font-size: 17px;
+  line-height: 17px;
+  padding: 17px 30px;
+}
+.content .flight-info .active {
+  color: #FC9313;
+  background: #EFEFEF;
+  border-bottom: 3px solid #FC9313;
+}
+.content .flight-info .flight-wrap {
+  background-color: #fff;
+}
+.content .flight-info .flight-wrap .flight-round {
+  padding: 20px 0 10px 0;
+  margin: 0 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .flight-info .flight-wrap .flight-round .flight-depart, .content .flight-info .flight-wrap .flight-round .flight-dest {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+  font-family: PingFang-SC-Medium;
+}
+.content .flight-info .flight-wrap .flight-round .flight-depart .flight-time, .content .flight-info .flight-wrap .flight-round .flight-dest .flight-time {
+  font-size: 15px;
+  line-height: 15px;
+  color: #999;
+}
+.content .flight-info .flight-wrap .flight-round .flight-depart .flight-airport, .content .flight-info .flight-wrap .flight-round .flight-dest .flight-airport {
+  font-size: 20px;
+  line-height: 20px;
+  margin-top: 20px;
+  color: #333;
+}
+.content .flight-info .flight-wrap .flight-round .flight-depart {
+  text-align: left;
+}
+.content .flight-info .flight-wrap .flight-round .flight-dest {
+  align-items: flex-end;
+}
+.content .flight-info .flight-wrap .flight-round .icon-arrow {
+  width: 18px;
+  margin: auto 0;
+}
+.content .flight-info .flight-wrap .flight-date {
+  margin: 0 20px;
+  padding: 20px 0 12px 0;
+  border-bottom: 1px solid #E0E0E0;
+}
+.content .flight-info .flight-wrap .flight-date .flight-label {
+  font-size: 15px;
+  line-height: 15px;
+  color: #999;
+}
+.content .flight-info .flight-wrap .flight-date .flight-input {
+  font-size: 20px;
+  line-height: 20px;
+  margin-top: 20px;
+  color: #333;
+}
+.content .flight-info .flight-wrap .flight-date .flight-input span {
+  font-size: 15px;
+  line-height: 15px;
+  color: #999;
+  margin-left: 10px;
+}
+.content .flight-info .flight-wrap .btn-wrap {
+  padding: 25px 20px;
+}
+.content .flight-info .flight-wrap .btn-wrap .btn-orange {
+  background: #FC9313;
+  color: #FFF;
+  border: none;
+}
+
+/*# sourceMappingURL=ydjp.css.map */
