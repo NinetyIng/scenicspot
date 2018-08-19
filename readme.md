@@ -1,4 +1,5 @@
 - api模块 所有公众号的接口
+- mallb2c b2c商城
 - manager模块 管理后台接口
 - server模块 管理后台逻辑层
 - platform模块 对接第三方平台
