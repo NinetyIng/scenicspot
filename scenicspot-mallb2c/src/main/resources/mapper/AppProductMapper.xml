@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.b2c.mapper.AppProductMapper">
+
+   <resultMap id="ProductReturn" type="com.ythd.ower.b2c.model.ProductModel">
+       <id property="id" column="GOODS_ID" jdbcType="INTEGER" ></id>
+       <result property="goodsSn" column="GOODS_SN" jdbcType="VARCHAR"></result>
+       <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR"></result>
+       <result property="goodsTags" column="GOODS_TAGS" jdbcType="VARCHAR"></result>
+       <result property="goodsSpec" column="GOODS_SPEC" jdbcType="VARCHAR"></result>
+       <result property="goodsDesc" column="GOODS_DESC" jdbcType="VARCHAR"></result>
+       <result property="asAlumbDesc" column="IS_ALUMB_DESC" jdbcType="VARCHAR"></result>
+       <result property="goodsSummary" column="GOODS_SUMMARY" jdbcType="VARCHAR"></result>
+       <result property="goodsWeight" column="GOODS_WEIGHT" jdbcType="VARCHAR"></result>
+       <result property="marketPrice" column="MARKET_PRICE" jdbcType="VARCHAR"></result>
+       <result property="shopPrice" column="SHOP_PRICE" jdbcType="VARCHAR"></result>
+       <result property="goodsStock" column="GOODS_STOCK" jdbcType="VARCHAR"></result>
+       <result property="clickCount" column="CLICK_COUNT" jdbcType="VARCHAR"></result>
+       <result property="listImg" column="LIST_IMG" jdbcType="VARCHAR"></result>
+       <result property="virtualSales" column="VIRTUAL_SALES" jdbcType="INTEGER"></result>
+       <result property="recommend" column="RECOMMEND" jdbcType="INTEGER"></result>
+       <result property="popular" column="POPULAR" jdbcType="INTEGER"></result>
+       <result property="goodsFreight" column="GOODS_FREIGHT" jdbcType="DECIMAL"></result>
+       <result property="commentNum" column="USER_ID" jdbcType="INTEGER"></result>
+       <result property="putime" column="PUTIME" jdbcType="VARCHAR"></result>
+       <collection property="album" javaType="java.util.List" ofType="com.ythd.ower.b2c.model.ProductAlbumModel">
+           <id property="id" column="ALBUM_ID" jdbcType="INTEGER"></id>
+           <result property="goodsId" column="ALBUM_GOODS_ID" jdbcType="VARCHAR"></result>
+           <result property="originalImg" column="ORIGINAL_IMG" jdbcType="VARCHAR"></result>
+           <result property="thumbImg" column="THUMB_IMG" jdbcType="VARCHAR"></result>
+       </collection>
+       <collection property="attrs" javaType="java.util.List" ofType="com.ythd.ower.b2c.model.ProductAttrModel">
+           <id property="id" column="GOODS_ATTR_ID" jdbcType="INTEGER"></id>
+           <result property="attrName" column="ATTR_NAME" jdbcType="VARCHAR"></result>
+           <result property="goodsId" column="ATTR_GOODS_ID" jdbcType="INTEGER"></result>
+           <result property="attrValues" column="ATTR_VALUE" jdbcType="VARCHAR"></result>
+           <result property="attrSort" column="ATTR_SORT" jdbcType="INTEGER"></result>
+           <result property="isSale" column="IS_SALE" jdbcType="VARCHAR"></result>
+       </collection>
+   </resultMap>
+    <sql id="ProductFiled">
+        t1.GOODS_ID,t1.GOODS_SN,t1.GOODS_NAME,t1.GOODS_TAGS,t1.GOODS_SPEC,t1.GOODS_DESC,t1.IS_ALUMB_DESC,
+        t1.GOODS_SUMMARY,t1.GOODS_WEIGHT,t1.MARKET_PRICE,t1.SHOP_PRICE
+        ,t1.GOODS_STOCK,t1.CLICK_COUNT,t1.LIST_IMG,t1.VIRTUAL_SALES,t1.RECOMMEND,t1.POPULAR,t1.GOODS_FREIGHT,t1.USER_ID,t1.PUTIME
+    </sql>
+
+    <!--分页查询商品列表(IS_DELETE = 0 IS_ON_SALE = 1 list_img 不为空的) 默认排序：推荐值 发布时间 -->
+    <select id="findProductByPage" parameterType="page" resultMap="ProductReturn">
+        SELECT <include refid="ProductFiled" />
+        FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0 AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL
+        <choose>
+            <when test="pd.putimeOrder == 1">
+                ORDER BY PUTIME DESC
+            </when>
+            <when test="pd.recommendOrder == 1">
+                ORDER BY RECOMMEND DESC
+            </when>
+            <otherwise>
+                ORDER  BY RECOMMEND DESC ,PUTIME DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--不分页查询商品列表(IS_DELETE = 0 IS_ON_SALE = 1 list_img 不为空的) 默认排序：推荐值 发布时间 -->
+    <select id="findProduct" parameterType="pd" resultMap="ProductReturn">
+        SELECT <include refid="ProductFiled" />
+        FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0 AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL
+        <choose>
+            <when test="pd.putimeOrder == 1">
+                ORDER BY PUTIME DESC
+            </when>
+            <when test="pd.recommendOrder == 1">
+                ORDER BY RECOMMEND DESC
+            </when>
+            <otherwise>
+                ORDER  BY RECOMMEND DESC ,PUTIME DESC
+            </otherwise>
+        </choose>
+        <if test="limit != null and limit != ''">
+            limit #{pd.limit}
+        </if>
+    </select>
+
+    <!-- 查询商品详情 -->
+    <select id="findProductDetail" parameterType="pd" resultMap="ProductReturn">
+        SELECT <include refid="ProductFiled" />,t2.ORIGINAL_IMG,t2.THUMB_IMG,t2.GOODS_ID AS ALBUM_GOODS_ID,t2.ALBUM_ID,
+        t3.ATTR_NAME,t3.ATTR_VALUE,t3.ATTR_SORT,t3.IS_SALE,t3.GOODS_ATTR_ID,t3.GOODS_ID as ATTR_GOODS_ID
+        FROM (SELECT <include refid="ProductFiled" />  FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0
+        AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL) t1 LEFT JOIN T_GOODS_ALBUM t2
+        ON  t1.GOODS_ID = t2.GOODS_ID
+        LEFT JOIN  T_GOODS_ATTR t3 ON  t1.GOODS_ID = t3.GOODS_ID
+    </select>
+</mapper>

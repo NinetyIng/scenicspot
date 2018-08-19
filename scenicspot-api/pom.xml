@@ -24,6 +24,17 @@
         </dependency>
         <dependency>
             <groupId>com.ythd.ower</groupId>
+            <artifactId>scenicspot-mallb2c</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scenicspot-data</artifactId>
+                    <groupId>com.ythd.ower</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.ythd.ower</groupId>
             <artifactId>scenicspot-wechat</artifactId>
             <version>${project.version}</version>
             <exclusions>

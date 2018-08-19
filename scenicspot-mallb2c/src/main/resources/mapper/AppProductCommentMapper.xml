@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.b2c.mapper.AppProductCommentMapper">
+
+   <resultMap id="CommentFild" type="com.ythd.ower.b2c.model.ProductCommentModel">
+       <id property="id" column="COMMENT_ID" jdbcType="DECIMAL" ></id>
+       <result property="authorPhoto" column="author_photo" jdbcType="VARCHAR"></result>
+       <result property="author" column="AUTHOR" jdbcType="VARCHAR"></result>
+       <result property="content" column="CONTENT" jdbcType="VARCHAR"></result>
+       <result property="putime" column="CREATE_TIME" jdbcType="VARCHAR"></result>
+       <result property="star" column="STAR" jdbcType="VARCHAR"></result>
+       <result property="commentImages" column="COMMENT_IMG" jdbcType="VARCHAR"></result>
+       <result property="user_id" column="USER_ID" jdbcType="VARCHAR"></result>
+       <result property="order_id" column="ORDER_ID" jdbcType="VARCHAR"></result>
+       <result property="goodsId" column="GOODS_ID" jdbcType="VARCHAR"></result>
+   </resultMap>
+    <!-- 评论列表按评论时间降序 -->
+    <select id="findCommentListByPage" parameterType="page" resultMap="CommentFild">
+        SELECT COMMENT_ID,AUTHOR_PHOTO,AUTHOR,CONTENT,CREATE_TIME,STAR,COMMENT_IMG,USER_ID,ORDER_ID,GOODS_ID
+        FROM   T_GOODS_COMMENT
+        WHERE GOODS_ID = #{pd.goodsId}
+        ORDER BY CREATE_TIME DESC
+    </select>
+    <insert id="addComment" parameterType="com.ythd.ower.b2c.model.ProductCommentModel">
+        INSERT INTO T_GOODS_COMMENT(AUTHOR_PHOTO,AUTHOR,CONTENT,CREATE_TIME,STAR,COMMENT_IMG,USER_ID,ORDER_ID,GOODS_ID)
+        VALUES (#{authorPhoto},#{author},#{content},#{putime},#{star},#{commentImages},#{userId},#{orderId},#{goodsId})
+    </insert>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.b2c.mapper.AppProductStockMapper">
+
+   <resultMap id="StockReturn" type="com.ythd.ower.b2c.model.ProductStockModel">
+       <id property="id" column="SKU_ID" jdbcType="INTEGER" ></id>
+       <result property="goodsId" column="GOODS_ID" jdbcType="VARCHAR"></result>
+       <result property="marketPrice" column="MARKET_PRICE" jdbcType="VARCHAR"></result>
+       <result property="price" column="PRICE" jdbcType="VARCHAR"></result>
+       <result property="stock" column="STOCK" jdbcType="VARCHAR"></result>
+       <result property="saleAttr" column="ATTR_JSON" jdbcType="VARCHAR"></result>
+       <result property="barCode" column="BAR_CODE" jdbcType="VARCHAR"></result>
+       <result property="stockAlarm" column="STOCK_ALARM" jdbcType="VARCHAR"></result>
+   </resultMap>
+
+    <!--根据商品id查找库存 返回库存列表 -->
+    <select id="findStockListByGoodsId" parameterType="java.lang.Integer" resultMap="StockReturn">
+        SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
+        FROM T_GOODS_SKU  WHERE GOODS_ID = #{productId}
+    </select>
+
+</mapper>

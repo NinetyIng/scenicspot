@@ -1,4 +1,4 @@
-package com.ythd.ower.api.content;
+package com.ythd.ower.api.controller.content;
 
 
 import com.ythd.ower.common.constants.ErrorCodesContants;

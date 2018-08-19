@@ -1,5 +1,6 @@
 package com.ythd.ower.common.dto;
 
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.constants.ErrorCodesContants;
 import com.ythd.ower.common.exception.BizServiceException;
 import com.ythd.ower.common.tools.Tools;
@@ -27,13 +28,11 @@ public class Page {
 			throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
 		}
 		Page page = new Page();
-		page.setCurrentPage(pageData.getAsInteger("currentPage"));
-		if(StringUtils.isNotEmpty(pageData.getAsString("pageSize"))){
-			try {
-				page.setShowCount(pageData.getAsInt("pageSize") > page.getShowCount() ? page.getShowCount() : pageData.getAsInt("pageSize"));
-			}catch (Exception e){
-				throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
-			}
+		try {
+	    	page.setCurrentPage(pageData.getAsInteger("currentPage"));
+		}catch (Exception e){
+			//客户端传过来的参数可能不是数字报错
+			throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
 		}
 		page.setApp(Boolean.TRUE);
 		page.setPd(pageData);

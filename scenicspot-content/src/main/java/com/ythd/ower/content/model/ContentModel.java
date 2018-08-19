@@ -3,6 +3,7 @@ package com.ythd.ower.content.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 内容对象实体
@@ -72,5 +73,5 @@ public class ContentModel implements Serializable{
     /**
      * 相册
      */
-    private ContentAlbumModel album;
+    private List<ContentAlbumModel> album;
 }

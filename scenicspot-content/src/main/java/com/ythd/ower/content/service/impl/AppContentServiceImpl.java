@@ -12,9 +12,7 @@ import com.ythd.ower.content.model.ContentCommentModel;
 import com.ythd.ower.content.model.ContentModel;
 import com.ythd.ower.content.service.AppContentService;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +20,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *  新闻咨询服务类
+ */
 @Service
 public class AppContentServiceImpl implements AppContentService {
 

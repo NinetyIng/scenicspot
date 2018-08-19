@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 public class ConfigureLoadListener implements ApplicationListener<ContextRefreshedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigureLoadListener.class);
 
+    private static final String WXCONFIG = "wxconfig";
+    private static final String APPCONFIG = "appconfig";
+    private static final String SYSTEMCONFIG = "systemconfig";
     @Autowired
     private SystemConfigMapper systemConfigMapper;
     @Override
@@ -28,14 +31,16 @@ public class ConfigureLoadListener implements ApplicationListener<ContextRefresh
                 LOGGER.error("配置加载失败，服务即将停止");
                 System.exit(0);
             }
-            String systemConfigJson = pd.getAsString("systemconfig");
-            String wxConfigJson = pd.getAsString("wxconfig");
-            if(StringUtils.isEmpty(systemConfigJson) || StringUtils.isEmpty(wxConfigJson)){
+            String systemConfigJson = pd.getAsString(SYSTEMCONFIG);
+            String wxConfigJson = pd.getAsString(WXCONFIG);
+            String appConfigJson = pd.getAsString(APPCONFIG);
+            if(StringUtils.isEmpty(systemConfigJson) || StringUtils.isEmpty(wxConfigJson) || StringUtils.isEmpty(appConfigJson)){
                 LOGGER.error("配置加载失败，请配置系统配置和微信配置，服务即将退出");
                 System.exit(0);
             }
             ConfigureManager.parseWxConfig(wxConfigJson);
             ConfigureManager.parseSystemConfig(systemConfigJson);
+            ConfigureManager.parseAppConfig(appConfigJson);
         }
     }
 }

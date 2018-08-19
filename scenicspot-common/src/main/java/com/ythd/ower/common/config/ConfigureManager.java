@@ -2,6 +2,9 @@ package com.ythd.ower.common.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ythd.ower.common.constants.ErrorCodesContants;
+import com.ythd.ower.common.dto.ErrorCode;
+import com.ythd.ower.common.exception.BizServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,24 +20,30 @@ public class ConfigureManager {
 
   private static SystemConfigure systemConfigure;
 
+  private static AppConfigure appConfigure;
+
 
   public static WxConfigure getWxConfig(){
     if(wxConfigure != null){
       return wxConfigure;
     }
-    LOGGER.error("微信配置获取失败，服务即将停止");
-    System.exit(0);
-    return null;
+   throw new BizServiceException(ErrorCodesContants.WX_CONFIG_ERROR);
   }
 
   public static SystemConfigure getSystemConfig(){
     if(systemConfigure != null){
       return systemConfigure;
     }
-    LOGGER.error("系统配置获取失败，服务即将停止");
-    System.exit(0);
-    return null;
+    throw new BizServiceException(ErrorCodesContants.SYSTEM_CONFIG_ERROR);
   }
+  public static AppConfigure getAppConfig(){
+    if(appConfigure != null){
+      return appConfigure;
+    }
+    throw new BizServiceException(ErrorCodesContants.APP_CONFIG_ERROR);
+  }
+
+
 
   public static void parseWxConfig(String wxConfigJson){
     if(wxConfigure == null){
@@ -78,6 +87,19 @@ public class ConfigureManager {
               .setImageShowPath(ftpConfig.getString("imageShowPath"))
               .setPassword(ftpConfig.getString("password"))
               .setUsername(ftpConfig.getString("username"));
+    }
+  }
+
+
+  public static void parseAppConfig(String appConfig){
+    if(systemConfigure == null){
+      appConfigure = AppConfigure.bulider();
+
+      JSONObject appObject = JSON.parseObject(appConfig);
+      JSONObject productConfigObject = appObject.getJSONObject("puroductConfig");
+      appConfigure.builderProductConfig().setCartLimit(productConfigObject.getInteger("cartLimit"))
+              .setIndexLastCount(productConfigObject.getInteger("indexLastCount"))
+              .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"));
     }
   }
 
