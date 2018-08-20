@@ -14,10 +14,10 @@
        <result property="ctype" column="CTYPE" jdbcType="VARCHAR"></result>
        <result property="timg" column="T_IMG" jdbcType="VARCHAR"></result>
        <result property="content" column="CONTENT" jdbcType="VARCHAR"></result>
-       <result property="ccommentCount" column="COMMENT_COUNT" jdbcType="DECIMAL"></result>
+       <result property="commentCount" column="COMMENT_COUNT" jdbcType="DECIMAL"></result>
        <result property="praiseCount" column="PRAISE_COUNT" jdbcType="DECIMAL"></result>
        <result property="modelType" column="MODEL_TYPE" jdbcType="DECIMAL"></result>
-       <collection property="album" jdbcType="java.util.List" ofType="com.ythd.ower.content.model.ContentAlbumModel">
+       <collection property="album" javaType="java.util.List" ofType="com.ythd.ower.content.model.ContentAlbumModel">
            <id property="id" column="ALBUM_Id" jdbcType="DECIMAL"></id>
            <result property="originalImg" column="ORIGINAL_IMG" jdbcType="VARCHAR"></result>
            <result property="thumbnailImg" column="THUMBNAIL_IMG" jdbcType="VARCHAR"></result>

@@ -23,6 +23,7 @@
 		           	/main/login.do	 		= anon
 		           	/main/doLogin.do	 	= anon
                     /client/**              = anon
+					/api/**                 = anon
 		           	/*                      = anon
 		           	/appwx/**				= anon
 					/healthCheck.do         = anon

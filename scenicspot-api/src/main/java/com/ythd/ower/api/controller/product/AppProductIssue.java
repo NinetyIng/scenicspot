@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by junbo
  * on 2018/8/19
  */
-@Controller
+@RestController
 @RequestMapping("/api/product/")
 public class AppProductIssue {
 
@@ -68,6 +70,9 @@ public class AppProductIssue {
    @RequestMapping(value = "list", method = RequestMethod.POST)
    public GenericResponseDto list(@RequestBody PageData requestParam){
        LOGGER.info("请求商品列表接口，请求参数：{}", MapperUtil.toJson(requestParam));
+       //参数校验 后续自己添加
+      // Result<GenericResponseDto> checkResult = ProductParamCheck.
+
        //构建首页数据结构
        List<ProductModel> productList = appProductService.productListByPage(requestParam);
        LOGGER.info("商品首页接口响应数据为{}", MapperUtil.toJson(productList));
@@ -79,6 +84,7 @@ public class AppProductIssue {
      * @param requestParam
      * @return
      */
+    @RequestMapping(value = "detail", method = RequestMethod.POST)
    public GenericResponseDto detail(@RequestBody PageData requestParam){
        LOGGER.info("请求商品详情接口，请求参数：{}", MapperUtil.toJson(requestParam));
        Result<GenericResponseDto> checkResult = ProductParamCheck.checkProductDetailParam(requestParam);

@@ -26,4 +26,15 @@ public class ProductParamCheck {
         return Result.success();
     }
 
+    public static Result<GenericResponseDto> checkProductList(PageData pageData){
+        return Result.success();
+    }
+
+
+    public static void main(String[] args) {
+
+        System.out.println("34".matches(Regular.POSITIVE_INTEGER));
+
+    }
+
 }

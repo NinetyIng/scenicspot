@@ -95,4 +95,12 @@
     </div>
 </body>
 <script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+<script src="/statics/js/util/Ajax.js"></script>
+<script src="/statics/js/util/jquery-2.1.1.min.js"></script>
+<script>
+  $(".slide-box").empty();
+  $(".favourite-wrap").empty();
+  Ajax.request("/api/product/index",{"method":"POST","success":function(data){
+  }});
+</script>
 </html>
