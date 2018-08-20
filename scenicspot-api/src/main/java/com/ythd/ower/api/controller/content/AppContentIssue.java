@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 提供所有与文章有关接口
  */
-@RestController
+@Controller
 @RequestMapping("/api/content/")
 public class AppContentIssue {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppContentIssue.class);
@@ -40,8 +43,9 @@ public class AppContentIssue {
      * @param requestParam
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.POST)
-    public GenericResponseDto list(@RequestBody PageData requestParam) {
+    @RequestMapping(value = "list", method = RequestMethod.POST )
+    @ResponseBody
+    public GenericResponseDto list(HttpServletRequest request,@RequestBody PageData requestParam) {
         LOGGER.info("请求文章列表接口，请求参数：{}", MapperUtil.toJson(requestParam));
         ContentListDto contentListDto = appContentService.contentList(Page.builder(requestParam));
         LOGGER.info("文章列表接口响应数据为{}", MapperUtil.toJson(contentListDto));

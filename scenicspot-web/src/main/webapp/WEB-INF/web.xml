@@ -33,7 +33,7 @@
     </filter>
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CorsFilter</filter-name>
@@ -41,7 +41,7 @@
     </filter>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
