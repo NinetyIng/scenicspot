@@ -1,7 +1,9 @@
 package com.ythd.ower.api.controller.content;
 
 
+import com.ythd.ower.common.constants.CommonContants;
 import com.ythd.ower.common.constants.ErrorCodesContants;
+import com.ythd.ower.common.constants.NumberContants;
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.exception.BizServiceException;
@@ -30,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 提供所有与文章有关接口
  */
-@Controller
+@RestController
 @RequestMapping("/api/content/")
 public class AppContentIssue {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppContentIssue.class);
@@ -44,7 +46,6 @@ public class AppContentIssue {
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.POST )
-    @ResponseBody
     public GenericResponseDto list(HttpServletRequest request,@RequestBody PageData requestParam) {
         LOGGER.info("请求文章列表接口，请求参数：{}", MapperUtil.toJson(requestParam));
         ContentListDto contentListDto = appContentService.contentList(Page.builder(requestParam));
@@ -53,7 +54,7 @@ public class AppContentIssue {
     }
 
     /**
-     * 新闻详情接口
+     * 新闻详情接口 查询第一页的评论
      *
      * @param requestParam
      * @return
@@ -64,6 +65,7 @@ public class AppContentIssue {
         if (StringUtils.isEmpty(requestParam.getAsString(ContantConstant.CONTENT_ID))) {
             throw new BizServiceException(ErrorCodesContants.PARAM_ERROR);
         }
+        requestParam.put(CommonContants.CURRENT_PAGE, NumberContants.COMFIRST);
         ContentDetailDto contentDetailDto = appContentService.contentDetail(Page.builder(requestParam));
         LOGGER.info("文章详情接口响应数据为{}", MapperUtil.toJson(contentDetailDto));
         return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(contentDetailDto)));

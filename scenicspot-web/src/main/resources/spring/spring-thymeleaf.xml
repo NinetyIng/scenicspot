@@ -34,22 +34,19 @@
     <bean id="thymeleafTemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
     </bean>
-  <!--  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list >
-                <ref bean="mappingJacksonHttpMessageConverter" />
-            </list>
-        </property>
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="thymeleafTemplateEngine"/>
+        <property name="characterEncoding" value="UTF-8" />
     </bean>
-    <bean id="mappingJacksonHttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
--->
+
+    <bean id="appAccessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
+    <aop:config>
+        <aop:pointcut id="web" expression="execution (* com.ythd.ower.api.*.*(..))"/>
+        <aop:aspect ref="appAccessLogRecordAspect">
+            <aop:around method="handleApi" pointcut-ref="web" />
+        </aop:aspect>
+    </aop:config>
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -75,19 +72,6 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
-    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-        <property name="templateEngine" ref="thymeleafTemplateEngine"/>
-        <property name="characterEncoding" value="UTF-8" />
-    </bean>
-
-    <bean id="appAccessLogRecordAspect" class="com.ythd.ower.common.aspect.AccessLogRecordAspect" />
-    <aop:config>
-        <aop:pointcut id="web" expression="execution (* com.ythd.ower.api.*.*(..))"/>
-        <aop:aspect ref="appAccessLogRecordAspect">
-            <aop:around method="handleApi" pointcut-ref="web" />
-        </aop:aspect>
-    </aop:config>
     <!-- 自动为切面方法中匹配的方法所在的类生成代理对象。 -->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 

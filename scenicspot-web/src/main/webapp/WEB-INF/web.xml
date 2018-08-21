@@ -148,7 +148,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springThymeleaf</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.shtm</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>encodingFilter</filter-name>

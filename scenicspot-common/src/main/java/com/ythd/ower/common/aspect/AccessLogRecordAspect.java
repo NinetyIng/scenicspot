@@ -12,6 +12,7 @@
 
 package com.ythd.ower.common.aspect;
 
+import com.ythd.ower.common.constants.ErrorCodesContants;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import com.ythd.ower.common.constants.LogConstants;
-import com.ythd.ower.common.constants.RespcdContants;
+import com.ythd.ower.common.constants.CommonContants;
 import com.ythd.ower.common.constants.SpecificSymbolConstants;
 import com.ythd.ower.common.ibox.DtoUtils;
 import com.ythd.ower.common.ibox.GenericResponseDto;
@@ -96,7 +97,7 @@ public class AccessLogRecordAspect {
             return result;
         } catch (Throwable throwable) {
             logger.error("[{}] [HTTP] [request] - Exception:{}", serviceId, throwable.getMessage());
-            return DtoUtils.getFailResponse(RespcdContants.YTHD_MT0001);
+            return DtoUtils.getFailResponse(ErrorCodesContants.SYSTEM_ERROR);
         }
     }
 

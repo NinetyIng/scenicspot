@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 public class GlobalException {
+
     @ResponseBody
     @ExceptionHandler({BizServiceException.class})
      public String bizException(Exception e) {

@@ -36,11 +36,7 @@ public class AppProductServiceImpl implements AppProductService {
 
     @Override
     public List<ProductModel> productListByPage(PageData requestParam) {
-        LOGGER.info("开始构建page对象");
-        Page page = Page.builder(requestParam);
-        //从配置中读取商品分页显示条数
-        page.setShowCount(ConfigureManager.getAppConfig().getPuroductConfig().getPageSize());
-        List<ProductModel> list = appProductMapper.findProductByPage(page);
+        List<ProductModel> list = appProductMapper.findProductByPage(Page.builder(requestParam));
         return list;
     }
 
