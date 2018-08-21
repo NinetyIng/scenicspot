@@ -38,54 +38,66 @@
            <result property="isSale" column="IS_SALE" jdbcType="VARCHAR"></result>
        </collection>
    </resultMap>
-    <sql id="ProductFiled">
+    <sql id="ProductListFiled">
+        t1.GOODS_ID,t1.GOODS_NAME,t1.GOODS_TAGS,t1.GOODS_SPEC,
+        t1.GOODS_SUMMARY,t1.MARKET_PRICE,t1.SHOP_PRICE
+        ,t1.GOODS_STOCK,t1.CLICK_COUNT,t1.LIST_IMG,t1.VIRTUAL_SALES,t1.RECOMMEND,t1.POPULAR,t1.GOODS_FREIGHT,t1.PUTIME
+    </sql>
+
+    <sql id="ProductDetailFiled">
         t1.GOODS_ID,t1.GOODS_SN,t1.GOODS_NAME,t1.GOODS_TAGS,t1.GOODS_SPEC,t1.GOODS_DESC,t1.IS_ALUMB_DESC,
         t1.GOODS_SUMMARY,t1.GOODS_WEIGHT,t1.MARKET_PRICE,t1.SHOP_PRICE
-        ,t1.GOODS_STOCK,t1.CLICK_COUNT,t1.LIST_IMG,t1.VIRTUAL_SALES,t1.RECOMMEND,t1.POPULAR,t1.GOODS_FREIGHT,t1.USER_ID,t1.PUTIME
+        ,t1.GOODS_STOCK,t1.CLICK_COUNT,t1.LIST_IMG,t1.VIRTUAL_SALES,t1.RECOMMEND,t1.POPULAR,t1.GOODS_FREIGHT,t1.PUTIME
     </sql>
 
     <!--分页查询商品列表(IS_DELETE = 0 IS_ON_SALE = 1 list_img 不为空的) 默认排序：推荐值 发布时间 -->
     <select id="findProductByPage" parameterType="page" resultMap="ProductReturn">
-        SELECT <include refid="ProductFiled" />
-        FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0 AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL
+        SELECT <include refid="ProductListFiled" />
+        FROM T_GOODS t1  WHERE IFNULL(t1.IS_DELETE,0) = 0 AND  IFNULL(t1.IS_ON_SALE,1) = 1 AND t1.list_img IS NOT NULL
         <choose>
             <when test="pd.putimeOrder == 1">
-                ORDER BY PUTIME DESC
+                ORDER BY t1.PUTIME DESC
             </when>
             <when test="pd.recommendOrder == 1">
-                ORDER BY RECOMMEND DESC
+                ORDER BY t1.RECOMMEND DESC
             </when>
             <otherwise>
-                ORDER  BY RECOMMEND DESC ,PUTIME DESC
+                ORDER  BY t1.RECOMMEND DESC ,t1.PUTIME DESC
             </otherwise>
         </choose>
     </select>
 
     <!--不分页查询商品列表(IS_DELETE = 0 IS_ON_SALE = 1 list_img 不为空的) 默认排序：推荐值 发布时间 -->
     <select id="findProduct" parameterType="pd" resultMap="ProductReturn">
-        SELECT <include refid="ProductFiled" />
-        FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0 AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL
+        SELECT <include refid="ProductListFiled" />
+        FROM T_GOODS t1  WHERE IFNULL(t1.IS_DELETE,0) = 0 AND  IFNULL(t1.IS_ON_SALE,1) = 1 AND t1.list_img IS NOT NULL
+        <if test="excludeIds != null and excludeIds.size() > 0">
+            AND t1.GOODS_ID NOT IN
+            <foreach collection="excludeIds" index="index" item="item" open="(" separator="," close=")">
+                #{excludeIds[${index}]}
+            </foreach>
+        </if>
         <choose>
-            <when test="pd.putimeOrder == 1">
-                ORDER BY PUTIME DESC
+            <when test="putimeOrder == 1">
+                ORDER BY t1.PUTIME DESC
             </when>
-            <when test="pd.recommendOrder == 1">
-                ORDER BY RECOMMEND DESC
+            <when test="recommendOrder == 1">
+                ORDER BY t1.RECOMMEND DESC
             </when>
             <otherwise>
-                ORDER  BY RECOMMEND DESC ,PUTIME DESC
+                ORDER  BY t1.RECOMMEND DESC ,t1.PUTIME DESC
             </otherwise>
         </choose>
         <if test="limit != null and limit != ''">
-            limit #{pd.limit}
+            limit #{limit}
         </if>
     </select>
 
     <!-- 查询商品详情 -->
     <select id="findProductDetail" parameterType="pd" resultMap="ProductReturn">
-        SELECT <include refid="ProductFiled" />,t2.ORIGINAL_IMG,t2.THUMB_IMG,t2.GOODS_ID AS ALBUM_GOODS_ID,t2.ALBUM_ID,
+        SELECT <include refid="ProductDetailFiled" />,t2.ORIGINAL_IMG,t2.THUMB_IMG,t2.GOODS_ID AS ALBUM_GOODS_ID,t2.ALBUM_ID,
         t3.ATTR_NAME,t3.ATTR_VALUE,t3.ATTR_SORT,t3.IS_SALE,t3.GOODS_ATTR_ID,t3.GOODS_ID as ATTR_GOODS_ID
-        FROM (SELECT <include refid="ProductFiled" />  FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0
+        FROM (SELECT <include refid="ProductDetailFiled" />  FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0
         AND  IFNULL(IS_ON_SALE,1) = 1 AND list_img IS NOT NULL) t1 LEFT JOIN T_GOODS_ALBUM t2
         ON  t1.GOODS_ID = t2.GOODS_ID
         LEFT JOIN  T_GOODS_ATTR t3 ON  t1.GOODS_ID = t3.GOODS_ID

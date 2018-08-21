@@ -11,6 +11,7 @@ import com.ythd.ower.content.dto.ContentListDto;
 import com.ythd.ower.content.model.ContentCommentModel;
 import com.ythd.ower.content.model.ContentModel;
 import com.ythd.ower.content.service.AppContentService;
+import java.util.ArrayList;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,9 @@ public class AppContentServiceImpl implements AppContentService {
     /**
      * 做缓存固顶所有id
      */
-   static List<Integer> EXCLUDE_IDS;
+   static List<Integer> EXCLUDE_IDS = new ArrayList<>(8);
 
-
+   @Override
    public ContentListDto contentList(Page page){
 
        if(CollectionUtils.isEmpty(FIXTOP_LIST)){

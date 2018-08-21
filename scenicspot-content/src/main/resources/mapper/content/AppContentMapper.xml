@@ -14,10 +14,10 @@
        <result property="ctype" column="CTYPE" jdbcType="VARCHAR"></result>
        <result property="timg" column="T_IMG" jdbcType="VARCHAR"></result>
        <result property="content" column="CONTENT" jdbcType="VARCHAR"></result>
-       <result property="ccommentCount" column="COMMENT_COUNT" jdbcType="DECIMAL"></result>
+       <result property="commentCount" column="COMMENT_COUNT" jdbcType="DECIMAL"></result>
        <result property="praiseCount" column="PRAISE_COUNT" jdbcType="DECIMAL"></result>
        <result property="modelType" column="MODEL_TYPE" jdbcType="DECIMAL"></result>
-       <collection property="album" jdbcType="java.util.List" ofType="com.ythd.ower.content.model.ContentAlbumModel">
+       <collection property="album" javaType="java.util.List" ofType="com.ythd.ower.content.model.ContentAlbumModel">
            <id property="id" column="ALBUM_Id" jdbcType="DECIMAL"></id>
            <result property="originalImg" column="ORIGINAL_IMG" jdbcType="VARCHAR"></result>
            <result property="thumbnailImg" column="THUMBNAIL_IMG" jdbcType="VARCHAR"></result>
@@ -25,8 +25,8 @@
    </resultMap>
   <!-- 查询新闻列表非头条  先按推荐值排序 后按时间排序(过滤掉头条内容可传参数excludeIds) -->
   <select id="findContentListByPage" parameterType="page" resultMap="ContentFild">
-     SELECT t1.CONTENT_ID,t1.TITLE,t1.SORT_TITLE,t1.LINK,t1.ABSTRACT,t1.ORGIN,t1.ORGINURL,t1.PUTTIME,
-     t1.CTYPE,t1.T_IMG,t1.CONTENT,t1.COMMENT_COUNT,t1.PRAISE_COUNT,t1.MODEL_TYPE,t2.ALBUM_ID,
+     SELECT t1.CONTENT_ID,t1.TITLE,t1.SORT_TITLE,t1.LINK,t1.ORGIN,t1.ORGINURL,t1.PUTTIME,
+     t1.CTYPE,t1.T_IMG,t1.COMMENT_COUNT,t1.PRAISE_COUNT,t1.MODEL_TYPE,t2.ALBUM_ID,
      t2.ORIGINAL_IMG,t2.THUMBNAIL_IMG
      FROM T_CONTENT t1 LEFT JOIN  T_CONTENT_ALBUM t2
      ON  t1.CONTENT_ID = t2.CONTENT_ID
@@ -34,15 +34,15 @@
     <if test="pd.excludeIds != null and pd.excludeIds != ''">
         AND t1.CONTENT_ID NOT IN
         <foreach collection="pd.excludeIds" index="index" item="item" open="(" separator="," close=")">
-            #{item}
+            #{pd.excludeIds[${index}]}
          </foreach>
     </if>
     ORDER BY RECOMMEND DESC ,PUTTIME DESC
   </select>
     <!-- 查询固顶新闻 可以为多条 固顶日期为空标识 不限制固顶时间 先根据固顶级别排序再根据推荐值排序-->
   <select id="findFixTopList" parameterType="pd" resultMap="ContentFild">
-    SELECT * FROM (SELECT t1.CONTENT_ID,t1.TITLE,t1.SORT_TITLE,t1.LINK,t1.ABSTRACT,t1.ORGIN,t1.ORGINURL,t1.PUTTIME,
-     t1.CTYPE,t1.T_IMG,t1.CONTENT,t1.COMMENT_COUNT,t1.PRAISE_COUNT,t1.MODEL_TYPE,t1.TOPLV,t1.RECOMMEND
+    SELECT * FROM (SELECT t1.CONTENT_ID,t1.TITLE,t1.SORT_TITLE,t1.LINK,t1.ORGIN,t1.ORGINURL,t1.PUTTIME,
+     t1.CTYPE,t1.T_IMG,t1.COMMENT_COUNT,t1.PRAISE_COUNT,t1.MODEL_TYPE,t1.TOPLV,t1.RECOMMEND
     FROM T_CONTENT t1
     WHERE t1.STATE = 1 AND IFNULL(t1.TOPLV,0) > 0 AND t1.TOPLVDATE > DATE_FORMAT(NOW(),'%Y-%m-%d %h:%i:%s %p')
     UNION ALL

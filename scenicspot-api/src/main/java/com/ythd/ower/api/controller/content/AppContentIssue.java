@@ -1,7 +1,9 @@
 package com.ythd.ower.api.controller.content;
 
 
+import com.ythd.ower.common.constants.CommonContants;
 import com.ythd.ower.common.constants.ErrorCodesContants;
+import com.ythd.ower.common.constants.NumberContants;
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.exception.BizServiceException;
@@ -17,15 +19,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 提供所有与文章有关接口
  */
-@Controller
+@RestController
 @RequestMapping("/api/content/")
 public class AppContentIssue {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppContentIssue.class);
@@ -38,8 +45,8 @@ public class AppContentIssue {
      * @param requestParam
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.POST)
-    public GenericResponseDto list(@RequestBody PageData requestParam) {
+    @RequestMapping(value = "list", method = RequestMethod.POST )
+    public GenericResponseDto list(HttpServletRequest request,@RequestBody PageData requestParam) {
         LOGGER.info("请求文章列表接口，请求参数：{}", MapperUtil.toJson(requestParam));
         ContentListDto contentListDto = appContentService.contentList(Page.builder(requestParam));
         LOGGER.info("文章列表接口响应数据为{}", MapperUtil.toJson(contentListDto));
@@ -47,7 +54,7 @@ public class AppContentIssue {
     }
 
     /**
-     * 新闻详情接口
+     * 新闻详情接口 查询第一页的评论
      *
      * @param requestParam
      * @return
@@ -58,6 +65,7 @@ public class AppContentIssue {
         if (StringUtils.isEmpty(requestParam.getAsString(ContantConstant.CONTENT_ID))) {
             throw new BizServiceException(ErrorCodesContants.PARAM_ERROR);
         }
+        requestParam.put(CommonContants.CURRENT_PAGE, NumberContants.COMFIRST);
         ContentDetailDto contentDetailDto = appContentService.contentDetail(Page.builder(requestParam));
         LOGGER.info("文章详情接口响应数据为{}", MapperUtil.toJson(contentDetailDto));
         return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(contentDetailDto)));

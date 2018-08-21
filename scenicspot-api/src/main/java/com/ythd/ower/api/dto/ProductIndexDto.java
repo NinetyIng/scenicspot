@@ -1,10 +1,6 @@
 package com.ythd.ower.api.dto;
 
-import com.ythd.ower.b2c.constant.ProductConstant;
 import com.ythd.ower.b2c.model.ProductModel;
-import com.ythd.ower.common.dto.PageData;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 
 import java.util.List;
 

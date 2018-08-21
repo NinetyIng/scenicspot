@@ -13,4 +13,6 @@ public interface NumberContants  {
    Integer ZERO = 0;
    Integer FOUR = 4;
    Integer TEN = 10;
+   Integer COMFIRST = 1;
+   Integer PROFIRST = 0;
 }

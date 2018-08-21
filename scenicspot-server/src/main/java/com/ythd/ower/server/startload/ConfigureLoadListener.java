@@ -24,7 +24,6 @@ public class ConfigureLoadListener implements ApplicationListener<ContextRefresh
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         if(contextRefreshedEvent.getApplicationContext().getParent() == null)
         {
-            //需要执行的逻辑代码，当spring容器初始化完成后就会执行该方法。
             LOGGER.info("开始加载系统配置文件");
             PageData pd = systemConfigMapper.selectConfig();
             if (pd == null){
