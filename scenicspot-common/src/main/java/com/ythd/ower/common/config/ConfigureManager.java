@@ -97,10 +97,11 @@ public class ConfigureManager {
 
       JSONObject appObject = JSON.parseObject(appConfig);
       JSONObject productConfigObject = appObject.getJSONObject("puroductConfig");
-      appConfigure.builderProductConfig().setCartLimit(productConfigObject.getInteger("cartLimit"))
+
+      appConfigure.setPageSize(appObject.getIntValue("pageSize"))
+              .builderProductConfig().setCartLimit(productConfigObject.getInteger("cartLimit"))
               .setIndexLastCount(productConfigObject.getInteger("indexLastCount"))
-              .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"))
-               .setPageSize(productConfigObject.getInteger("pageSize"));
+              .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"));
     }
   }
 }

@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/jumplink/")
 public class ClientRedirectController {
 
+
+
+
+
     @RequestMapping("home")
     public String homePage(){
         return "common/home";

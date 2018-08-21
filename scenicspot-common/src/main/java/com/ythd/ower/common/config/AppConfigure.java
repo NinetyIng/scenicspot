@@ -7,6 +7,8 @@ package com.ythd.ower.common.config;
  */
 public class AppConfigure {
 
+    private Integer pageSize;
+
     private ProductConfigure puroductConfig;
 
     public static AppConfigure bulider(){
@@ -25,6 +27,15 @@ public class AppConfigure {
         return this;
     }
 
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public AppConfigure setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+        return this;
+    }
+
     public class ProductConfigure{
         /**
          * 首页推荐记录数
@@ -34,11 +45,6 @@ public class AppConfigure {
          * 首页最新发布记录数
          */
         private Integer indexLastCount;
-        /**
-         * 商品列表分页大小
-         */
-        private Integer pageSize;
-
         /**
          * 购物车商品上限
          */
@@ -71,14 +77,6 @@ public class AppConfigure {
             return this;
         }
 
-        public Integer getPageSize() {
-            return pageSize;
-        }
-
-        public ProductConfigure setPageSize(Integer pageSize) {
-            this.pageSize = pageSize;
-            return this;
-        }
     }
 
 

@@ -30,7 +30,7 @@ public class Page {
       page.setCurrentPage(1);
 		}
 		try {
-			  page.setShowCount(ConfigureManager.getAppConfig().getPuroductConfig().getPageSize());
+			  page.setShowCount(ConfigureManager.getAppConfig().getPageSize());
 	    	page.setCurrentPage(pageData.getAsInteger(CommonContants.CURRENT_PAGE));
 		}catch (Exception e){
 			//客户端传过来的参数可能不是数字报错
