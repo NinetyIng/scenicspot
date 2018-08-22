@@ -5,6 +5,7 @@ import com.ythd.ower.api.dto.ProductIndexDto;
 import com.ythd.ower.b2c.constant.ProductConstant;
 import com.ythd.ower.b2c.dto.ProductListDto;
 import com.ythd.ower.b2c.model.ProductModel;
+import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.b2c.service.AppProductService;
 import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.dto.PageData;
@@ -105,5 +106,17 @@ public class AppProductIssue {
        LOGGER.info("请求商品详情接口返回数据：{}", MapperUtil.toJson(productModel));
        return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(productModel)));
    }
+
+    /**
+     * 查询库存详情
+     */
+    @RequestMapping(value = "stockDetail",method = RequestMethod.POST)
+    public GenericResponseDto stockDetail(@RequestBody PageData requestParam){
+        LOGGER.info("请求库存详情接口，请求参数：{}", MapperUtil.toJson(requestParam));
+        ProductStockModel stockModel = appProductService.stockDetail(requestParam);
+        LOGGER.info("请求库存详情返回数据：{}", MapperUtil.toJson(stockModel));
+        return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(stockModel)));
+    }
+
 
 }

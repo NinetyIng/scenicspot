@@ -5,10 +5,18 @@ import com.ythd.ower.b2c.mapper.AppProductCommentMapper;
 import com.ythd.ower.b2c.mapper.AppProductMapper;
 import com.ythd.ower.b2c.mapper.AppProductStockMapper;
 import com.ythd.ower.b2c.model.ProductModel;
+import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.b2c.service.AppProductService;
 import com.ythd.ower.common.config.ConfigureManager;
+import com.ythd.ower.common.constants.ErrorCodesContants;
+import com.ythd.ower.common.constants.SpecificSymbolConstants;
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
+import com.ythd.ower.common.exception.BizServiceException;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,5 +56,20 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     public ProductModel productDetail(PageData requestParam) {
         return appProductMapper.findProductDetail(requestParam.getAsInteger(ProductConstant.PRODUCT_ID));
+    }
+
+    @Override
+    public ProductStockModel stockDetail(PageData pageData) {
+        String attrVals = pageData.getAsString(ProductConstant.ATTR_VALS);
+        if (StringUtils.isEmpty(attrVals)){
+            throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
+        }
+        Optional<String> valsOpt =Stream.of(attrVals.split(SpecificSymbolConstants.VERTICAL_LINE)).sorted()
+                .reduce((a,b)->String.join(SpecificSymbolConstants.VERTICAL_LINE,a,b));
+        if(!valsOpt.isPresent()){
+            throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
+        }
+        LOGGER.info("排序之后的字符串为：{}",valsOpt.get());
+        return appProductStockMapper.findByAttrValues(valsOpt.get());
     }
 }

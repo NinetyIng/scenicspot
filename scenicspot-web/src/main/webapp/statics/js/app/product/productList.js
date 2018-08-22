@@ -1,17 +1,8 @@
 ;!function(win,undefined){
-   document.write("<script language=javascript src='/statics/js/app/globalConfig.js'></script>");
-   document.write("<script language=javascript src='/statics/js/jquery-2.1.1.min.js'></script>");
-   document.write("<script language=javascript src='/statics/js/util/Ajax.js'></script>");
    var config = {
-       url:"/api/product/list",
-       reqParam:{
-           currentPage:0,
-           priceOrder:0,
-           saleOrder:0,
-           categoryId:0,
-           pageSize:10
-       }
-   },dom = {_window:$(window),_document:$(document),_html:$('html'),_body:$('body'),_loadmore:$('.load-more'),_content:$("#sortDefault")},xrp={};
+       url:"/api/product/list.shtm",
+       reqParam:{"currentPage":0,"priceOrder":0,"saleOrder":0,"categoryId":0,"pageSize":10}
+   },dom = {_window:$(window),_document:$(document),_html:$('html'),_body:$('body'),_loadmore:$('.load-more'),_content:$("#sortDefault"),_condition:$(".control-item")},xrp={};
     xrp.html = '     <li class="table-view-cell media">\n'
         + '                <a class="navigate-right">\n'
         + '                    <img class="media-object pull-left" src="/statics/app/img/dstc/3.jpg"/>\n'
@@ -29,15 +20,16 @@
    //初始化面板方法
     xrp.initPanel = function(){
         dom._content.empty();
-        xrp.request();
+        xrp.request(true);
     };
 
-   xrp.request = function () {
-       if (!xrp.isRequest()){
+   xrp.request = function (first) {
+       if(!first && !xrp.isRequest()){
            return;
        }
        config.reqParam.currentPage ++;
-       Ajax.request(config.url,{"method":"POST","data":config.reqParam,"success":function (data) {
+       alert(JSON.parse(config.reqParam));
+       Ajax.request(config.url,{"data":JSON.parse(config.reqParam),"success":function (data) {
            xrp.analysis(data);
        }});
    };
@@ -46,10 +38,10 @@
         dom._loadmore.attr("disabled",true);
         xrp.request();
      });
-   }
+   };
    xrp.isRequest = function(){
        return config.reqParam.pageSize == globalConfig.pageSize;
-   }
+   };
    xrp.analysis = function(data){
        dom._loadmore.removeAttr("disabled");
        if(data.resultCode == globalConfig.SUCCESSCODE){
@@ -68,12 +60,14 @@
                dom._content.append($createNode);
            }
        }else{
-           alert(data.resultDesc);
+           alert(data.errorDesc);
        }
    };
    xrp.xr = (function(){
        xrp.initPanel();
        xrp.loadMore();
+       dom._condition.click(function(){
+       });
    }());
 }(window);
 

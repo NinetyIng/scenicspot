@@ -3,6 +3,7 @@ package com.ythd.ower.b2c.mapper;
 import com.ythd.ower.b2c.model.ProductStockModel;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by junbo
@@ -11,5 +12,7 @@ import java.util.List;
 public interface AppProductStockMapper {
 
     List<ProductStockModel> findStockListByGoodsId(Integer productId);
+
+    ProductStockModel findByAttrValues(@Param("attrVals") String attrVals);
 
 }

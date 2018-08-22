@@ -18,5 +18,8 @@
         SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
         FROM T_GOODS_SKU  WHERE GOODS_ID = #{productId}
     </select>
-
+    <select id="findByAttrValues" resultMap="StockReturn">
+        SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
+        FROM T_GOODS_SKU  WHERE ATTR_JSON = #{attrVals}
+    </select>
 </mapper>

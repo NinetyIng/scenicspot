@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8" />
+<span th:fragment="commonOnLoadJs">
+    <link href="/statics/app/vendors/ratchet/css/ratchet.css" rel="stylesheet">
+    <script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
+    <script src="/statics/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"  th:inline="javascript">
+        /*<![CDATA[*/
+        ;var globalConfig = {
+            pageSize:/*[[${application.SystemConfiure.pageSize}]]*/,
+            systemName:/*[[${application.SystemConfiure.systemName}]]*/,
+            domain:/*[[${application.SystemConfiure.domain}]]*/,
+            showUrl:/*[[${application.SystemConfiure.showUrl}]]*/,
+            SUCCESSCODE:1,
+            FAILCODE:0
+        }
+        Ajax =
+            function(){
+                function request(url,opt){
+                    function fn(){}
+                    var async   = opt.async !== false,
+                        method  = opt.method    || 'POST',
+                        data    = opt.data      || null,
+                        success = opt.success   || fn,
+                        failure = opt.failure   || fn;
+                    method  = method.toUpperCase();
+                    $.ajax({
+                        type: method,
+                        url: url,
+                        data: data,
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function(data){
+                            success(data);
+                        }
+                    });
+                }
+                return {request:request};
+            }();
+        /*]]>*/
+</script>
+</span>
+</html>

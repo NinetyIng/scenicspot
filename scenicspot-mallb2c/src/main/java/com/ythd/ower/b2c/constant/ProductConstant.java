@@ -9,4 +9,5 @@ public interface ProductConstant {
     String PUTIME_ORDER = "putimeOrder";
     String RECOMMEND_ORDER = "recommendOrder";
     String EXCLUDE_IDS = "excludeIds";
+    String ATTR_VALS ="attrVals";
 }

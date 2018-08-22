@@ -1,5 +1,5 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>商品首页</title>
@@ -13,8 +13,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="email=no" name="format-detection" />
-    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
     <link rel="stylesheet" href="/statics/app/css/spsy.css">
+    <span th:include="/common/globalConfig :: commonOnLoadJs"></span>
 </head>
 
 <body>
@@ -94,13 +94,4 @@
         </div>
     </div>
 </body>
-<script src="/statics/app/vendors/ratchet/js/ratchet.js"></script>
-<script src="/statics/js/util/Ajax.js"></script>
-<script src="/statics/js/util/jquery-2.1.1.min.js"></script>
-<script>
-  $(".slide-box").empty();
-  $(".favourite-wrap").empty();
-  Ajax.request("/api/product/index",{"method":"POST","success":function(data){
-  }});
-</script>
 </html>

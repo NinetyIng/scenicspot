@@ -1,6 +1,7 @@
 package com.ythd.ower.b2c.service;
 
 import com.ythd.ower.b2c.model.ProductModel;
+import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.common.dto.PageData;
 
 import java.util.List;
@@ -23,5 +24,8 @@ public interface AppProductService {
 
 
     ProductModel productDetail(PageData requestParam);
+
+
+    ProductStockModel stockDetail(PageData pageData);
 
 }

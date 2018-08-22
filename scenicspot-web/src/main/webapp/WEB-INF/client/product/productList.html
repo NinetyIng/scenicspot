@@ -1,7 +1,7 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>都匀特产</title>
     <meta name="author" content=""/>
     <meta name="keywords" content=""/>
@@ -13,8 +13,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="email=no" name="format-detection" />
-    <link href="/statics/app/css/vendors/ratchet/css/ratchet.css" rel="stylesheet">
     <link rel="stylesheet" href="/statics/app/css/dstc.css">
+    <span th:include="/common/globalConfig :: commonOnLoadJs"></span>
 </head>
 
 <body>
@@ -42,9 +42,9 @@
         </div>
     </nav>
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div class="content">
+   <div class="content">
         <ul id="sortDefault" class="control-content table-view active">
-            <li class="table-view-cell media">
+             <li class="table-view-cell media">
                 <a class="navigate-right">
                     <img class="hot" src="/statics/app/img/dstc/hot.png" alt=""/>
                     <img class="media-object pull-left" src="/statics/app/img/dstc/1.jpg"/>
@@ -318,12 +318,13 @@
             <img src="/statics/app/img/dstc/loading.gif" alt=""/>
         </div>
     </div>
+
+
     <script type="text/javascript">
         var openMenu = function () {
             var menu = document.getElementById('menuPage');
             showMenu(menu);
         };
-
         // 隐藏modal
         var closeMenu = function () {
             var menu = document.getElementById('closeMenu');
@@ -376,6 +377,6 @@
             }, 3000);
         };
     </script>
+    <script src="/statics/js/app/product/productList.js"></script>
 </body>
-<script src="/statics/app/statics/app/vendors/ratchet/js/ratchet.js"></script>
 </html>
