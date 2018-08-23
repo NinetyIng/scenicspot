@@ -62,9 +62,9 @@
                    var childNode = node.find(".favourite-item").first().clone();
                    node.empty();
                    for (var j = 0; j < 2;j++){
-                       childNode.find("img").attr("src",globalConfig.showUrl + latestRelease[i]["listImg"]);
-                       childNode.find("p").text(latestRelease[i]["goodsName"]);
-                       childNode.find(".price").text("￥"+latestRelease[i]["shopPrice"]);
+                       childNode.find("img").attr("src",globalConfig.showUrl + latestRelease[i+j]["listImg"]);
+                       childNode.find("p").text(latestRelease[i+j]["goodsName"]);
+                       childNode.find(".price").text("￥"+latestRelease[i+j]["shopPrice"]);
                        node.append(childNode);
                        childNode = childNode.clone();
                    }

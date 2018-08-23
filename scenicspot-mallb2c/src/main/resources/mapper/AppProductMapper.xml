@@ -61,6 +61,12 @@
             <when test="pd.recommendOrder == 1">
                 ORDER BY t1.RECOMMEND DESC
             </when>
+            <when test="pd.saleOrder == 1">
+                ORDER BY t1.VIRTUAL_SALES DESC
+            </when>
+            <when test="pd.priceOrder == 1">
+                ORDER BY t1.SHOP_PRICE ASC
+            </when>
             <otherwise>
                 ORDER  BY t1.RECOMMEND DESC ,t1.PUTIME DESC
             </otherwise>

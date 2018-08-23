@@ -12,11 +12,13 @@ input, button, select, textarea {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url(../img/icons/arrow_right.png);
+  background-image: url(/statics/app/img/icons/arrow_right.png);
   background-repeat: no-repeat;
   background-size: 16px auto;
 }
-
+.bar{
+  border-bottom: 1px solid #FFF!important;
+}
 .bar-nav {
   background-color: #000;
 }

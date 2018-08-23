@@ -18,139 +18,125 @@
 </head>
 
 <body>
-    <nav class="bar bar-standard .bar-nav">
-        <div class="segmented-control">
-            <a class="control-item active" href="#sortDefault">
-                综合
-            </a>
-            <a class="control-item" href="#sortSale">
-                销量
-            </a>
-            <a class="control-item sort-price" href="#sortPrice">
-                价格
-                <img src="/statics/app/img/icons/price_sort.png" alt="">
-            </a>
-            <a class="control-item sort-by" onclick="openMenu()">
-                分类
-                <img src="/statics/app/img/icons/sort.png" alt="">
-            </a>
-        </div>
-    </nav>
-    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-   <div class="content">
-        <ul id="sortDefault" class="control-content table-view active">
-             <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="hot" src="/statics/app/img/dstc/hot.png" alt=""/>
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/1.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">
-                            都匀毛尖茶
-                            <div class="recomment">特别推荐</div>
-                        </div>
-                        <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
-                        <p class="moods">230人付款</p>
-                        <div class="price">¥ 200.00</div>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="hot" src="/statics/app/img/hot.png" alt=""/>
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/2.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">
-                            都匀绿壳鸡蛋
-                            <div class="recomment">人气推荐</div>
-                        </div>
-                        <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
-                        <p class="moods">220人付款</p>
-                        <div class="price">¥ 60.00</div>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/3.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">
-                            鱼包韭菜
-                            <div class="recomment">特别推荐</div>
-                        </div>
-                        <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
-                        <p class="moods">230人付款</p>
-                        <div class="price">¥ 200.00</div>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/4.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">
-                            都匀风味四酸
-                        </div>
-                        <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
-                        <p class="moods">180人付款</p>
-                        <div class="price">¥ 58.00</div>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/5.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">都匀太师饼</div>
-                        <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
-                        <p class="moods">530人付款</p>
-                        <div class="price">¥ 40.00</div>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell media">
-                <a class="navigate-right">
-                    <img class="media-object pull-left" src="/statics/app/img/dstc/6.jpg"/>
-                    <div class="media-body">
-                        <div class="title-name">墨冲角角鱼</div>
-                        <p><i class="rating-star-40"></i><span class="score">4.0</span></p>
-                        <p class="moods">230人付款</p>
-                        <div class="price">¥ 78.00</div>
-                    </div>
-                </a>
-            </li>
-        </ul>
-        <div class="load-more">
-            <button class="btn btn-block" onclick="loadMore()">加载更多</button>
-        </div>
+<!-- Make sure all your bars are the first things in your <body> -->
+<header class="bar bar-nav">
+    <a class="icon icon-left-nav pull-left"></a>
+    <h1 class="title">都匀特产</h1>
+</header>
+<nav class="bar bar-standard bar-header-secondary">
+    <div class="segmented-control">
+        <a class="control-item  active" >
+            综合
+        </a>
+        <a class="control-item saleOrder" href="#sortSale">
+            销量
+        </a>
+        <a class="control-item sort-price priceOrder" href="#sortPrice">
+            价格
+            <img src="/statics/app/img/icons/price_sort.png" alt="">
+        </a>
+        <a class="control-item sort-by putimeOrder">
+            最新
+           <img src="/statics/app/img/icons/price_sort.png" alt="">
+        </a>
     </div>
-    <!--产品规格选择-->
-    <div id="menuPage" class="modal">
-        <div class="content">
-            <ul class="table-view">
-                <li class="table-view-cell">
-                    <a class="navigate-right">
-                        Item 1
-                    </a>
-                </li>
-                <li class="table-view-cell">
-                    <a class="navigate-right">
-                        Item 2
-                    </a>
-                </li>
-                <li class="table-view-cell">
-                    <a class="navigate-right">
-                        Item 3
-                    </a>
-                </li>
-            </ul>
-        </div>
+</nav>
+<input type="hidden" th:value="${putimeOrder}" id="putimeOrder" />
+<input type="hidden" th:value="${recommendOrder}" id="recommendOrder" />
+
+<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+<div class="content">
+    <ul id="sortDefault" class="control-content table-view active">
+        <!--<li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="hot" src="img/dstc/hot.png" alt=""/>
+                <img class="media-object pull-left" src="img/dstc/1.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">
+                        都匀毛尖茶
+                        <div class="recomment">特别推荐</div>
+                    </div>
+                    <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
+                    <p class="moods">230人付款</p>
+                    <div class="price">¥ 200.00</div>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="hot" src="img/hot.png" alt=""/>
+                <img class="media-object pull-left" src="img/dstc/2.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">
+                        都匀绿壳鸡蛋
+                        <div class="recomment">人气推荐</div>
+                    </div>
+                    <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
+                    <p class="moods">220人付款</p>
+                    <div class="price">¥ 60.00</div>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="media-object pull-left" src="img/dstc/3.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">
+                        鱼包韭菜
+                        <div class="recomment">特别推荐</div>
+                    </div>
+                    <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
+                    <p class="moods">230人付款</p>
+                    <div class="price">¥ 200.00</div>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="media-object pull-left" src="img/dstc/4.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">
+                        都匀风味四酸
+                    </div>
+                    <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
+                    <p class="moods">180人付款</p>
+                    <div class="price">¥ 58.00</div>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="media-object pull-left" src="img/dstc/5.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">都匀太师饼</div>
+                    <p><i class="rating-star-50"></i><span class="score">5.0</span></p>
+                    <p class="moods">530人付款</p>
+                    <div class="price">¥ 40.00</div>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right">
+                <img class="media-object pull-left" src="img/dstc/6.jpg"/>
+                <div class="media-body">
+                    <div class="title-name">墨冲角角鱼</div>
+                    <p><i class="rating-star-40"></i><span class="score">4.0</span></p>
+                    <p class="moods">230人付款</p>
+                    <div class="price">¥ 78.00</div>
+                </div>
+            </a>
+        </li>-->
+    </ul>
+    <div class="load-more">
+        <button class="btn btn-block" onclick="loadMore()">加载更多</button>
     </div>
-    <!--设定预加载效果-->
-    <div class="spinner">
-        <div class="loading">
-            <img src="/statics/app/img/dstc/loading.gif" alt=""/>
-        </div>
+</div>
+<!--设定预加载效果-->
+<div class="spinner">
+    <div class="loading">
+        <img src="/statics/app/img/dstc/loading.gif" alt=""/>
     </div>
+</div>
 
 
     <script type="text/javascript">
@@ -207,7 +193,7 @@
             loadingPanel.style.display = 'flex';
             setTimeout(function () {
                 loadingPanel.style.display = 'none';
-            }, 3000);
+            }, 1500);
         };
     </script>
     <script src="/statics/js/app/product/productList.js"></script>

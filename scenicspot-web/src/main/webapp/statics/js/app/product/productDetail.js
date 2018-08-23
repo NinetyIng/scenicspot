@@ -6,7 +6,9 @@
         _buyNowBtn:$(".btn-buy"),
         _productId:$("#productId"),
         _price:$(".pro-price"),
-        _proOthers:$(".pro-others")},
+        _proOthers:$(".pro-others"),
+        _productDetail:$(".img-wrap")
+        },
         xrp = {};
     xrp.initPinal = function () {
 
