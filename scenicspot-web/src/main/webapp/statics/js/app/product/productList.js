@@ -2,7 +2,7 @@
    var config = {
        url:"/api/product/list.shtm",
        reqParam:{"currentPage":0,"priceOrder":0,"saleOrder":0,"categoryId":0,"pageSize":10}
-   },dom = {_window:$(window),_document:$(document),_html:$('html'),_body:$('body'),_loadmore:$('.load-more'),_content:$("#sortDefault"),_condition:$(".control-item")},xrp={};
+   },dom = {_window:$(win),_document:$(document),_html:$('html'),_body:$('body'),_loadmore:$('.load-more'),_content:$("#sortDefault"),_condition:$(".control-item")},xrp={};
     xrp.html = '     <li class="table-view-cell media">\n'
         + '                <a class="navigate-right">\n'
         + '                    <img class="media-object pull-left" src="/statics/app/img/dstc/3.jpg"/>\n'
@@ -20,6 +20,7 @@
    //初始化面板方法
     xrp.initPanel = function(){
         dom._content.empty();
+        dom._loadmore.hide();
         xrp.request(true);
     };
 
@@ -28,8 +29,7 @@
            return;
        }
        config.reqParam.currentPage ++;
-       alert(JSON.parse(config.reqParam));
-       Ajax.request(config.url,{"data":JSON.parse(config.reqParam),"success":function (data) {
+       Ajax.request(config.url,{"data":config.reqParam,"success":function (data) {
            xrp.analysis(data);
        }});
    };
@@ -49,13 +49,14 @@
                //渲染无数据页面
                return;
            }
-           var $createNode = $(xrp.html);
+           var $nodeModel = $(xrp.html);
            var productList = data.productList;
            config.reqParam.pageSize = productList.length;
            for (var i = 0 ; i < productList.length ; i++){
+               var $createNode = $nodeModel.clone();
                $createNode.find(".media-object").attr("src",[data.imagePrix,productList[i].listImg].join(""));
                $createNode.find(".title-name").text(productList[i].goodsName);
-               $createNode.find(".moods").text(productList[i].virtual_sales+"人付款");
+               $createNode.find(".moods").text(productList[i].virtualSales+"人付款");
                $createNode.find(".price").text("￥"+productList[i].shopPrice)
                dom._content.append($createNode);
            }

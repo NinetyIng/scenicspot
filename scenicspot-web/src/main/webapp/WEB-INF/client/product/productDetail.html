@@ -13,10 +13,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="email=no" name="format-detection" />
-    <link rel="stylesheet" href="/statics/app//statics/app/css/tcxq.css">
+    <link rel="stylesheet" href="/statics/app/css/tcxq.css">
     <span th:include="/common/globalConfig :: commonOnLoadJs"></span>
 </head>
-
 <body>
     <!--底部导航栏-->
     <footer class="bar bar-tab footer-bar">
@@ -26,8 +25,8 @@
             <span class="bar-item btn-buy" style="">立即购买</span>
         </div>
     </footer>
-
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <input type="hidden" th:value="${productId}" id="productId" />
     <div class="content">
         <!--产品详情顶部图片-->
         <img class="pro-img" src="/statics/app/img/tcxq/1.jpg" />
@@ -174,4 +173,5 @@
         },false);
     </script>
 </body>
+<script src="/statics/js/app/product/productDetail.js"></script>
 </html>
