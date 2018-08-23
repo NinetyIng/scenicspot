@@ -55,29 +55,24 @@ input, button, select, textarea {
   padding: 15px;
 }
 .content .popular-info .slide-box {
-  height: 180px;
   margin-top: 30px;
-  overflow: hidden;
-}
-.content .popular-info .slide-box .wrap {
-  height: 200px;
   display: -webkit-box;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 }
-.content .popular-info .slide-box .wrap .slide-item {
+.content .popular-info .slide-box .slide-item {
   width: 120px;
   text-align: center;
   margin-right: 15px;
   overflow: hidden;
 }
-.content .popular-info .slide-box .wrap .slide-item img {
+.content .popular-info .slide-box .slide-item img {
   width: 120px;
   height: 120px;
   border: 1px solid #ccc;
   vertical-align: bottom;
 }
-.content .popular-info .slide-box .wrap .slide-item p {
+.content .popular-info .slide-box .slide-item p {
   font-size: 14px;
   line-height: 14px;
   margin-top: 15px;
@@ -87,7 +82,7 @@ input, button, select, textarea {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.content .popular-info .slide-box .wrap .slide-item .price {
+.content .popular-info .slide-box .slide-item .price {
   color: #FF3C00;
   font-size: 17px;
 }
