@@ -109,7 +109,14 @@ public class ProductModel implements Serializable{
      */
     private String putime;
 
-
+    /**
+     * 默认库存id
+     */
+    private Integer skuId;
+    /**
+     * 默认库存
+     */
+    private Integer stock;
     /**
      * 商品相册
      */
