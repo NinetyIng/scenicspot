@@ -29,7 +29,13 @@
     <input type="hidden" th:value="${productId}" id="productId" />
     <div class="content">
         <!--产品详情顶部图片-->
-        <img class="pro-img" src="/statics/app/img/tcxq/1.jpg" />
+        <div class="banner">
+            <div style="height:250px;width:100%" id="swiper-container" class="swiper-container">
+                <div class="swiper-wrapper">
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
         <!--产品简介-->
         <div class="pro-bref">
             <div class="pro-title"></div>
@@ -38,11 +44,11 @@
                 <span>¥</span>
                 <span>￥</span>
             </div>
-            <div class="pro-others">
+           <!-- <div class="pro-others">
                 <span class="pro-address">都匀</span>
                 <span class="pro-post">快递 0.00</span>
                 <span class="pro-has-sell"></span>
-            </div>
+            </div>-->
         </div>
         <a class="pro-choose" onclick="openModal()">
             <div class="">选择：盒装</div>
@@ -67,7 +73,7 @@
     <div id="specificationPage" class="modal">
         <header class="bar bar-nav">
             <a class="icon icon-close pull-right" onclick="closeModal()"></a>
-            <h1 class="title">都均毛尖茶</h1>
+            <h3 class="title">选择规格</h3>
             <div class="pro-img"></div>
         </header>
 
@@ -83,7 +89,7 @@
         </footer>
         <div class="content">
             <div class="spec">
-                <div class="spec-title padding-left-5">规格</div>
+                <!--<div class="spec-title padding-left-5">规格</div>
                 <ul class="spec-list padding-left-5">
                     <li>礼盒包装</li>
                     <li>礼盒包装</li>
@@ -92,7 +98,7 @@
                 <ul class="spec-list padding-left-5">
                     <li>礼盒包装</li>
                     <li>礼盒包装</li>
-                </ul>
+                </ul>-->
                 <div class="pro-num">
                     <div class="num-label">数量</div>
                     <div class="num-adjust">
@@ -131,7 +137,11 @@
         };
 
         var plus = function () {
-            adjustView.innerText ++;
+            if(parseInt(adjustView.innerText) < globalConfig.singleProductBuyLimit){
+                adjustView.innerText ++;
+            }else{
+                alert("该商品最多购买" + globalConfig.singleProductBuyLimit+"件");
+            }
         };
         
         var openModal = function () {

@@ -61,9 +61,6 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     public ProductStockModel stockDetail(PageData pageData) {
         String attrVals = pageData.getAsString(ProductConstant.ATTR_VALS);
-        if (StringUtils.isEmpty(attrVals)){
-            throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
-        }
         Optional<String> valsOpt =Stream.of(attrVals.split(SpecificSymbolConstants.VERTICAL_LINE)).sorted()
                 .reduce((a,b)->String.join(SpecificSymbolConstants.VERTICAL_LINE,a,b));
         if(!valsOpt.isPresent()){

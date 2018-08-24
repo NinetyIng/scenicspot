@@ -33,7 +33,10 @@ public class StartFilter implements Filter{
       AppClientConfig appClientConfig = AppClientConfig.builder().setDomain(ConfigureManager.getSystemConfig().getDomain())
               .setPageSize(ConfigureManager.getAppConfig().getPageSize() + StringUtils.EMPTY)
               .setShowUrl(ConfigureManager.getSystemConfig().getFtpConfigure().getImageShowPath())
-              .setSystemName(ConfigureManager.getSystemConfig().getSystemName());
+              .setSystemName(ConfigureManager.getSystemConfig().getSystemName())
+              .setCartLimit(ConfigureManager.getAppConfig().getPuroductConfig().getCartLimit() + StringUtils.EMPTY)
+              .setBuyCountLimit(ConfigureManager.getAppConfig().getPuroductConfig().getBuyCountLimit() + StringUtils.EMPTY)
+              .setSingleProductBuyLimit(ConfigureManager.getAppConfig().getPuroductConfig().getSingleProductBuyLimit() + StringUtils.EMPTY);
       servletRequest.getServletContext().setAttribute(CONTEXTCONFIG,appClientConfig);
     }
     filterChain.doFilter(servletRequest,servletResponse);

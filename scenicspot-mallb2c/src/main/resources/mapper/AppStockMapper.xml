@@ -20,6 +20,6 @@
     </select>
     <select id="findByAttrValues" resultMap="StockReturn">
         SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
-        FROM T_GOODS_SKU  WHERE ATTR_JSON = #{attrVals}
+        FROM T_GOODS_SKU  WHERE ATTR_JSON = #{attrVals} AND GOODS_ID = #{productId}
     </select>
 </mapper>
