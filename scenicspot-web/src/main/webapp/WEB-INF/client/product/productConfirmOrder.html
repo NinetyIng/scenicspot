@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>确认商品订单</title>
+    <link href="/statics/css/reset.css" rel="stylesheet" />
+    <link href="/statics/css/common.css" rel="stylesheet" />
+    <link href="/statics/css/confirm-order.css" rel="stylesheet" />
+    <link href="/statics/css/pay-type.css" rel="stylesheet" />
+    <span th:include="/common/globalConfig :: commonOnLoadJs"></span>
+    <style type="text/css">
+        .yuebuzhu {
+            color: #999;
+        }
+        #pointChecked, #is_mer_title {
+            -webkit-appearance: none;
+            border-radius: 0px;
+            border: 0px;
+            width: 0px;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            background: none;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<!--收货地址-->
+<div class="address">
+    <a href='#'>
+        <div>
+            <p class="f333">请选择地址</p>
+            <p class="f333"></p>
+            <p class="f333">联系人信息：刘俊博    13631705905</p>
+            <p class="f666 font-s12 margin-t12">广东省深圳市宝安区</p>
+        </div> <i class="icon-right"></i>
+    </a>
+</div>
+<!--商品介绍-->
+<div class="wrap">
+    <div class="content ">
+        <div class="cart-info border-bottom clearfix con-box goodsItem" style="margin-top: 15px;">
+            <img class="l" style="width: 80px; height: 80px;"   src="" />
+            <div class="con clearfix">
+                <div class="l">
+                    <p>iphonex</p>
+                    <p class="font-s12 f666" style="display: block; height: 20px;">
+                        1111
+                    </p>
+                    <p class="fad8a54">￥98</p>
+                </div>
+                <p class="f666 font-s12 text-X1">X 2</p>
+            </div>
+        </div>
+        <div class="text-box">
+            <p>
+                总计：<span class="fad8a54">￥<span>32</span></span>
+            </p>
+            <p class="f666">
+                免运费（含运费￥<span>52</span>）
+            </p>
+        </div>
+    </div>
+</div>
+<div class="wrap-youh">
+    <div class="wrap-con clearfix" >
+        <span class="l">配送方式</span>
+        <div class="check-box r">
+            <input name="checkbox"  type="checkbox">快递
+            <input name="checkbox"  type="checkbox"> 到店自提
+        </div>
+    </div>
+</div>
+<div class="wrap-youh">
+    <div class="wrap-con clearfix" >
+        <span class="l">开具发票</span>
+        <div class="check-box r">
+            <input name="checkbox"  type="checkbox">
+        </div>
+    </div>
+    <div class="wrap-con clearfix" style="border-bottom: 0px;">
+        <input type="text" placeholder="请填写发票抬头"    style="border: 1px solid #e0e0e0; height: 35px; width: 80%; text-indent: .3rem; margin-top: 10px;"   name="mer_title" id="mer_title" />
+        <span   style="margin-left: 20px;"><span>0</span>/<span>50</span></span>
+        <input  type="text" placeholder="请填写发票税号"   style="border: 1px solid #e0e0e0; height: 35px; width: 80%; text-indent: .3rem; margin-top: 10px;"  name="mer_no"  />
+    </div>
+    <div class="wrap-con clearfix" style="border-bottom: 0px;display: none;">
+        <input type="text" placeholder="请填写纳税人识别号" style="border: 1px solid #e0e0e0; height: 35px; width: 80%; text-indent: .3rem; margin-top: 10px;"   name="mer_no" />
+    </div>
+</div>
+<!--提交订单-->
+<div class="cart-js">
+    <div class="yf margin-t20 l">
+        <p style="margin-top: 8px;">
+            总计：<span class="fad8a54">￥<span id="orderTotalPrice">253</span></span>
+        </p>
+    </div>
+    <div class="cart-right r">
+        <button style="background-color: #FF3C00;">去支付</button>
+    </div>
+</div>
+<div class="fixed" style="display: none;" id="toPay">
+    <div class="fixed-bg"></div>
+    <div class="fixed-wrap">
+        <ul class="content-list">
+            <li>
+                <div id="closePayType" class="back l">
+                    <img src="/statics/img/cancel_icon.png" />
+                </div>
+                <p class="text-center font-s16">选择支付方式</p>
+            </li>
+            <!--我发布的-->
+            <li data-type="2" id="wechatPay" class="clearfix selectPayType">
+                <!--左边-->
+                <div class="icon-box l">
+                    <img src="/statics/img/weixin@2x.png" /> <span class="f666">微信支付</span>
+                </div>
+                <div class="select-width r">
+                    <img src="/statics/img/xuanze@2x.png">
+                </div>
+            </li>
+        </ul>
+        <div class="clearfix pay">
+            <span class="l">付款</span> <span class="fad8a54 r">￥<span>1180.00</span></span>
+        </div>
+        <div class="sure-btn">
+            <button>确定付款</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

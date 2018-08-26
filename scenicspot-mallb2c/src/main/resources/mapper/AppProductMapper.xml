@@ -25,6 +25,8 @@
        <result property="putime" column="PUTIME" jdbcType="VARCHAR"></result>
        <result property="skuId" column="SKU_ID" jdbcType="INTEGER"></result>
        <result property="stock" column="STOCK" jdbcType="DECIMAL"></result>
+       <result property="maxPrice" column="maxPrice" jdbcType="VARCHAR"></result>
+       <result property="minPrice" column="minPrice" jdbcType="VARCHAR"></result>
        <collection property="album" javaType="java.util.List" ofType="com.ythd.ower.b2c.model.ProductAlbumModel">
            <id property="id" column="ALBUM_ID" jdbcType="INTEGER"></id>
            <result property="goodsId" column="ALBUM_GOODS_ID" jdbcType="VARCHAR"></result>
@@ -107,7 +109,8 @@
     <select id="findProductDetail" parameterType="pd" resultMap="ProductReturn">
         SELECT <include refid="ProductDetailFiled" />,t2.ORIGINAL_IMG,t2.THUMB_IMG,t2.GOODS_ID AS ALBUM_GOODS_ID,t2.ALBUM_ID,
         t3.ATTR_NAME,t3.ATTR_VALUE,t3.ATTR_SORT,t3.IS_SALE,t3.GOODS_ATTR_ID,t3.GOODS_ID as ATTR_GOODS_ID,
-        t4.SKU_ID,t4.STOCK
+        t4.SKU_ID,t4.STOCK,(SELECT MAX(price) FROM T_GOODS_SKU WHERE GOODS_ID = #{productId}) AS  maxPrice,
+        (SELECT MIN(price) FROM T_GOODS_SKU WHERE GOODS_ID = #{productId}) AS  minPrice
         FROM (SELECT * FROM T_GOODS  WHERE IFNULL(IS_DELETE,0) = 0
         AND  IFNULL(IS_ON_SALE,1) = 1 AND LIST_IMG IS NOT NULL AND GOODS_ID = #{productId}) t1 LEFT JOIN T_GOODS_ALBUM t2
         ON  t1.GOODS_ID = t2.GOODS_ID

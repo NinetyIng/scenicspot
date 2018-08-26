@@ -14,7 +14,43 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="email=no" name="format-detection" />
     <link rel="stylesheet" href="/statics/app/css/tcxq.css">
+    <link rel="stylesheet" href="/statics/css/swiper.min.css">
     <span th:include="/common/globalConfig :: commonOnLoadJs"></span>
+    <script src="/statics/js/swiper.min.js"></script>
+    <style>
+        .attrSelect{
+            color:#FFF!important;
+            background-color: #FC9313!important;
+        }
+
+        .attrNoSelect{
+            color: #FC9313!important;
+            background-color: #FFF!important;
+        }
+        .title{
+            left:-40px;
+            font-size: 16px!important;
+            color: #ff7d13!important;
+            font-weight: bold!important;
+        }
+        .selectTip{
+            position: absolute!important;
+            z-index: 20!important;
+            left: 143px!important;
+            top: 34px!important;
+            font-size: 16px!important;
+            width: 60%!important;
+            height: 70px!important;
+            overflow: hidden;
+        }
+        .addcl{
+            position: absolute!important;
+            z-index: 20!important;
+            left: 149px!important;
+            top: 0px!important;
+            font-size: 16px!important;
+        }
+    </style>
 </head>
 <body>
     <!--底部导航栏-->
@@ -31,7 +67,7 @@
         <!--产品详情顶部图片-->
         <div class="banner">
             <div style="height:250px;width:100%" id="swiper-container" class="swiper-container">
-                <div class="swiper-wrapper">
+                <div  class="swiper-wrapper">
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -39,10 +75,9 @@
         <!--产品简介-->
         <div class="pro-bref">
             <div class="pro-title"></div>
-            <p class="pro-intro"></p>
             <div class="pro-price">
-                <span>¥</span>
-                <span>￥</span>
+                <span></span>
+                <span></span>
             </div>
            <!-- <div class="pro-others">
                 <span class="pro-address">都匀</span>
@@ -51,40 +86,38 @@
             </div>-->
         </div>
         <a class="pro-choose" onclick="openModal()">
-            <div class="">选择：盒装</div>
+            <div class="">选择规格</div>
             <img src="/statics/app/img/icons/arrow_right.png" alt=""/>
         </a>
         <!--产品介绍-->
         <div class="pro-detail">
             <div class="pro-title">产品介绍</div>
-            <p class="pro-content hidden">都匀毛尖， 中国十大名茶之一。1956年，由毛泽东亲 笔命名，又名“白毛尖”、“细毛尖”、“鱼钩茶”、 “雀舌茶”，是贵州三大名茶之一。外形条索紧结纤细 卷曲、披毫，色绿翠。香清高，味鲜浓，叶底嫩绿匀整... 防治坏血病和护御放射性元素等多种功效与作用。</p>
-            <div class="btn-wrap" onclick="showDetailInfo()">
+            <p class="pro-content"></p>
+         <!--   <div class="btn-wrap" onclick="showDetailInfo()">
                 <img src="/statics/app/img/icons/arrow_down.png" alt=""/>
-            </div>
+            </div>-->
         </div>
         <!--产品图片-->
         <div class="img-wrap">
-            <img src="/statics/app/img/tcxq/2.jpg" alt=""/>
-            <img src="/statics/app/img/tcxq/3.png" alt=""/>
-            <img src="/statics/app/img/tcxq/4.jpg" alt=""/>
         </div>
     </div>
     <!--产品规格选择-->
     <div id="specificationPage" class="modal">
         <header class="bar bar-nav">
             <a class="icon icon-close pull-right" onclick="closeModal()"></a>
-            <h3 class="title">选择规格</h3>
+            <div class="title addcl"></div>
+            <div class="selectTip">请选择 机身颜色  存储容量  网络类型 运营商类型</div>
             <div class="pro-img"></div>
         </header>
 
         <!--底部导航栏-->
         <footer class="bar bar-tab order-bar">
             <div class="toolbar">
-            <span class="bar-item total-price">
+          <!--  <span class="bar-item total-price">
                 <div>￥961</div>
                 <div>订单总价</div>
-            </span>
-                <span class="bar-item btn-buy">提交订单</span>
+            </span>-->
+                <span class="bar-item btn-buy">确定</span>
             </div>
         </footer>
         <div class="content">
@@ -129,6 +162,10 @@
                 }
             }
         };
+        var mySwiper = new Swiper('#swiper-container', {
+            autoplay: 5000,//可选选项，自动滑动
+            pagination: '.swiper-pagination'
+        });
 
         var adjustView = document.querySelector('.adjust-view');
 

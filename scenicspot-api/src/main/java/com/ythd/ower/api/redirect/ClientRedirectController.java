@@ -35,7 +35,10 @@ public class ClientRedirectController {
         model.addAttribute(ProductConstant.PRODUCT_ID,productId);
         return "product/productDetail";
     }
-
+    @RequestMapping("confirmOrder")
+    public String confirmOrder(){
+        return "product/productConfirmOrder";
+    }
     @RequestMapping("productList")
     public String productList(Model model,String recommendOrder,String putimeOrder) {
         if (StringUtils.isNotEmpty(recommendOrder)){

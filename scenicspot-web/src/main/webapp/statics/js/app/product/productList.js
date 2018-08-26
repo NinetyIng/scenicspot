@@ -69,7 +69,7 @@
            for (var i = 0 ; i < productList.length ; i++){
                var $createNode = $nodeModel.clone();
                $createNode.attr("onclick","window.location.href='"+config.detailUrl+"?productId="+productList[i].id+"'");
-               $createNode.find(".media-object").attr("src",[data.imagePrix,productList[i].listImg].join(""));
+               $createNode.find(".media-object").attr("src",globalConfig.showUrl + productList[i].listImg);
                $createNode.find(".title-name").text(productList[i].goodsName);
                $createNode.find(".moods").text(productList[i].virtualSales+"人付款");
                $createNode.find(".price").text("￥"+productList[i].shopPrice)

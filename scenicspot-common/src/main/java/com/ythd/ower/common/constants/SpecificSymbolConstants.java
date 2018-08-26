@@ -14,6 +14,7 @@ public interface SpecificSymbolConstants {
     String COMMA = ",";
     String QUOTE = "'";
     String SLASH = "/";
+    String BACKSLASH = "\\";
     String PERIOD = ".";
     String TILDE = "~";
     String VERTICAL_LINE = "|";

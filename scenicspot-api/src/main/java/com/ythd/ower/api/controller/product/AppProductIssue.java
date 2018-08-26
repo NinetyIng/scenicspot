@@ -121,6 +121,4 @@ public class AppProductIssue {
         LOGGER.info("请求库存详情返回数据：{}", MapperUtil.toJson(stockModel));
         return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(stockModel)));
     }
-
-
 }

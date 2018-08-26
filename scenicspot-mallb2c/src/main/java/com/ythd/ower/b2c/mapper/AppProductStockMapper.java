@@ -13,6 +13,6 @@ public interface AppProductStockMapper {
 
     List<ProductStockModel> findStockListByGoodsId(Integer productId);
 
-    ProductStockModel findByAttrValues(@Param("attrVals") String attrVals);
+    ProductStockModel findByAttrValues(@Param("attrVals") String attrVals,@Param("productId") String productId);
 
 }

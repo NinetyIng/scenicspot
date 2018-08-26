@@ -1,0 +1,143 @@
+*{
+	box-sizing: border-box;
+}
+img{
+	display: block;
+}
+/*color*/
+.f47616e{
+	color: #47616e;
+}
+.f666{
+	color: #666;
+}
+.fad8a54{
+	color:#FF3C00;
+}
+.f999{
+	color: #999;
+}
+.f000{
+	color: #000;
+}
+.f333{
+	color:#333333;
+}
+.fred{
+	color: red;
+}
+/*margin*/
+.margin-t12{
+	margin-top: .12rem;
+}
+.margin-t20{
+	margin-top: .2rem;
+}
+.margin-t30{
+	margin-top: .3rem;
+}
+.margin-t60{
+	margin-top: .6rem;
+}
+.margin-t50{
+	margin-top: .5rem;
+}
+.margin-t40{
+	margin-top: .4rem;
+}
+.margin-r30{
+	margin-right: .3rem;
+}
+/*font-size*/
+.font-s12{
+	font-size: 12px;
+}
+.font-s16{
+	font-size: 16px;
+}
+.font-s18{
+	font-size: 18px;
+}
+/*background*/
+.bg-fff{
+	background: #fff;
+}
+/*padding*/
+.pd{
+	padding: .16rem .26rem;
+}
+/*鏂囧瓧涓棿鍔犳í绾�/
+.text-decoration{text-decoration: line-through;}
+
+/*boder-bottom #e0e0e0*/
+.border-bottom{
+	border-bottom: 1px solid #e0e0e0;
+}
+.border-right{
+	border-right:1px solid #e0e0e0;
+}
+/*wrap*/
+.wrap{
+	padding-top: 0.26rem;
+	padding-bottom: 0.26rem;
+	margin-top: 0.2rem;
+	background: #fff;
+	border-bottom: 1px solid #e0e0e0;
+}
+/*鏍囬*/
+.title{
+	padding-left: 0.26rem;
+	overflow: hidden;
+	padding-bottom: 0.3rem;
+	position: relative;
+}
+.title .title-box{
+	width: 3px;
+	height: 23px;
+	background: #47626e;
+	float: left;
+	margin-right: 0.14rem;
+}
+.title h2{
+	font-size: 16px;
+	font-weight: 500;
+}
+.title .icon-right{
+	position: absolute;
+    right: .2rem;
+    top: 0;
+}
+.icon-right{
+	width: .32rem;
+	height: .32rem;
+	display: block;
+	background: url(../img/jiantou@2x.png) no-repeat;
+	background-size: contain;
+}
+
+/*
+ banner
+ * */
+.banner .swiper-container .swiper-pagination-bullet-active{
+	background: #B59D6D;
+}
+.banner .swiper-pagination-bullet{
+	background: #fff;
+	opacity: 1;
+}
+
+/*
+ * checkbox radio
+ */
+input[type="radio"]:before,input[type="checkbox"]:before{
+		content: "";
+		width: .26rem;
+		height: .26rem;
+		display: inline-block;      
+		background: url(../img/weixuan.png) no-repeat;
+		background-size: contain;
+}
+input[type="radio"]:checked:before,input[type="checkbox"]:checked:before{
+		background: url(../img/yixuan@2x.png) no-repeat;
+		background-size: contain;
+}

@@ -61,12 +61,13 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     public ProductStockModel stockDetail(PageData pageData) {
         String attrVals = pageData.getAsString(ProductConstant.ATTR_VALS);
-        Optional<String> valsOpt =Stream.of(attrVals.split(SpecificSymbolConstants.VERTICAL_LINE)).sorted()
+        Stream.of(attrVals.split(SpecificSymbolConstants.BACKSLASH + SpecificSymbolConstants.VERTICAL_LINE)).forEach(item-> System.out.println(item));
+        Optional<String> valsOpt =Stream.of(attrVals.split(SpecificSymbolConstants.BACKSLASH + SpecificSymbolConstants.VERTICAL_LINE)).sorted()
                 .reduce((a,b)->String.join(SpecificSymbolConstants.VERTICAL_LINE,a,b));
         if(!valsOpt.isPresent()){
             throw  new BizServiceException(ErrorCodesContants.PARAM_ERROR);
         }
         LOGGER.info("排序之后的字符串为：{}",valsOpt.get());
-        return appProductStockMapper.findByAttrValues(valsOpt.get());
+        return appProductStockMapper.findByAttrValues(valsOpt.get(),pageData.getAsString(ProductConstant.PRODUCT_ID));
     }
 }
