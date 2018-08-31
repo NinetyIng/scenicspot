@@ -118,5 +118,16 @@ public class AppProductIssue {
         return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(stockModel)));
     }
 
+    /**
+     * 提交订单
+     */
+    @RequestMapping(value = "confirmOrder",method = RequestMethod.POST)
+    public GenericResponseDto confirmOrder(@RequestBody PageData requestParam){
+        LOGGER.info("请求库存详情接口，请求参数：{}", MapperUtil.toJson(requestParam));
+       // appProductService.confirmOrder(requestParam);
+        return null;
+    }
+
+
 
 }
