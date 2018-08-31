@@ -101,7 +101,9 @@ public class ConfigureManager {
       appConfigure.setPageSize(appObject.getIntValue("pageSize"))
               .builderProductConfig().setCartLimit(productConfigObject.getInteger("cartLimit"))
               .setIndexLastCount(productConfigObject.getInteger("indexLastCount"))
-              .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"));
+              .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"))
+              .setBuyCountLimit(productConfigObject.getInteger("buyCountLimit"))
+              .setSingleProductBuyLimit(productConfigObject.getInteger("singleProductBuyLimit"));
     }
   }
 }

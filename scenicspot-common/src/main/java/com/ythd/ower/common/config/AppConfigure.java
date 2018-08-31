@@ -50,6 +50,10 @@ public class AppConfigure {
          */
          private Integer cartLimit;
 
+         private Integer singleProductBuyLimit;
+
+         private Integer buyCountLimit;
+
         public Integer getCartLimit() {
             return cartLimit;
         }
@@ -61,6 +65,24 @@ public class AppConfigure {
 
         public Integer getIndexRecommendCount() {
             return indexRecommendCount;
+        }
+
+        public Integer getSingleProductBuyLimit() {
+            return singleProductBuyLimit;
+        }
+
+        public ProductConfigure setSingleProductBuyLimit(Integer singleProductBuyLimit) {
+            this.singleProductBuyLimit = singleProductBuyLimit;
+            return this;
+        }
+
+        public Integer getBuyCountLimit() {
+            return buyCountLimit;
+        }
+
+        public ProductConfigure setBuyCountLimit(Integer buyCountLimit) {
+            this.buyCountLimit = buyCountLimit;
+            return this;
         }
 
         public ProductConfigure setIndexRecommendCount(Integer indexRecommendCount) {

@@ -27,6 +27,40 @@ public class AppClientConfig {
    */
   private String systemName;
 
+  private String singleProductBuyLimit;
+
+
+  private String buyCountLimit;
+
+  private String cartLimit;
+
+  public String getSingleProductBuyLimit() {
+    return singleProductBuyLimit;
+  }
+
+  public AppClientConfig setSingleProductBuyLimit(String singleProductBuyLimit) {
+    this.singleProductBuyLimit = singleProductBuyLimit;
+    return this;
+  }
+
+  public String getBuyCountLimit() {
+    return buyCountLimit;
+  }
+
+  public AppClientConfig setBuyCountLimit(String buyCountLimit) {
+    this.buyCountLimit = buyCountLimit;
+    return this;
+  }
+
+  public String getCartLimit() {
+    return cartLimit;
+  }
+
+  public AppClientConfig setCartLimit(String cartLimit) {
+    this.cartLimit = cartLimit;
+    return this;
+  }
+
   public static AppClientConfig builder(){
     return new AppClientConfig();
   }

@@ -117,6 +117,16 @@ public class ProductModel implements Serializable{
      * 默认库存
      */
     private Integer stock;
+
+    /**
+     * 最大的价格
+     */
+    private String maxPrice;
+    /**
+     * 最小的价格
+     */
+    private String minPrice;
+
     /**
      * 商品相册
      */

@@ -113,6 +113,10 @@ public class AppProductIssue {
     @RequestMapping(value = "stockDetail",method = RequestMethod.POST)
     public GenericResponseDto stockDetail(@RequestBody PageData requestParam){
         LOGGER.info("请求库存详情接口，请求参数：{}", MapperUtil.toJson(requestParam));
+        Result<GenericResponseDto> checkResult = ProductParamCheck.checkStockDetail(requestParam);
+        if(checkResult.isFailure()){
+            return checkResult.getData();
+        }
         ProductStockModel stockModel = appProductService.stockDetail(requestParam);
         LOGGER.info("请求库存详情返回数据：{}", MapperUtil.toJson(stockModel));
         return DtoUtils.getSuccessResponse(MapperUtil.toMap(MapperUtil.toJson(stockModel)));
@@ -127,7 +131,4 @@ public class AppProductIssue {
        // appProductService.confirmOrder(requestParam);
         return null;
     }
-
-
-
 }

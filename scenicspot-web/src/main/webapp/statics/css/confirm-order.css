@@ -1,0 +1,97 @@
+/*地址管理*/
+.address{
+	padding:.2rem .26rem;
+	background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+}
+.address .icon-right{
+	position: absolute;
+    right: .26rem;
+    top: .3rem;
+}
+.con-box{
+	padding-bottom: 10px;
+    padding-left: .26rem;
+}
+.text-box{
+	padding-right: .26rem;
+    text-align: right;
+    padding-top: .26rem;
+}
+.content img{
+	width: 1.6rem;
+}
+.con{
+	width: 1%;
+	display: table-cell;
+	padding: 0 10px;
+	position: relative;
+}
+.text-X1{
+	position: absolute;
+    right: 10px;
+    bottom: 0;
+}
+/*优惠*/
+.wrap-youh{
+	padding-left: .26rem;
+    padding-right: .26rem;
+    margin-top: 0.2rem;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+.wrap-con{
+	padding-top: .26rem;
+    padding-bottom: .26rem;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+}
+.wrap-con .icon-right{
+	position: absolute;
+    right: 0;
+}
+
+
+/*结算*/
+.cart-js{
+	position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.2rem;
+    background: #fff;
+    padding-left: .34rem;
+}
+.cart-left{
+	position: relative;
+    float: left;
+    height: 100%;
+    vertical-align: middle;
+}
+.cart-left label{
+	margin-left: .5rem;
+    display: inline-block;
+    padding-top: .5rem;
+}
+.cart-left input{
+	position: absolute;
+    left: 0;
+    top: .5rem;
+}
+.cart-right{
+	height:100%;
+}
+.cart-right .yf{
+	margin-top: 10px;
+	margin-right: 5px;
+	display: inline-block;
+}
+.cart-right button{
+	padding-left: .8rem;
+    padding-right: .8rem;
+    background: #ab8a54;
+    height: 100%;
+    color: #fff;
+    display: inline-block;
+}
