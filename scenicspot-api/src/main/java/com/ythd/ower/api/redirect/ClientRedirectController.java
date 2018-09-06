@@ -38,7 +38,7 @@ public class ClientRedirectController {
     @RequestMapping("confirmOrder")
     public String confirmOrder(Model model,String productId){
         model.addAttribute(ProductConstant.PRODUCT_ID,productId);
-        return "product/confirm-order";
+        return "product/confirmOrder";
     }
     @RequestMapping("productList")
     public String productList(Model model,String recommendOrder,String putimeOrder) {

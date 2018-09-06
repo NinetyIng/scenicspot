@@ -123,12 +123,36 @@ public class AppProductIssue {
     }
 
     /**
-     * 提交订单
+     * 确认订单
      */
     @RequestMapping(value = "confirmOrder",method = RequestMethod.POST)
     public GenericResponseDto confirmOrder(@RequestBody PageData requestParam){
-        LOGGER.info("请求库存详情接口，请求参数：{}", MapperUtil.toJson(requestParam));
-       // appProductService.confirmOrder(requestParam);
-        return null;
+        LOGGER.info("请求确认订单接口，请求参数：{}", MapperUtil.toJson(requestParam));
+        Result<GenericResponseDto> checkResult = ProductParamCheck.checkConfirmOrder(requestParam);
+        if(checkResult.isFailure()){
+          return checkResult.getData();
+        }
+        String confirmDto = MapperUtil.toJson(appProductService.confirmOrder(requestParam));
+        LOGGER.info("请求确认订单返回数据：{}", confirmDto);
+        return DtoUtils.getSuccessResponse(MapperUtil.toMap(confirmDto));
     }
+
+  /**
+   * 提交订单
+   */
+  @RequestMapping(value = "submitOrder",method = RequestMethod.POST)
+  public GenericResponseDto submitOrder(@RequestBody PageData requestParam){
+    LOGGER.info("请求提交订单接口，请求参数：{}", MapperUtil.toJson(requestParam));
+    Result<GenericResponseDto> checkResult = ProductParamCheck.checkSubmitOrder(requestParam);
+    if(checkResult.isFailure()){
+      return checkResult.getData();
+    }
+    String confirmDto = MapperUtil.toJson(appProductService.submitOrder(requestParam));
+    LOGGER.info("提交订单接口返回数据：{}", confirmDto);
+    return DtoUtils.getSuccessResponse(MapperUtil.toMap(confirmDto));
+  }
+
+
+
+
 }

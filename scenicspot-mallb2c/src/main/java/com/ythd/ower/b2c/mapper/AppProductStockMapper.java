@@ -15,4 +15,6 @@ public interface AppProductStockMapper {
 
     ProductStockModel findByAttrValues(@Param("attrVals") String attrVals,@Param("productId") String productId);
 
+    List<ProductStockModel> findStockByIds(@Param("idList") List<String> idList);
+
 }

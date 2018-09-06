@@ -155,6 +155,13 @@
     xrp.buyNow = function () {
        if(config.requestData.attrs && config.requestData.attrs.length > 0){
            openModal();
+           //判断是否选择完成
+           if(dom._selectTip.text().indexOf("请选择")){
+               return;
+           }
+       }
+       if(config.submitParam.skuId){
+           window.location.href = "/jumplink/confirmOrder?stockId=" + config.submitParam.skuId;
        }
     };
    (function(){

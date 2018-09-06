@@ -32,7 +32,7 @@
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/statics/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/statics/js/jquery.tips.js"></script>
-<script type="text/javascript" src="/statics/js/util/Ajax.js"></script>
+<script type="text/javascript" src="/statics/js/user/Ajax.js"></script>
 <script type="text/javascript" src="/statics/js/user/Login.js"></script>
 <script type="text/javascript">
 	$(document).keyup(function(event) {

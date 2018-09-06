@@ -20,6 +20,7 @@
         <module>scenicspot-web</module>
         <module>scenicspot-wechat</module>
         <module>scenicspot-mallb2c</module>
+        <module>scenicspot-member</module>
     </modules>
     <properties>
         <guava.version>r09</guava.version>

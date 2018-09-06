@@ -22,4 +22,13 @@
         SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
         FROM T_GOODS_SKU  WHERE ATTR_JSON = #{attrVals} AND GOODS_ID = #{productId}
     </select>
+    <select id="findStockByIds" parameterType="java.util.List" resultMap="StockReturn">
+        SELECT SKU_ID,GOODS_ID,PRICE,ATTR_JSON,STOCK
+        FROM T_GOODS_SKU
+        WHERE SKU_ID  IN
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

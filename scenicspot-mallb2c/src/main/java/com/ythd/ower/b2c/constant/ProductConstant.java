@@ -9,5 +9,27 @@ public interface ProductConstant {
     String PUTIME_ORDER = "putimeOrder";
     String RECOMMEND_ORDER = "recommendOrder";
     String EXCLUDE_IDS = "excludeIds";
-    String ATTR_VALS ="attrVals";
+    String ATTR_VALS = "attrVals";
+    String STOCK_IDS = "stockIds";
+    String ORDER_MONEY = "orderMoney";
+    String PRODUCT_MONEY = "productMoney";
+    String CONNAME = "conName";
+    String CONPHONE= "conPhone";
+    String CONADDRESS = "address";
+    String AREA = "area";
+    String CITY = "city";
+    String CITY_ID = "cityId";
+    String AREA_ID = "areaId";
+    String PROVINCE = "province";
+    String PROVINCE_ID = "provinceId";
+    String CREATE_TYPE = "createType";
+    String MER = "mer";
+    String MER_NO = "mer_no";
+    String MER_TITLE = "merTitle";
+
+    String MER_TYPE = "merType";
+
+    String ORDER_SN = "orderSn";
+
+
 }

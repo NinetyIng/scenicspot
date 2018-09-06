@@ -1,5 +1,7 @@
 package com.ythd.ower.b2c.service;
 
+import com.ythd.ower.b2c.dto.ProductConfirmDto;
+import com.ythd.ower.b2c.dto.ProductPayDto;
 import com.ythd.ower.b2c.model.ProductModel;
 import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.common.dto.PageData;
@@ -22,10 +24,30 @@ public interface AppProductService {
      */
     List<ProductModel> productList(PageData requestParam);
 
-
+    /**
+     * 商品详情
+     * @param requestParam
+     * @return
+     */
     ProductModel productDetail(PageData requestParam);
 
-
+    /**
+     * 库存详情
+     * @param pageData
+     * @return
+     */
     ProductStockModel stockDetail(PageData pageData);
 
+    /**
+     * 确认订单
+     * @param pageData
+     * @return
+     */
+    ProductConfirmDto confirmOrder(PageData pageData);
+    /**
+     * 提交订单 返回支付参数
+     * @param pageData
+     * @return
+     */
+    ProductPayDto submitOrder(PageData pageData);
 }

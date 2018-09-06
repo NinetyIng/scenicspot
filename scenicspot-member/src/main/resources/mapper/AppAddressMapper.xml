@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.member.mapper.AppAddressMapper">
+
+   <resultMap id="AddressReturn" type="com.ythd.ower.member.model.UserAddressModel">
+       <id property="id" column="id" jdbcType="INTEGER" ></id>
+       <result property="conName" column="con_name" jdbcType="VARCHAR"></result>
+       <result property="conAddress" column="con_address" jdbcType="VARCHAR"></result>
+       <result property="conPhone" column="con_phone" jdbcType="VARCHAR"></result>
+       <result property="provinceId" column="province_id" jdbcType="VARCHAR"></result>
+       <result property="cityId" column="city_id" jdbcType="VARCHAR"></result>
+       <result property="areaId" column="area_id" jdbcType="VARCHAR"></result>
+       <result property="area" column="area" jdbcType="VARCHAR"></result>
+       <result property="city" column="city" jdbcType="VARCHAR"></result>
+       <result property="province" column="province" jdbcType="VARCHAR"></result>
+       <result property="def" column="is_default" jdbcType="VARCHAR"></result>
+   </resultMap>
+    <sql id="Filed">
+        ID,
+        CON_NAME,
+        CON_ADDRESS,
+        CON_PHONE,
+        PROVINCE_ID,
+        CITY_ID,
+        AREA_ID,
+        AREA,
+        CITY,
+        PROVINCE,
+        IS_DEFAULT
+    </sql>
+    <!-- 查询用户默认地址-->
+    <select id="findDefaultAddress" resultMap="AddressReturn">
+        SELECT <include refid="Filed" /> FROM T_USER_ADDRESS WHERE USER_ID = #{userId}
+        AND IS_DEFAULT = 1
+    </select>
+
+</mapper>

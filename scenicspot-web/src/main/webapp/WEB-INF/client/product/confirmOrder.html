@@ -1,9 +1,8 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html>
 <head>
-
-	<title></title>
-
+	<title>确认订单</title>
 	<meta name="author" content=""/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -14,6 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="email=no" name="format-detection" />
+	<span th:include="/common/globalConfig :: commonOnLoadJs"></span>
     <link rel="stylesheet" type="text/css" href="/statics/app/css/qrdd.css">
     <style type="text/css">
     </style>
@@ -21,12 +21,12 @@
 <body>
    <div class="content">
    	  <div class="address">
-   	  	  <img class="pull-left adress-icon" src="/statics/app/img/icons/img/address.png"/>
+   	  	  <img class="pull-left adress-icon" src="/statics/app/img/icons/address.png"/>
    	  	 <div class="right">
    	  	 	<div class="con-person"><div class="pull-left">收货人：刘俊博</div><div class="pull-right" style="margin-top: 3px;">13631705905</div></div>
    	  	 	<div class="clear"></div>
             <div class="con-address">收货地址：广东省深圳市南山区粤海南山科技园科研路9号比克大厦11楼1101A</div>
-            <img class="right-icon" src="/statics/app/img/icons/img/right.png">
+            <img class="right-icon" src="/statics/app/img/icons/right.png">
    	  	 </div>
    	  	 <img class="gdt" src="/statics/app/img/icons/img/1.jpg">
    	  </div>
@@ -38,7 +38,7 @@
 
       <div class="pro-list">
       	<div class="pro-item">
-      		 <img class="pull-left pro-img" src="/statics/app/img/icons/img/2.jpg"/>
+      		 <img class="pull-left pro-img" src="/statics/app/img/icons/2.jpg"/>
              <div class="pull-right pro-right">
              	<div class="pro-title">
              		 <div>妙洁平板拖把升级</div>
@@ -53,7 +53,7 @@
       	</div>
       	<div style="background-color: #FFF;width: 100%;height: 8px;"></div>
       	<div class="pro-item">
-      		 <img class="pull-left pro-img" src="/statics/app/img/icons/img/2.jpg"/>
+      		 <img class="pull-left pro-img" src="/statics/app/img/icons/2.jpg"/>
              <div class="pull-right pro-right">
              	<div class="pro-title">
              		 <div>妙洁平板拖把升级</div>
@@ -71,9 +71,9 @@
       	<div class="num">
             <div class="num-left pull-left">购买数量</div>
             <div class="num-right pull-right">
-            	<div class="num-gray pull-right"><img src="/statics/app/img/icons/img/jiahao.png"></div>
+            	<div class="num-gray pull-right"><img src="/statics/app/img/icons/jiahao.png"></div>
             	<div class="pull-right" style="line-height: 2;">1</div>
-            	<div class="num-gray pull-right"><img src="/statics/app/img/icons/img/jianhao.png"></div>
+            	<div class="num-gray pull-right"><img src="/statics/app/img/icons/jianhao.png"></div>
             </div>
             <div class="clear"></div>
       	</div>
