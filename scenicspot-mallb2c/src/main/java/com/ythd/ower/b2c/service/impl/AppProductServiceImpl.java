@@ -1,5 +1,7 @@
 package com.ythd.ower.b2c.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.ythd.ower.b2c.constant.ProductConstant;
 import com.ythd.ower.b2c.dto.ProductConfirmDto;
 import com.ythd.ower.b2c.dto.ProductPayDto;
@@ -8,6 +10,7 @@ import com.ythd.ower.b2c.mapper.AppProductMapper;
 import com.ythd.ower.b2c.mapper.AppProductOrderMapper;
 import com.ythd.ower.b2c.mapper.AppProductStockMapper;
 import com.ythd.ower.b2c.model.ProductModel;
+import com.ythd.ower.b2c.model.ProductOrderGoodsModel;
 import com.ythd.ower.b2c.model.ProductOrderModel;
 import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.b2c.service.AppProductService;
@@ -21,6 +24,10 @@ import com.ythd.ower.common.tools.MapperUtil;
 import com.ythd.ower.member.constant.UserConstant;
 import com.ythd.ower.member.mapper.AppAddressMapper;
 import com.ythd.ower.member.model.UserAddressModel;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -94,12 +101,23 @@ public class AppProductServiceImpl implements AppProductService {
     return ProductConfirmDto.builder().setProductListDto(stocks).setUserAddressModel(addressModel);
   }
 
-
   @Override
   public ProductPayDto submitOrder(PageData pageData) {
     ProductOrderModel productOrderModel =  ProductOrderModel.builder(pageData);
     LOGGER.info("创建订单数据为：", MapperUtil.toJson(productOrderModel));
     appProductOrderMapper.createOrder(productOrderModel);
-    return null;
+    JSONArray buyInfo = JSONArray.parseArray(pageData.getAsString(ProductConstant.BUY_INFO));
+    LOGGER.info("用户购买信息为{}",buyInfo);
+    Map<String,String> buyInfoMap = buyInfo.stream().collect(Collectors.toMap(
+            p->{JSONObject buyItem = JSONObject.parseObject(p.toString()) ;   return buyItem.getString(ProductConstant.SKU_ID);}
+            ,p-> {JSONObject buyItem = JSONObject.parseObject(p.toString()) ; return buyItem.getString(ProductConstant.BUY_NUM);}));
+    List<ProductOrderGoodsModel> orderGoodsModels = appProductStockMapper.findProductInfoByStuIds(new ArrayList<>(buyInfoMap.keySet()));
+    orderGoodsModels.stream().forEach(item -> {
+      item.setOrderId(productOrderModel.getId());
+      item.setProductCount(buyInfoMap.get(item.getSkuId()));
+    });
+    appProductOrderMapper.createOrderGoods(orderGoodsModels);
+    ProductPayDto payDto = ProductPayDto.builder().setOrderSn(productOrderModel.getOrderSn());
+    return payDto;
   }
 }

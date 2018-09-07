@@ -10,4 +10,21 @@ package com.ythd.ower.b2c.dto;
  * @version: $Revision$
  */
 public class ProductPayDto {
+  /**
+   * 订单号
+   */
+  String orderSn;
+
+  public static ProductPayDto builder(){
+    return new ProductPayDto();
+  }
+
+  public String getOrderSn() {
+    return orderSn;
+  }
+
+  public ProductPayDto setOrderSn(String orderSn) {
+    this.orderSn = orderSn;
+    return this;
+  }
 }

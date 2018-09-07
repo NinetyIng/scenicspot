@@ -26,10 +26,11 @@ public interface ProductConstant {
     String MER = "mer";
     String MER_NO = "mer_no";
     String MER_TITLE = "merTitle";
-
     String MER_TYPE = "merType";
-
     String ORDER_SN = "orderSn";
+    String BUY_INFO = "buyInfo";
+    String SKU_ID = "skuId";
+    String BUY_NUM = "buyNum";
 
 
 }

@@ -53,6 +53,7 @@ public class ConfigureManager {
       wxConfigure.setAppId(baseConfig.getString("appId"));
       wxConfigure.setAppKey(baseConfig.getString("appKey"));
       wxConfigure.setMchtId(baseConfig.getString("mchtId"));
+      wxConfigure.setToken(baseConfig.getString("token"));
       JSONObject payConfig = wxObject.getJSONObject("payConfig");
       wxConfigure.builderWxPayConfigureInstance()
               .setPayAppId(payConfig.getString("payAppId"))

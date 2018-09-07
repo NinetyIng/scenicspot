@@ -18,6 +18,8 @@ public class WxConfigure {
 
   private String mchtId;
 
+  private String token;
+
   private WxPayConfigure payConfigure;
 
   private WxUrlConfigure urlConfigure;
@@ -72,6 +74,13 @@ public class WxConfigure {
     this.urlConfigure = urlConfigure;
   }
 
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 
   public class WxPayConfigure{
 

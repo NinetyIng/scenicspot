@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.wx.mapper.WeChatMapper">
+    <sql id="condition">
+        <if test="pd.id != null">
+            and id = #{pd.id}
+        </if>
+        <if test="pd.menu_name != null">
+            and menu_name = #{pd.menu_name}
+        </if>
+        <if test="pd.menu_type != null">
+            and menu_type = #{pd.menu_type}
+        </if>
+        <if test="pd.parent_id != null">
+            and parent_id = #{pd.parent_id}
+        </if>
+        <if test="pd.menu_content != null">
+            and menu_content = #{pd.menu_content}
+        </if>
+        <if test="pd.menu_key != null">
+            and menu_key = #{pd.menu_key}
+        </if>
+    </sql>
+    <!-- 新增-->
+    <insert id="insert" parameterType="pd">
+        insert into t_wechat_reply (key_word,reply_type,reply_content,status,crate_time,creator)
+        values (#{key_word},#{reply_type},#{reply_content},#{status},#{crate_time},#{creator})
+    </insert>
+    <!-- 删除-->
+    <delete id="delete" parameterType="pd">
+        delete from t_wechat_menu where  id = #{id}
+    </delete>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="pd">
+        update  t_wechat_reply
+        set
+        key_word = #{key_word},
+        reply_type = #{reply_type},
+        status = #{status},
+        reply_content = #{reply_content}
+        where
+        id = #{id}
+    </update>
+
+    <!-- 通过ID获取数据 -->
+    <select id="findById" resultType="pd"  parameterType="pd">
+        select  * from  t_wechat_reply where  id	= #{id}
+    </select>
+
+    <!-- 微信自動回復按關鍵詞查詢回復內容-->
+    <select id="findByKeyWord" resultType="pd"  parameterType="pd" useCache="false">
+        select  * from  t_wechat_reply where  1 = 1
+        <if test="key_word != null and key_word != ''">
+            and key_word like CONCAT('%',#{key_word},'%')
+        </if>
+    </select>
+    <!-- 微信自動回復按關鍵詞查詢回復內容-->
+    <select id="findByEventKey" resultType="pd"  parameterType="pd" useCache="false">
+        select  * from  t_wechat_reply where  key_word = #{key_word}
+    </select>
+
+    <!-- 匹配关键词 -->
+    <select id="findByKw" resultType="pd"  parameterType="pd" useCache="false">
+        select  * from  t_wechat_reply where 1=1
+        <if test="key_word != null and key_word != ''">
+            and key_word = #{key_word}
+        </if>
+        <if test="id != null and id != ''">
+            and id != #{id}
+        </if>
+        <if test="status == null or status == ''">
+            and status = 1
+        </if>
+    </select>
+
+    <!-- 列表 -->
+    <select id="datalistPage" resultType="pd"  parameterType="pd">
+        select
+        *
+        from
+        t_wechat_menu
+        where
+        1=1
+        <if test="pd.KEYWORD != null and pd.KEYWORD != ''"><!-- 关键词检索 -->
+            and KEYWORD LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+        </if>
+        <if test="pd.STATUS!=null and pd.STATUS!='' and pd.STATUS!=0"><!-- 状态检索 -->
+            and status = #{pd.status}
+        </if>
+        order by crate_time desc
+    </select>
+
+    <!-- 列表(全部) -->
+    <select id="listAll" resultType="pd"  parameterType="pd">
+        select * from  t_wechat_menu
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteAll" parameterType="String">
+        delete from t_wechat_menu
+        where
+        IMGMSG_ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+
+    <!--
+        =======================================================================================================================================
+        菜单部分
+        =======================================================================================================================================
+     -->
+    <!-- 新增-->
+    <insert id="saveMenu" parameterType="pd">
+        insert into t_wechat_menu (menu_name,menu_type,menu_order,parent_id,menu_content,menu_key,author,crate_time,creator)
+        values (#{menu_name},#{menu_type},#{menu_order},#{parent_id},#{menu_content},#{menu_key},#{author},#{crate_time},#{creator})
+    </insert>
+
+    <!-- 删除-->
+    <delete id="deleteMenu" parameterType="pd">
+        delete from t_wechat_menu where 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="menu_name != null">
+            and menu_name = #{menu_name}
+        </if>
+        <if test="menu_type != null">
+            and menu_type = #{menu_type}
+        </if>
+        <if test="parent_id != null">
+            and parent_id = #{parent_id}
+        </if>
+        <if test="menu_content != null">
+            and menu_content = #{menu_content}
+        </if>
+        <if test="menu_key != null">
+            and menu_key = #{menu_key}
+        </if>
+    </delete>
+
+    <!-- 修改 -->
+    <update id="editMenu" parameterType="pd">
+        update t_wechat_menu
+        <set>
+            <if test="menu_name != null">
+                menu_name = #{menu_name},
+            </if>
+            <if test="menu_type != null">
+                menu_type = #{menu_type},
+            </if>
+            <if test="parent_id != null">
+                parent_id = #{parent_id},
+            </if>
+            <if test="menu_content != null">
+                menu_content = #{menu_content},
+            </if>
+            <if test="menu_key != null">
+                menu_key = #{menu_key},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="listMenu" resultType="pd"  parameterType="pd">
+        select * from t_wechat_menu where 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="menu_name != null">
+            and menu_name = #{menu_name}
+        </if>
+        <if test="menu_type != null">
+            and menu_type = #{menu_type}
+        </if>
+        <if test="parent_id != null">
+            and parent_id = #{parent_id}
+        </if>
+        <if test="menu_content != null">
+            and menu_content = #{menu_content}
+        </if>
+        <if test="menu_key != null">
+            and menu_key = #{menu_key}
+        </if>
+    </select>
+    <select id="findMenuById" resultType="pd"  parameterType="pd" >
+        SELECT * from t_wechat_menu where id = #{id}
+    </select>
+    <delete id="deleteMenuById" parameterType="pd">
+        delete from t_wechat_menu where id = #{id}
+    </delete>
+</mapper>

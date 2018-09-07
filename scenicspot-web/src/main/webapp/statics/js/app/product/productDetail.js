@@ -161,7 +161,7 @@
            }
        }
        if(config.submitParam.skuId){
-           window.location.href = "/jumplink/confirmOrder?stockId=" + config.submitParam.skuId;
+           window.location.href = "/jumplink/confirmOrder?stockIds=" + config.submitParam.skuId;
        }
     };
    (function(){

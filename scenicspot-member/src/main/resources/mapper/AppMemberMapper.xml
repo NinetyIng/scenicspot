@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.member.mapper.AppUserMapper">
+  
+    <resultMap id="UserReturn" type="com.ythd.ower.member.model.UserModel">
+        <id column="user_id" property="id" jdbcType="INTEGER"></id>
+        <result property="phone" column="phone" jdbcType="VARCHAR"></result>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"></result>
+        <result property="password" column="password" jdbcType="VARCHAR"></result>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"></result>
+        <result property="registerChannel" column="register_channel" jdbcType="VARCHAR"></result>
+        <result property="registerTime" column="register_time" jdbcType="VARCHAR"></result>
+        <result property="status" column="status" jdbcType="VARCHAR"></result>
+        <result property="subscribe" column="subscribe" jdbcType="VARCHAR"></result>
+        <result property="headimgurl" column="headimgurl" jdbcType="VARCHAR"></result>
+        <result property="subscribeTime" column="subscribe_time" jdbcType="VARCHAR"></result>
+        <result property="openId" column="open_id" jdbcType="VARCHAR"></result>
+        <result property="buyer" column="is_buyer" jdbcType="VARCHAR"></result>
+        <result property="loginer" column="is_loginer" jdbcType="VARCHAR"></result>
+        <result property="commenter" column="is_commenter" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ythd.ower.member.model.UserModel">
+        INSERT INTO T_USER(phone,user_name,password,nick_name,register_channel,register_time,status,subscribe,headimgurl,subscribe_time,open_id,is_buyer,is_loginer,is_commenter)
+        VALUES(#{phone},#{userName},#{password},#{nickName},#{registerChannel},#{registerTime},#{status},#{subscribe},#{headimgurl},#{subscribeTime},#{openId},#{buyer},#{loginer},#{commenter})
+    </insert>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="UserReturn">
+        SELECT  * FROM T_USER WHERE open_id = #{openId}
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="UserReturn">
+        SELECT  * FROM T_USER WHERE user_id = #{userId}
+    </select>
+
+</mapper>

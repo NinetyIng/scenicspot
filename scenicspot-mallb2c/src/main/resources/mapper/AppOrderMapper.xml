@@ -39,6 +39,7 @@
         <result property="failReason" column="fail_reason" jdbcType="VARCHAR"></result>
     </resultMap>
 
+    <!-- 创建订单主表-->
     <insert id="createOrder" parameterType="com.ythd.ower.b2c.model.ProductOrderModel">
         INSERT  INTO t_orders (order_sn,user_id,user_name,order_money,goods_money,order_status,shipping_status,shipping_type,pay_status,
         pay_type,contact_name,contact_phone,province_id,province,city_id,city,area_id,area,address,
@@ -51,5 +52,13 @@
         </selectKey>
     </insert>
 
+    <!-- 创建订单商品表-->
+    <insert id="createOrderGoods" parameterType="java.util.List">
+        INSERT INTO T_ORDERS_GOODS (order_id,goods_id,goods_name,goods_sn,goods_count,goods_price,goods_sku_id,goods_attr,is_refund)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.orderId}, #{item.productId},#{item.productName},#{item.productSn},#{item.productCount},#{item.productPrice},#{item.skuId},#{productAttr},#{refund})
+        </foreach>
+    </insert>
 
 </mapper>

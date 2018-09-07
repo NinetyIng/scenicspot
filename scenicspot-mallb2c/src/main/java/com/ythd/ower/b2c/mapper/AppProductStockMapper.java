@@ -1,5 +1,6 @@
 package com.ythd.ower.b2c.mapper;
 
+import com.ythd.ower.b2c.model.ProductOrderGoodsModel;
 import com.ythd.ower.b2c.model.ProductStockModel;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface AppProductStockMapper {
 
     List<ProductStockModel> findStockByIds(@Param("idList") List<String> idList);
 
+    List<ProductOrderGoodsModel> findProductInfoByStuIds(@Param("idList") List<String> idList);
 }

@@ -1,6 +1,9 @@
 package com.ythd.ower.b2c.mapper;
 
+import com.ythd.ower.b2c.model.ProductOrderGoodsModel;
 import com.ythd.ower.b2c.model.ProductOrderModel;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Description:
@@ -14,4 +17,7 @@ public interface AppProductOrderMapper {
    * @param order
    */
   void createOrder(ProductOrderModel order);
+
+
+  void createOrderGoods(@Param("list") List<ProductOrderGoodsModel> list);
 }

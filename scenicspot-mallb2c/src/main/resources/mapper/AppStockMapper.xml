@@ -12,7 +12,18 @@
        <result property="barCode" column="BAR_CODE" jdbcType="VARCHAR"></result>
        <result property="stockAlarm" column="STOCK_ALARM" jdbcType="VARCHAR"></result>
    </resultMap>
-
+    <resultMap id="ProductInfo" type="com.ythd.ower.b2c.model.ProductOrderGoodsModel">
+        <id property="id" column="order_goods_id" jdbcType="INTEGER" ></id>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"></result>
+        <result property="productId" column="goods_id" jdbcType="INTEGER"></result>
+        <result property="goodsName" column="goods_name" jdbcType="VARCHAR"></result>
+        <result property="productSn" column="goods_sn" jdbcType="VARCHAR"></result>
+        <result property="productCount" column="goods_count" jdbcType="VARCHAR"></result>
+        <result property="productPrice" column="goods_price" jdbcType="VARCHAR"></result>
+        <result property="skuId" column="goods_sku_id" jdbcType="INTEGER"></result>
+        <result property="productAttr" column="goods_attr" jdbcType="VARCHAR"></result>
+        <result property="refund" column="is_refund" jdbcType="INTEGER"></result>
+    </resultMap>
     <!--根据商品id查找库存 返回库存列表 -->
     <select id="findStockListByGoodsId" parameterType="java.lang.Integer" resultMap="StockReturn">
         SELECT SKU_ID,GOODS_ID,MARKET_PRICE,PRICE,ATTR_JSON,STOCK,BAR_CODE,STOCK_ALARM
@@ -26,6 +37,14 @@
         SELECT SKU_ID,GOODS_ID,PRICE,ATTR_JSON,STOCK
         FROM T_GOODS_SKU
         WHERE SKU_ID  IN
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="findProductInfoByStuIds" parameterType="java.util.List" resultMap="ProductInfo">
+        SELECT  t1.price as goods_price,t1.sku_id as goods_sku_id,t1.attr_json as goods_attr,t2.goods_name,t2.goods_id,t2.goods_sn
+        FROM T_GOODS_SKU t1 INNER  JOIN T_GOODS t2 ON  t1.GOODS_ID = t2.GOODS_ID
+        WHERE SKU_ID IN
         <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>

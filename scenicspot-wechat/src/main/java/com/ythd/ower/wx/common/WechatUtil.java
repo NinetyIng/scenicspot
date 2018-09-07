@@ -223,14 +223,7 @@ public final class WechatUtil {
 		return object.getString("errmsg");
 	}
 
-	/**
-	 * 查询设置的行业信息
-	 */
-	public static String getIndustryInfo() {
-		String jsonStr = HttpRequest.sendPost(
-				"https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=" + getAccessToken(), "");
-		return jsonStr;
-	}
+
 
 	/**
 	 * 查询所有模板列表
@@ -427,9 +420,9 @@ public final class WechatUtil {
 		String wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + Configure.getAppid()
 				+ "&redirect_uri=";
 		if (EAString.isNullStr(redirect_uri)) {
-			wxUrl = wxUrl + PropertiesHelper.getWechatUrl() + "appwx/oauth2";
+			wxUrl = wxUrl + ConfigureManager.getSystemConfig().getDomain()  + "appwx/oauth2";
 		} else {
-			wxUrl = wxUrl + PropertiesHelper.getWechatUrl() + "appwx/oauth2?zcurl=" + url + "%26dengHaoShu=" + dc;
+			wxUrl = wxUrl + ConfigureManager.getSystemConfig().getDomain()  + "appwx/oauth2?zcurl=" + url + "%26dengHaoShu=" + dc;
 		}
 		wxUrl = wxUrl + "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
 		return wxUrl;
@@ -441,14 +434,14 @@ public final class WechatUtil {
 	 */
 	public static String getAuthorUrlUserInfo(String redirect_uri) {
 		redirect_uri = EAString.base64Encode(redirect_uri);
-		int dc = EAString.countOccurrencesOf(redirect_uri, "=");
-		String url = EAString.delete(redirect_uri, "=");
+		int dc = EAString.countOccurrencesOf(redirect_uri, SpecificSymbolConstants.EQUEL);
+		String url = EAString.delete(redirect_uri, SpecificSymbolConstants.EQUEL);
 		String wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + Configure.getAppid()
 				+ "&redirect_uri=";
 		if (EAString.isNullStr(redirect_uri)) {
-			wxUrl = wxUrl +  PropertiesHelper.getWechatUrl()+"appwx/oauth2";
+			wxUrl = wxUrl +  ConfigureManager.getSystemConfig().getDomain() + "appwx/oauth2";
 		} else {
-			wxUrl = wxUrl +  PropertiesHelper.getWechatUrl()+"appwx/oauth2?zcurl=" + url + "%26dengHaoShu=" + dc;
+			wxUrl = wxUrl +  ConfigureManager.getSystemConfig().getDomain() +"appwx/oauth2?zcurl=" + url + "%26dengHaoShu=" + dc;
 		}
 		wxUrl = wxUrl + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		return wxUrl;

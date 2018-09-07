@@ -1,5 +1,7 @@
 package com.ythd.ower.member.service;
 
+import com.ythd.ower.common.dto.PageData;
+
 /**
  * Description:
  * @author: liujunbo
@@ -7,4 +9,17 @@ package com.ythd.ower.member.service;
  * @version: $Revision$
  */
 public interface AppUserService {
+
+  /**
+   * 关注公众号
+   * @param pd
+   */
+  void subscribe(PageData pd);
+
+  /**
+   * 取消关注公众号
+   * @param openId
+   */
+  void unsubscribe(String openId);
+
 }

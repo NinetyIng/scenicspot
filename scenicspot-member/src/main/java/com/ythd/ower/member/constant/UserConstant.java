@@ -11,5 +11,26 @@ package com.ythd.ower.member.constant;
  */
 public interface UserConstant {
 
-  String USERID = "userID";
+  String TIMEFORMAT_ONE = "yyyy-MM-dd HH:mm:ss";
+
+  String USERID = "userId";
+
+  String OPENID = "open_id";
+
+  String WX_USERINFO = "wxUserInfo";
+
+
+  String WX_HEADIMGURL = "headimgurl";
+
+  String WX_NICKNAME = "nickname";
+
+  String WX_PHONE = "phone";
+
+  String WX_TITLE = "微信公众号";
+
+  String SUBSCRIBE_TIME = "subscribe_time";
+
+  Integer OPENED = 1;
+
+  Integer CLOSED = 0;
 }
