@@ -77,6 +77,7 @@
 			   if(confirm("确定删除菜单")){
 				   Ajax.request("/menu/delete.do",{"data":{"MENU_ID":menu_id},"success":function(item){
 			          	 if(item.result =="200"){
+			          	     parent.initTree();
 			          		 window.location.href="/menu/list.do?MENU_ID="+parent_id;
 			          	 }else{
 			          		 alert(item.msg);

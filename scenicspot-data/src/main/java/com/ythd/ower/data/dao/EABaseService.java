@@ -1,10 +1,11 @@
-package com.ythd.ower.server.base;
+package com.ythd.ower.data.dao;
 
 
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.tools.EAString;
 import com.ythd.ower.common.tools.EAUtil;
+
 import java.util.List;
 
 public abstract class EABaseService implements EAService{

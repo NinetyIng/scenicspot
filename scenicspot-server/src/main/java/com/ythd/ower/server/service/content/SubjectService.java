@@ -1,7 +1,7 @@
 package com.ythd.ower.server.service.content;
 
-import com.ythd.ower.server.base.EABaseService;
-import com.ythd.ower.server.base.EADao;
+import com.ythd.ower.data.dao.EABaseService;
+import com.ythd.ower.data.dao.EADao;
 import com.ythd.ower.server.mapper.content.SubjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

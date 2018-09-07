@@ -1,7 +1,8 @@
-package com.ythd.ower.server.base;
+package com.ythd.ower.data.dao;
 
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
+
 import java.util.List;
 
 public interface EADao {

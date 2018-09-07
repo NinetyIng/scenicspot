@@ -1,7 +1,7 @@
 package com.ythd.ower.server.mapper.content;
 
 
-import com.ythd.ower.server.base.EADao;
+import com.ythd.ower.data.dao.EADao;
 
 public interface ContentCategoryMapper  extends EADao {
 }

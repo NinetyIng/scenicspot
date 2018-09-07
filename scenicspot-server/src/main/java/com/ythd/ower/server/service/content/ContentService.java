@@ -1,8 +1,8 @@
 package com.ythd.ower.server.service.content;
 
 import com.ythd.ower.common.dto.PageData;
-import com.ythd.ower.server.base.EABaseService;
-import com.ythd.ower.server.base.EADao;
+import com.ythd.ower.data.dao.EABaseService;
+import com.ythd.ower.data.dao.EADao;
 import com.ythd.ower.server.mapper.content.ContentMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

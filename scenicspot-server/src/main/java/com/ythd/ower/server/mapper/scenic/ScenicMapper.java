@@ -3,7 +3,8 @@ package com.ythd.ower.server.mapper.scenic;
 
 import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
-import com.ythd.ower.server.base.EADao;
+import com.ythd.ower.data.dao.EADao;
+
 import java.util.List;
 
 public interface ScenicMapper extends EADao {

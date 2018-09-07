@@ -81,8 +81,6 @@
 													</div>
 													<div class="help-block with-errors"></div>
 												</div>
-												
-												
 												<div id="r_link_div" class="form-group" <c:if test="${dataModel.menu_type!=2 }">style="display: none;"</c:if> >
 													<label class="col-sm-2 control-label">网页地址</label>
 													<div class="col-sm-8">
@@ -346,7 +344,7 @@
 				var jsonText = JSON.stringify(items);
 				obj.menu_content=jsonText;
 			}
-			app.post(obj,"/sys/wechat/save_menu",onAddResult,onAddFault);
+			app.post(obj,"/sys/wechat/save_menu.do",onAddResult,onAddFault);
 		}
 		
 		function checkItem(paraStr){
@@ -364,7 +362,7 @@
 		function onAddResult(data){
 			if(data.result==200){
 				bootbox.alert("保存成功！");	
-				location.href="/sys/wechat/menu_list";
+				location.href="/sys/wechat/menu_list.do";
 			}else{
 				alert(data.msg);
 			}
@@ -372,7 +370,7 @@
 		function onAddFault(data){
 			if(data.result==200){
 				bootbox.alert("保存成功！");	
-				location.href="/sys/wechat/menu_list";
+				location.href="/sys/wechat/menu_list.do";
 			}else{
 				bootbox.alert(data.msg);
 			}

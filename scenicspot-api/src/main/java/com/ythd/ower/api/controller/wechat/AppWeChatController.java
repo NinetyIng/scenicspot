@@ -54,7 +54,6 @@ public class AppWeChatController extends BaseController{
   @Autowired
   private AppUserService appUserService;
 
-  private String TOKEN = ConfigureManager.getWxConfig().getToken();
 
   @RequestMapping(value = "/chartReply")
   public void valid(HttpServletRequest request, HttpServletResponse response) {
@@ -313,7 +312,7 @@ public class AppWeChatController extends BaseController{
       String timestamp = request.getParameter("timestamp");
       String nonce = request.getParameter("nonce");
       String echostr = request.getParameter("echostr");
-      String[] tmpArr = { TOKEN, timestamp, nonce };
+      String[] tmpArr = { ConfigureManager.getWxConfig().getToken(), timestamp, nonce };
       Arrays.sort(tmpArr);
       String tmpStr = EAString.ArrayToString(tmpArr);
       tmpStr = EAString.SHA1Encode(tmpStr);

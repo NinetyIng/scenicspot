@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.wx.mapper.WechatReplyMapper">
+	<sql id="condition">
+		<if test="pd.id != null">
+			and id = #{pd.id}
+		</if>
+		<if test="pd.key_word != null">
+			and key_word = #{pd.key_word}
+		</if>
+		<if test="pd.reply_type != null">
+			and reply_type = #{pd.reply_type}
+		</if>
+		<if test="pd.reply_content != null">
+			and reply_content = #{pd.reply_content}
+		</if>
+		<if test="pd.status != null">
+			and status = #{pd.status}
+		</if>
+		<if test="pd.create_time != null">
+			and create_time = #{pd.create_time}
+		</if>
+		<if test="pd.creator != null">
+			and creator = #{pd.creator}
+		</if>
+	</sql>
+	
+	<select id="selectByPage" resultType="pd"  parameterType="page">
+		select * from t_wechat_reply where 1=1
+			<include refid="condition"></include>
+	</select>
+
+	<select id="selectByMap" resultType="pd"  parameterType="pd">
+		select * from t_wechat_reply where 1=1
+			<include refid="condition"></include>
+	</select>
+
+	<select id="selectById" resultType="pd"  parameterType="Integer">
+		SELECT * from t_wechat_reply where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="pd">
+		insert into t_wechat_reply (key_word,reply_type,reply_content,status,create_time,creator)
+		values (#{key_word},#{reply_type},#{reply_content},#{status},#{create_time},#{creator})
+	</insert>
+
+	<select id="getLastId" resultType="Integer" parameterType="Integer">
+		select max(id) from t_wechat_reply where user_id = #{userId}
+	</select>
+
+	<update id="update" parameterType="pd">
+		update t_wechat_reply <set>
+		<if test="key_word != null">
+			key_word = #{key_word},
+		</if>
+		<if test="reply_type != null">
+			reply_type = #{reply_type},
+		</if>
+		<if test="reply_content != null">
+			reply_content = #{reply_content},
+		</if>
+		<if test="status != null">
+			status = #{status},
+		</if>
+		<if test="create_time != null">
+			create_time = #{create_time},
+		</if>
+		<if test="creator != null">
+			creator = #{creator},
+		</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete"   parameterType="pd">
+		delete from t_wechat_reply where 1=1
+		and id = #{pd.id}
+	</delete>
+
+	<select id="getCount" resultType="Integer"  parameterType="pd">
+		select count(*) from t_wechat_reply where 1=1
+		<include refid="condition"></include>
+	</select>
+</mapper>
