@@ -30,6 +30,8 @@ public interface UserConstant {
 
   String SUBSCRIBE_TIME = "subscribe_time";
 
+  String USER_MODEL = "userModel";
+
   Integer OPENED = 1;
 
   Integer CLOSED = 0;

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ythd.ower.b2c.mapper.AppProductStockMapper">
+
+    <resultMap id="TimerTaskReturn" type="com.ythd.ower.task.model.TimerTaskModel">
+        <id property="id" column="id" jdbcType="INTEGER" ></id>
+        <result property="name" column="name" jdbcType="VARCHAR"></result>
+        <result property="jobType" column="job_type" jdbcType="VARCHAR"></result>
+        <result property="groupName" column="group_name" jdbcType="VARCHAR"></result>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"></result>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"></result>
+        <result property="cron" column="cron" jdbcType="DECIMAL"></result>
+        <result property="jobStatus" column="job_status" jdbcType="DECIMAL"></result>
+        <result property="planStatus" column="plan_status" jdbcType="DECIMAL"></result>
+        <result property="isRunning" column="is_running" jdbcType="VARCHAR"></result>
+        <result property="jobData" column="job_data" jdbcType="VARCHAR"></result>
+        <result property="methodName" column="method_name" jdbcType="VARCHAR"></result>
+        <result property="beanName" column="bean_name" jdbcType="VARCHAR"></result>
+        <result property="description" column="description" jdbcType="VARCHAR"></result>
+        <result property="createId" column="create_id" jdbcType="VARCHAR"></result>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"></result>
+        <result property="modifyId" column="modify_id" jdbcType="VARCHAR"></result>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+    <select id="findByCondition" resultMap="TimerTaskReturn">
+        SELECT * FROM t_task_job WHERE  1 = 1
+        <if test="jobStatus != null and jobStatus != ''">
+            AND  job_status = #{jobStatus}
+        </if>
+        <if test="planStatus != null and planStatus != ''">
+            AND  plan_status = #{planStatus}
+        </if>
+    </select>
+
+    <delete id="deleteByNameAndGroup" parameterType="java.lang.String">
+        DELETE FROM t_task_job WHERE  name = #{name} and group_name = #{groupName}
+    </delete>
+
+    <insert id="insertLog" parameterType="com.ythd.ower.task.model.TimerTaskLogModel">
+        INSERT INTO t_task_log(job_id,reason,status,create_time)
+        VALUES (#{jobId},#{reason},#{status},#{createTime})
+    </insert>
+
+    <insert id="addJob" parameterType="com.ythd.ower.task.model.TimerTaskModel">
+        INSERT  INTO t_task_job(name,job_type,group_name,start_time,end_time,cron,job_status,plan_status,is_running,job_data,method_name,bean_name,description,create_time)
+        VALUES (#{name},#{jobType},#{groupName},#{startTime},#{endTime},#{cron},#{jobStatus},#{planStatus},#{isRunning},#{jobData},#{methodName},#{beanName},#{description},#{createTime})
+    </insert>
+
+    <update id="updateJob" parameterType="com.ythd.ower.task.model.TimerTaskModel">
+        UPDATE t_task_job
+        <set>
+         <if test="jobStatus != null and jobStatus != ''">
+            job_status = #{jobStatus},
+        </if>
+        <if test="planStatus != null and planStatus != ''">
+            plan_status = #{planStatus},
+        </if>
+        <if test="isRunning != null and isRunning != ''">
+            is_running = #{isRunning},
+        </if>
+        <if test="endTime != null and endTime != ''">
+            end_time = #{endTime},
+        </if>
+        <if test="cron != null and cron != ''">
+            cron = #{cron},
+        </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

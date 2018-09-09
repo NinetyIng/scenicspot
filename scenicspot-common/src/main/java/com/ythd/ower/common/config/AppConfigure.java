@@ -49,10 +49,20 @@ public class AppConfigure {
          * 购物车商品上限
          */
          private Integer cartLimit;
+        /**
+         * 单个商品购买限制
+         */
+        private Integer singleProductBuyLimit;
+        /**
+         * 购买总数限制
+         */
+        private Integer buyCountLimit;
 
-         private Integer singleProductBuyLimit;
+        private Double noPayOrderCancleTime;
 
-         private Integer buyCountLimit;
+        private String noPayTaskClassName;
+
+        private String defaultMethodName;
 
         public Integer getCartLimit() {
             return cartLimit;
@@ -99,6 +109,33 @@ public class AppConfigure {
             return this;
         }
 
+
+        public Double getNoPayOrderCancleTime() {
+            return noPayOrderCancleTime;
+        }
+
+        public ProductConfigure setNoPayOrderCancleTime(Double noPayOrderCancleTime) {
+            this.noPayOrderCancleTime = noPayOrderCancleTime;
+            return this;
+        }
+
+        public String getNoPayTaskClassName() {
+            return noPayTaskClassName;
+        }
+
+        public ProductConfigure setNoPayTaskClassName(String noPayTaskClassName) {
+            this.noPayTaskClassName = noPayTaskClassName;
+            return this;
+        }
+
+        public String getDefaultMethodName() {
+            return defaultMethodName;
+        }
+
+        public ProductConfigure setDefaultMethodName(String defaultMethodName) {
+            this.defaultMethodName = defaultMethodName;
+            return this;
+        }
     }
 
 

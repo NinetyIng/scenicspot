@@ -9,7 +9,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * Description:设置全局参数
@@ -27,7 +31,6 @@ public class StartFilter implements Filter{
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)throws ServletException,IOException{
-    System.out.println(servletRequest.getAttribute("currentPage"));
     Object configObj = servletRequest.getServletContext().getAttribute(CONTEXTCONFIG);
     if(configObj == null){
       AppClientConfig appClientConfig = AppClientConfig.builder().setDomain(ConfigureManager.getSystemConfig().getDomain())
@@ -39,9 +42,13 @@ public class StartFilter implements Filter{
               .setSingleProductBuyLimit(ConfigureManager.getAppConfig().getPuroductConfig().getSingleProductBuyLimit() + StringUtils.EMPTY);
       servletRequest.getServletContext().setAttribute(CONTEXTCONFIG,appClientConfig);
     }
+    /**
+     * 先写死成一个用户
+     */
+    HttpServletRequest request = (HttpServletRequest)servletRequest;
+    request.getSession().setAttribute("openId","oqJKnwxY57FosHk3vz6YIEbMfAqg");
     filterChain.doFilter(servletRequest,servletResponse);
   }
-
   @Override
   public void destroy() {
   }

@@ -21,23 +21,25 @@ import com.ythd.ower.common.dto.Page;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.common.exception.BizServiceException;
 import com.ythd.ower.common.tools.MapperUtil;
+import com.ythd.ower.common.tools.TimeUtils;
 import com.ythd.ower.member.constant.UserConstant;
 import com.ythd.ower.member.mapper.AppAddressMapper;
 import com.ythd.ower.member.model.UserAddressModel;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.apache.commons.lang3.StringUtils;
+
+import com.ythd.ower.task.constant.JobType;
+import com.ythd.ower.task.constant.TimerTaskConstant;
+import com.ythd.ower.task.job.QuartzManager;
+import com.ythd.ower.task.model.TimerTaskModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -63,6 +65,9 @@ public class AppProductServiceImpl implements AppProductService {
 
   @Resource
   private AppProductOrderMapper appProductOrderMapper;
+
+  @Resource
+  private QuartzManager quartzManager;
 
 
   @Override
@@ -118,6 +123,25 @@ public class AppProductServiceImpl implements AppProductService {
     });
     appProductOrderMapper.createOrderGoods(orderGoodsModels);
     ProductPayDto payDto = ProductPayDto.builder().setOrderSn(productOrderModel.getOrderSn());
+    //动态建立任务调度 30分钟后执行更改订单状态
+    try {
+
+      TimerTaskModel timerTaskModel = new TimerTaskModel();
+      timerTaskModel.setCreateTime(TimeUtils.toStringFormat_1(new Date()));
+      timerTaskModel.setJobData(MapperUtil.toJson(timerTaskModel));
+      timerTaskModel.setDescription("更改未支付状态为关闭状态");
+      timerTaskModel.setIsRunning(false);
+      timerTaskModel.setJobStatus(TimerTaskModel.CONCURRENT_IS);
+      timerTaskModel.setPlanStatus(TimerTaskModel.CONCURRENT_IS);
+      timerTaskModel.setName(productOrderModel.getOrderSn());
+      timerTaskModel.setGroupName(TimerTaskConstant.GROUP_NAME_ORDER);
+      timerTaskModel.setSpringId(ConfigureManager.getAppConfig().getPuroductConfig().getNoPayTaskClassName());
+      timerTaskModel.setMethodName(ConfigureManager.getAppConfig().getPuroductConfig().getDefaultMethodName());
+      timerTaskModel.setJobType(JobType.NOPAY_ORDER_JOB.getCode());
+      quartzManager.addJob(new TimerTaskModel());
+    }catch (Exception e){
+      LOGGER.error("订单号为{}的定时任务添加失败",productOrderModel.getOrderSn());
+    }
     return payDto;
   }
 }

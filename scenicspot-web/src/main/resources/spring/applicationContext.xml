@@ -17,4 +17,5 @@
 	</context:component-scan>
 	<!-- shiro  -->
 	<import resource="spring-shiro.xml"/>
+	<import resource="spring-quartz.xml"/>
 </beans>

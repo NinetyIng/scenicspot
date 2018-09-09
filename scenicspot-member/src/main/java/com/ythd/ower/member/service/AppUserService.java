@@ -1,6 +1,7 @@
 package com.ythd.ower.member.service;
 
 import com.ythd.ower.common.dto.PageData;
+import com.ythd.ower.member.model.UserModel;
 
 /**
  * Description:
@@ -21,5 +22,12 @@ public interface AppUserService {
    * @param openId
    */
   void unsubscribe(String openId);
+
+  /**
+   * 根据openid查询用户
+   * @param openId
+   * @return
+   */
+  UserModel findUserByOpenId(String openId);
 
 }

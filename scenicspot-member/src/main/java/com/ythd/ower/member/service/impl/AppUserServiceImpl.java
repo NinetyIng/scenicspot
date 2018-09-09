@@ -72,4 +72,9 @@ public class AppUserServiceImpl  implements AppUserService{
        appUserMapper.update(userModel);
     }
   }
+
+  @Override
+  public UserModel findUserByOpenId(String openId) {
+    return appUserMapper.findByOpenId(openId);
+  }
 }

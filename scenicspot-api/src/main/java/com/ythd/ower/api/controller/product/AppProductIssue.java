@@ -1,6 +1,7 @@
 package com.ythd.ower.api.controller.product;
 
 import com.ythd.ower.api.check.ProductParamCheck;
+import com.ythd.ower.api.common.BaseController;
 import com.ythd.ower.api.dto.ProductIndexDto;
 import com.ythd.ower.b2c.constant.ProductConstant;
 import com.ythd.ower.b2c.dto.ProductListDto;
@@ -14,6 +15,8 @@ import com.ythd.ower.common.ibox.GenericResponseDto;
 import com.ythd.ower.common.ibox.Result;
 import com.ythd.ower.common.tools.MapperUtil;
 import java.util.stream.Collectors;
+
+import com.ythd.ower.member.constant.UserConstant;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/product/")
-public class AppProductIssue {
+public class AppProductIssue extends BaseController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppProductIssue.class);
 
@@ -147,6 +150,7 @@ public class AppProductIssue {
     if(checkResult.isFailure()){
       return checkResult.getData();
     }
+    requestParam.put(UserConstant.USER_MODEL,getUser());
     String confirmDto = MapperUtil.toJson(appProductService.submitOrder(requestParam));
     LOGGER.info("提交订单接口返回数据：{}", confirmDto);
     return DtoUtils.getSuccessResponse(MapperUtil.toMap(confirmDto));

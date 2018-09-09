@@ -104,7 +104,10 @@ public class ConfigureManager {
               .setIndexLastCount(productConfigObject.getInteger("indexLastCount"))
               .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"))
               .setBuyCountLimit(productConfigObject.getInteger("buyCountLimit"))
-              .setSingleProductBuyLimit(productConfigObject.getInteger("singleProductBuyLimit"));
+              .setSingleProductBuyLimit(productConfigObject.getInteger("singleProductBuyLimit"))
+              .setNoPayOrderCancleTime(productConfigObject.getDouble("noPayOrderCancleTime"))
+              .setNoPayTaskClassName(productConfigObject.getString("noPayTaskClassName"))
+              .setDefaultMethodName(productConfigObject.getString("defaultMethodName"));
     }
   }
 }

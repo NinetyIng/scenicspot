@@ -15,5 +15,10 @@
             <artifactId>scenicspot-member</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.ythd.ower</groupId>
+            <artifactId>scenicspot-task</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
