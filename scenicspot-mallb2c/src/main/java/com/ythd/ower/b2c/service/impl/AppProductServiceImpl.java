@@ -26,6 +26,7 @@ import com.ythd.ower.member.constant.UserConstant;
 import com.ythd.ower.member.mapper.AppAddressMapper;
 import com.ythd.ower.member.model.UserAddressModel;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -100,12 +101,21 @@ public class AppProductServiceImpl implements AppProductService {
 
   @Override
   public ProductConfirmDto confirmOrder(PageData pageData) {
-    String ids = pageData.getAsString(ProductConstant.STOCK_IDS);
-    List<ProductStockModel> stocks = appProductStockMapper.findStockByIds(CollectionUtils.arrayToList(ids.split(SpecificSymbolConstants.COMMA)));
-    UserAddressModel addressModel = appAddressMapper.findDefaultAddress(pageData.getAsInteger(UserConstant.USERID));
-    return ProductConfirmDto.builder().setProductListDto(stocks).setUserAddressModel(addressModel);
-  }
 
+    JSONArray buyInfo = JSONArray.parseArray(pageData.getAsString(ProductConstant.BUY_INFO));
+    Map<String,String> buyInfoMap = listToMap(buyInfo);
+    List<ProductStockModel> stocks = appProductStockMapper.findStockByIds(new ArrayList<>(buyInfoMap.keySet()));
+    stocks.stream().forEach(item ->
+            item.setNumber(Integer.parseInt(buyInfoMap.getOrDefault(item.getId(),"1")))
+    );
+    UserAddressModel addressModel = appAddressMapper.findDefaultAddress(pageData.getAsInteger(UserConstant.USERID));
+    BigDecimal  totalMoney = stocks.stream().map(ProductStockModel::getPrice).reduce(BigDecimal.valueOf(0),BigDecimal::add);
+    IntSummaryStatistics totalNumberStatistics = stocks.stream().collect(Collectors.summarizingInt(ProductStockModel::getNumber));
+
+    LOGGER.info("确认订单接口：选择商品总价格{}",totalMoney);
+    return ProductConfirmDto.builder().setProductListDto(stocks).setUserAddressModel(addressModel)
+            .setTotalMoney(totalMoney).setTotalNumber((int)totalNumberStatistics.getSum());
+  }
   @Override
   public ProductPayDto submitOrder(PageData pageData) {
     ProductOrderModel productOrderModel =  ProductOrderModel.builder(pageData);
@@ -113,9 +123,7 @@ public class AppProductServiceImpl implements AppProductService {
     appProductOrderMapper.createOrder(productOrderModel);
     JSONArray buyInfo = JSONArray.parseArray(pageData.getAsString(ProductConstant.BUY_INFO));
     LOGGER.info("用户购买信息为{}",buyInfo);
-    Map<String,String> buyInfoMap = buyInfo.stream().collect(Collectors.toMap(
-            p->{JSONObject buyItem = JSONObject.parseObject(p.toString()) ;   return buyItem.getString(ProductConstant.SKU_ID);}
-            ,p-> {JSONObject buyItem = JSONObject.parseObject(p.toString()) ; return buyItem.getString(ProductConstant.BUY_NUM);}));
+    Map<String,String> buyInfoMap = listToMap(buyInfo);
     List<ProductOrderGoodsModel> orderGoodsModels = appProductStockMapper.findProductInfoByStuIds(new ArrayList<>(buyInfoMap.keySet()));
     orderGoodsModels.stream().forEach(item -> {
       item.setOrderId(productOrderModel.getId());
@@ -125,11 +133,10 @@ public class AppProductServiceImpl implements AppProductService {
     ProductPayDto payDto = ProductPayDto.builder().setOrderSn(productOrderModel.getOrderSn());
     //动态建立任务调度 30分钟后执行更改订单状态
     try {
-
       TimerTaskModel timerTaskModel = new TimerTaskModel();
       timerTaskModel.setCreateTime(TimeUtils.toStringFormat_1(new Date()));
-      timerTaskModel.setJobData(MapperUtil.toJson(timerTaskModel));
-      timerTaskModel.setDescription("更改未支付状态为关闭状态");
+      timerTaskModel.setJobData(MapperUtil.toJson(productOrderModel));
+      timerTaskModel.setDescription("更改未支付状态为取消状态");
       timerTaskModel.setIsRunning(false);
       timerTaskModel.setJobStatus(TimerTaskModel.CONCURRENT_IS);
       timerTaskModel.setPlanStatus(TimerTaskModel.CONCURRENT_IS);
@@ -143,5 +150,11 @@ public class AppProductServiceImpl implements AppProductService {
       LOGGER.error("订单号为{}的定时任务添加失败",productOrderModel.getOrderSn());
     }
     return payDto;
+  }
+
+  private Map<String,String> listToMap(JSONArray dest){
+   return  dest.stream().collect(Collectors.toMap(
+            p->{JSONObject buyItem = JSONObject.parseObject(p.toString()) ;   return buyItem.getString(ProductConstant.SKU_ID);}
+            ,p-> {JSONObject buyItem = JSONObject.parseObject(p.toString()) ; return buyItem.getString(ProductConstant.BUY_NUM);}));
   }
 }

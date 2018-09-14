@@ -3,9 +3,12 @@ package com.ythd.ower.member.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.member.constant.UserConstant;
+import com.ythd.ower.member.mapper.AppAddressMapper;
 import com.ythd.ower.member.mapper.AppUserMapper;
+import com.ythd.ower.member.model.UserAddressModel;
 import com.ythd.ower.member.model.UserModel;
 import com.ythd.ower.member.service.AppUserService;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
@@ -30,6 +33,9 @@ public class AppUserServiceImpl  implements AppUserService{
 
   @Resource
   private AppUserMapper appUserMapper;
+
+  @Resource
+  private AppAddressMapper appAddressMapper;
 
 
   @Override
@@ -76,5 +82,20 @@ public class AppUserServiceImpl  implements AppUserService{
   @Override
   public UserModel findUserByOpenId(String openId) {
     return appUserMapper.findByOpenId(openId);
+  }
+
+  @Override
+  public List<UserAddressModel> addressList(PageData pageData) {
+    return appAddressMapper.findAllByUserId(pageData.getAsInteger(UserConstant.USERID));
+  }
+
+  @Override
+  public void deleteAddress(PageData pageData) {
+    appAddressMapper.deleteById(pageData.getAsInt(UserConstant.ID));
+  }
+
+  @Override
+  public void addAddress(PageData pageData) {
+    appAddressMapper.add(pageData);
   }
 }

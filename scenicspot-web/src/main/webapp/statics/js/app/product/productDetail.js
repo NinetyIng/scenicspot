@@ -160,8 +160,10 @@
                return;
            }
        }
+       var number =  $(".adjust-view").text();
+       var submitParam = {"skuId":config.submitParam.skuId,"buyNum":number};
        if(config.submitParam.skuId){
-           window.location.href = "/jumplink/confirmOrder?stockIds=" + config.submitParam.skuId;
+           window.location.href = "/jumplink/confirmOrder?buyInfo="+JSON.stringify(submitParam);
        }
     };
    (function(){

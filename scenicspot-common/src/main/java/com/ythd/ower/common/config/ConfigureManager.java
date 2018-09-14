@@ -105,7 +105,7 @@ public class ConfigureManager {
               .setIndexRecommendCount(productConfigObject.getInteger("indexRecommendCount"))
               .setBuyCountLimit(productConfigObject.getInteger("buyCountLimit"))
               .setSingleProductBuyLimit(productConfigObject.getInteger("singleProductBuyLimit"))
-              .setNoPayOrderCancleTime(productConfigObject.getDouble("noPayOrderCancleTime"))
+              .setNoPayOrderCancleTime(productConfigObject.getInteger("noPayOrderCancleTime"))
               .setNoPayTaskClassName(productConfigObject.getString("noPayTaskClassName"))
               .setDefaultMethodName(productConfigObject.getString("defaultMethodName"));
     }

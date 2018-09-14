@@ -21,9 +21,22 @@ public class ProductStockModel  implements Serializable{
     private Integer goodsId;
 
     /**
+     * 商品名称
+     */
+    private String goodsName;
+    /**
+     * 商品图片
+     */
+    private String listImg;
+    /**
      * 市场价格
      */
     private BigDecimal marketPrice;
+
+    /**
+     * 选择数量
+     */
+    private Integer number;
 
     /**
      * 销售价格

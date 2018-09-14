@@ -99,7 +99,7 @@ public class ProductOrderModel  implements Serializable{
 
   public static ProductOrderModel builder(PageData pageData){
     UserModel userModel = (UserModel)pageData.get(UserConstant.USER_MODEL);
-    if (userModel.getBuyer() == UserConstant.CLOSED){
+    if (userModel.getBuyer() == UserConstant.CLOSED.intValue()){
       throw new BizServiceException(ErrorCodesContants.BUYER_LIMIT_EXCEPTION);
     }
     ProductOrderModel productOrderModel = new ProductOrderModel();

@@ -36,8 +36,8 @@ public class ClientRedirectController {
   }
 
   @RequestMapping("confirmOrder")
-  public String confirmOrder(Model model, String stockIds) {
-    model.addAttribute(ProductConstant.STOCK_IDS, stockIds);
+  public String confirmOrder(Model model, String buyInfo) {
+    model.addAttribute(ProductConstant.BUY_INFO, buyInfo);
     return "product/confirmOrder";
   }
 
@@ -55,6 +55,15 @@ public class ClientRedirectController {
   @RequestMapping("ticketList")
   public String ticketList() {
     return "ticket/ticketList";
+  }
+
+  @RequestMapping("address/list")
+  public String addressList(){
+    return "product/addressList";
+  }
+  @RequestMapping("product/cart")
+  public String cartList(){
+    return "product/cartList";
   }
 
 }

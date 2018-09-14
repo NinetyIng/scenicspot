@@ -3,6 +3,7 @@ package com.ythd.ower.b2c.mapper;
 import com.ythd.ower.b2c.model.ProductOrderGoodsModel;
 import com.ythd.ower.b2c.model.ProductOrderModel;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -20,4 +21,7 @@ public interface AppProductOrderMapper {
 
 
   void createOrderGoods(@Param("list") List<ProductOrderGoodsModel> list);
+
+
+  void cancleOrder(ProductOrderModel param);
 }

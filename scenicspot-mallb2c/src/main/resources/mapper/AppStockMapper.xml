@@ -11,6 +11,8 @@
        <result property="saleAttr" column="ATTR_JSON" jdbcType="VARCHAR"></result>
        <result property="barCode" column="BAR_CODE" jdbcType="VARCHAR"></result>
        <result property="stockAlarm" column="STOCK_ALARM" jdbcType="VARCHAR"></result>
+       <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR"></result>
+       <result property="listImg" column="LIST_IMG" jdbcType="VARCHAR"></result>
    </resultMap>
     <resultMap id="ProductInfo" type="com.ythd.ower.b2c.model.ProductOrderGoodsModel">
         <id property="id" column="order_goods_id" jdbcType="INTEGER" ></id>
@@ -34,15 +36,16 @@
         FROM T_GOODS_SKU  WHERE ATTR_JSON = #{attrVals} AND GOODS_ID = #{productId}
     </select>
     <select id="findStockByIds" parameterType="java.util.List" resultMap="StockReturn">
-        SELECT SKU_ID,GOODS_ID,PRICE,ATTR_JSON,STOCK
-        FROM T_GOODS_SKU
+        SELECT t1.SKU_ID,t1.GOODS_ID,t1.PRICE,t1.ATTR_JSON,t1.STOCK,t2.GOODS_NAME,t2.LIST_IMG
+        FROM T_GOODS_SKU t1 INNER  JOIN  T_GOODS t2 on t1.GOODS_ID = t2.GOODS_ID
         WHERE SKU_ID  IN
         <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
     <select id="findProductInfoByStuIds" parameterType="java.util.List" resultMap="ProductInfo">
-        SELECT  t1.price as goods_price,t1.sku_id as goods_sku_id,t1.attr_json as goods_attr,t2.goods_name,t2.goods_id,t2.goods_sn
+        SELECT  t1.price as goods_price,t1.sku_id as goods_sku_id,t1.attr_json as goods_attr,
+        t2.goods_name,t2.goods_id,t2.goods_sn,t2.list_img
         FROM T_GOODS_SKU t1 INNER  JOIN T_GOODS t2 ON  t1.GOODS_ID = t2.GOODS_ID
         WHERE SKU_ID IN
         <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">

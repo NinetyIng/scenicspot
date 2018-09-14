@@ -1,7 +1,10 @@
 package com.ythd.ower.api.check;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.ythd.ower.b2c.constant.ProductConstant;
 import com.ythd.ower.b2c.service.impl.AppProductServiceImpl;
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.constants.ErrorCodesContants;
 import com.ythd.ower.common.constants.SpecificSymbolConstants;
 import com.ythd.ower.common.dto.PageData;
@@ -9,6 +12,7 @@ import com.ythd.ower.common.exception.BizServiceException;
 import com.ythd.ower.common.ibox.DtoUtils;
 import com.ythd.ower.common.ibox.GenericResponseDto;
 import com.ythd.ower.common.ibox.Result;
+import com.ythd.ower.member.constant.UserConstant;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +43,40 @@ public class ProductParamCheck {
     }
     return Result.success();
   }
+  public static Result<GenericResponseDto> checkIdParam(PageData pageData) {
+    if (StringUtils.isEmpty(pageData.getAsString(UserConstant.ID)) || !pageData.getAsString(UserConstant.ID).matches(Regular.POSITIVE_INTEGER)) {
+      return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
+    }
+    return Result.success();
+  }
+
+
+
+
+  public static Result<GenericResponseDto> checkAddressListParam(PageData pageData) {
+    if (StringUtils.isEmpty(pageData.getAsString(UserConstant.USERID)) || !pageData.getAsString(UserConstant.USERID).matches(Regular.POSITIVE_INTEGER)) {
+      return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
+    }
+    return Result.success();
+  }
+
+
+  public static Result<GenericResponseDto> checkAddAddressParam(PageData pageData){
+    if (StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.CITYID))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.CITY))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.AREA))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.AREAID))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.PROVINCEID))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.PROVINCE))
+            ||  StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.CONADDRESS))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.CONNAME))
+            || StringUtils.isNotEmpty(pageData.getAsString(UserConstant.Filed.CONPHONE))){
+      return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
+
+    }
+    return Result.success();
+  }
+
 
   public static Result<GenericResponseDto> checkStockDetail(PageData pageData) {
     if (StringUtils.isEmpty(pageData.getAsString(ProductConstant.ATTR_VALS))) {
@@ -56,19 +94,28 @@ public class ProductParamCheck {
   }
 
   public static Result<GenericResponseDto> checkConfirmOrder(PageData pageData) {
-    String stockIds = pageData.getAsString(ProductConstant.STOCK_IDS);
-    if (StringUtils.isEmpty(stockIds)) {
+    String buyInfo = pageData.getAsString(ProductConstant.BUY_INFO);
+    if (StringUtils.isEmpty(buyInfo)) {
       return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
     }
-    if (!stockIds.matches(Regular.POSITIVE_INTEGER)) {
-      if (Stream.of(stockIds.split(SpecificSymbolConstants.COMMA)).anyMatch(item -> !item.matches(Regular.POSITIVE_INTEGER))) {
-        return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
-      }
+    JSONArray buyInfoAry = JSONObject.parseArray(buyInfo);
+    //检查商品是否超出单个商品的购买限制
+    if(buyInfoAry.stream().anyMatch(item -> {
+      JSONObject buyItem = JSONObject.parseObject(item.toString());
+      return ConfigureManager.getAppConfig().getPuroductConfig().getSingleProductBuyLimit().intValue()
+              < Integer.parseInt(buyItem.getString(ProductConstant.BUY_NUM));
+    })){
+      return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.BUY_NUM_LIMIT));
+    }
+    //检查是否超出购买商品个数限制
+    if(ConfigureManager.getAppConfig().getPuroductConfig().getBuyCountLimit().intValue() < buyInfoAry.size()){
+      return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.BUY_PRODUCTNUM_LIMIT));
     }
     return Result.success();
   }
 
   public static Result<GenericResponseDto> checkSubmitOrder(PageData pageData) {
+
     String orderMoney = pageData.getAsString(ProductConstant.ORDER_MONEY);
 
     String productMoney = pageData.getAsString(ProductConstant.PRODUCT_MONEY);
@@ -78,8 +125,6 @@ public class ProductParamCheck {
     String contactPhone = pageData.getAsString(ProductConstant.CONPHONE);
 
     String address = pageData.getAsString(ProductConstant.CONADDRESS);
-
-    String stockIds = pageData.getAsString(ProductConstant.STOCK_IDS);
 
     if(StringUtils.isEmpty(orderMoney) || !orderMoney.matches(Regular.POSITIVE_MONEY)){
       LOGGER.error("提交订单接口 参数检查失败，订单总金额格式不正确");
@@ -101,7 +146,7 @@ public class ProductParamCheck {
       LOGGER.error("提交订单接口 参数检查失败，地址不能为空");
       return Result.failure(DtoUtils.getFailResponse(ErrorCodesContants.PARAM_ERROR));
     }
-    return checkConfirmOrder(pageData);
+    return Result.success();
   }
   public static void main(String[] args) {
     System.out.println("34".matches(Regular.POSITIVE_INTEGER));

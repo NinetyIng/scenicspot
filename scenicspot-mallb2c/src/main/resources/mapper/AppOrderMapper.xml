@@ -61,4 +61,11 @@
         </foreach>
     </insert>
 
+
+    <update id="cancleOrder" parameterType="com.ythd.ower.b2c.model.ProductOrderModel">
+        UPDATE  t_orders SET  order_status = #{orderStatus}
+        WHERE  order_id = #{id}
+    </update>
+
+
 </mapper>

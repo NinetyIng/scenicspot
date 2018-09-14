@@ -34,4 +34,17 @@
         AND IS_DEFAULT = 1
     </select>
 
+    <!--用户地址列表 -->
+    <select id="findAllByUserId" resultMap="AddressReturn">
+        SELECT <include refid="Filed" /> FROM T_USER_ADDRESS WHERE USER_ID = #{userId}
+    </select>
+    <insert id="add" parameterType="pd">
+        INSERT  INTO T_USER_ADDRESS(CON_NAME,CON_ADDRESS,CON_PHONE,PROVINCE_ID,CITY_ID,AREA_ID,AREA,CITY,PROVINCE,IS_DEFAULT)
+        VALUES  (#{conName},#{conAddress},#{conPhone},#{provinceId},#{cityId},#{areaId},#{area},#{city},#{province},#{def})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE  FROM T_USER_ADDRESS WHERE id = #{id}
+    </delete>
+
 </mapper>

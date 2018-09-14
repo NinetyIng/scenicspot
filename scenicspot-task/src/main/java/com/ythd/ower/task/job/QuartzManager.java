@@ -65,6 +65,7 @@ public class QuartzManager {
             /**
              * 数据库更新job
              */
+            LOGGER.info("更新数据库任务状态");
             TimerTaskModel updateModel = new TimerTaskModel();
             updateModel.setId(job.getId());
             updateModel.setEndTime(TimeUtils.toStringFormat_1(new Date()));
@@ -72,12 +73,12 @@ public class QuartzManager {
             updateModel.setPlanStatus(TimerTaskModel.STATUS_NOT_RUNNING);
             updateModel.setModifyTime(TimeUtils.toStringFormat_1(new Date()));
             timerTaskService.updateJob(job);
-
             JobKey jobKey = JobKey.jobKey(job.getName(), job.getGroupName());
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
             scheduler.deleteJob(jobKey);
+            LOGGER.info("动态移除key成功");
         }catch (Exception e){
-            LOGGER.error("动态添加任务失败，失败信息",e);
+            LOGGER.error("动态删除任务失败，失败信息",e);
         }
     }
 }

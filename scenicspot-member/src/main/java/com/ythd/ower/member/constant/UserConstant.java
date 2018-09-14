@@ -15,6 +15,8 @@ public interface UserConstant {
 
   String USERID = "userId";
 
+  String ID = "id";
+
   String OPENID = "open_id";
 
   String WX_USERINFO = "wxUserInfo";
@@ -35,4 +37,19 @@ public interface UserConstant {
   Integer OPENED = 1;
 
   Integer CLOSED = 0;
+
+
+  interface  Filed{
+    String CONPHONE = "conPhone";
+    String CONNAME = "conName";
+    String CONADDRESS = "conAddress";
+    String PROVINCEID = "provinceId";
+    String CITYID = "cityId";
+    String AREAID = "areaId";
+    String PROVINCE = "province";
+    String CITY = "city";
+    String AREA = "area";
+    String DEF = "def";
+  }
+
 }

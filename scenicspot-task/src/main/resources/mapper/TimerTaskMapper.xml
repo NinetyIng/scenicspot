@@ -66,7 +66,7 @@
             cron = #{cron},
         </if>
         </set>
-        WHERE id = #{id}
+        WHERE name = #{name} and group_name = #{groupName}
     </update>
 
 </mapper>

@@ -6,6 +6,7 @@ import com.ythd.ower.b2c.model.ProductModel;
 import com.ythd.ower.b2c.model.ProductStockModel;
 import com.ythd.ower.common.dto.PageData;
 
+import com.ythd.ower.member.model.UserAddressModel;
 import java.util.List;
 
 public interface AppProductService {
@@ -50,4 +51,5 @@ public interface AppProductService {
      * @return
      */
     ProductPayDto submitOrder(PageData pageData);
+
 }

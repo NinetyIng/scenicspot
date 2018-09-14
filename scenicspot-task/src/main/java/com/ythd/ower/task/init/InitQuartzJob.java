@@ -1,11 +1,13 @@
 package com.ythd.ower.task.init;
 
+import com.ythd.ower.common.config.ConfigureManager;
 import com.ythd.ower.common.dto.PageData;
 import com.ythd.ower.task.constant.TimerTaskConstant;
 import com.ythd.ower.task.job.QuartzJobFactory;
 import com.ythd.ower.task.job.QuartzJobFactoryDisallowConcurrentExecution;
 import com.ythd.ower.task.model.TimerTaskModel;
 import com.ythd.ower.task.service.TimerTaskService;
+import com.ythd.ower.task.utils.ExpressionUtils;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +33,8 @@ public class InitQuartzJob implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if (this.appCtx == null) {
-            this.appCtx = applicationContext;
+        if (appCtx == null) {
+            appCtx = applicationContext;
         }
     }
 
@@ -81,8 +83,10 @@ public class InitQuartzJob implements ApplicationContextAware {
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(job.getName(), job.getGroupName()).usingJobData("data", job.getJobData()).build();
 
             jobDetail.getJobDataMap().put(TimerTaskConstant.JOB_NAME, job);
-
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCron());
+            String expression = ExpressionUtils.bulidTimeCron(job.getCreateTime(),
+                    ExpressionUtils.CronExpressionType.MINUTE, ConfigureManager.getAppConfig().getPuroductConfig().getNoPayOrderCancleTime());
+            logger.info("自动构造的表达式为{}",expression);
+            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(expression);
 
             trigger = TriggerBuilder.newTrigger().withDescription(job.getId().toString()).withIdentity(job.getName(), job.getGroupName())
                     .withSchedule(scheduleBuilder).build();

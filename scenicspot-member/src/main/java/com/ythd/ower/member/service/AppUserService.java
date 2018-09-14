@@ -1,7 +1,9 @@
 package com.ythd.ower.member.service;
 
 import com.ythd.ower.common.dto.PageData;
+import com.ythd.ower.member.model.UserAddressModel;
 import com.ythd.ower.member.model.UserModel;
+import java.util.List;
 
 /**
  * Description:
@@ -29,5 +31,25 @@ public interface AppUserService {
    * @return
    */
   UserModel findUserByOpenId(String openId);
+
+
+  /**
+   * 地址列表
+   * @param pageData
+   * @return
+   */
+  List<UserAddressModel> addressList(PageData pageData);
+
+  /**
+   * 删除地址
+   * @param pageData
+   */
+  void  deleteAddress(PageData pageData);
+
+  /**
+   * 添加地址
+   * @param pageData
+   */
+  void addAddress(PageData pageData);
 
 }

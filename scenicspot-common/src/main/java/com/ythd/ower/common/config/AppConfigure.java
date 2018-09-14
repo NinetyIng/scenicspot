@@ -58,7 +58,7 @@ public class AppConfigure {
          */
         private Integer buyCountLimit;
 
-        private Double noPayOrderCancleTime;
+        private Integer noPayOrderCancleTime;
 
         private String noPayTaskClassName;
 
@@ -110,11 +110,11 @@ public class AppConfigure {
         }
 
 
-        public Double getNoPayOrderCancleTime() {
+        public Integer getNoPayOrderCancleTime() {
             return noPayOrderCancleTime;
         }
 
-        public ProductConfigure setNoPayOrderCancleTime(Double noPayOrderCancleTime) {
+        public ProductConfigure setNoPayOrderCancleTime(Integer noPayOrderCancleTime) {
             this.noPayOrderCancleTime = noPayOrderCancleTime;
             return this;
         }

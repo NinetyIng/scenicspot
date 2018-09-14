@@ -22,4 +22,8 @@ public interface ErrorCodesContants {
 
     ErrorCode  BUYER_LIMIT_EXCEPTION = new ErrorCode("yt_203","用户购买行为已被管理员限制，请联系平台客服");
 
+    ErrorCode  BUY_NUM_LIMIT  = new ErrorCode("yt_204","购买单个商品数量超出限制");
+
+    ErrorCode  BUY_PRODUCTNUM_LIMIT  = new ErrorCode("yt_204","购买商品数量超过限制");
+
 }
